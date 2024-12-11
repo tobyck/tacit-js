@@ -1,7 +1,7 @@
 # Tacit.js
 
 Docs: [tobyck.github.io/tacit-js](https://tobyck.github.io/tacit-js) <br>
-GitHub: [github.com/tobyck/tacit-js](https://tobyck.github.io/tacit-js)
+GitHub: [github.com/tobyck/tacit-js](https://github.com/tobyck/tacit-js)
 
 ## Usage
 
