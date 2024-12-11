@@ -118,7 +118,7 @@ export class Vec {
 	 * Gets a list of the four orthogonal neighbors of this vector
 	 * @returns {Vec[]}
 	 */
-	get neighbors {
+	get neighbors() {
 		return [
 			this.add(new Vec(0, -1)),
 			this.add(new Vec(0, 1)),
@@ -139,7 +139,7 @@ export class Vec {
 	 * Clones the vector
 	 * @returns {Vec}
 	 */
-	get clone {
+	get clone() {
 		return new Vec(this.x, this.y)
 	}
 
