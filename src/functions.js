@@ -1,9 +1,7 @@
 import { _Set, Vec } from "./classes.js"
 
-const keep_global = func => {
-	func.keep_global = true
-	return func
-}
+const keep_global = func => (func.keep_global = true, func)
+const attach_to = (type, func) => (func.attach_to = type, func)
 
 /** @namespace */
 const type_checks = {}
@@ -340,7 +338,10 @@ iter_utils.first = iter => [...iter][0]
  * @param {Iterable.<*>} iter The iterable to get the last element from
  * @returns {any}
  */
-iter_utils.last = iter => (array = [...iter], array[array.length - 1])
+iter_utils.last = iter => {
+	const array = [...iter]
+	return array[array.length - 1]
+}
 
 /**
  * Removes the nth element from an iterable value
@@ -621,24 +622,29 @@ iter_utils.everynth = (iter, n, start = 0) => {
 }
 
 /**
- * Gets the element at index `index` of `iter`. If `index` is an array of
- * indices, returns an array of the elements at those indices. Indicies will
- * wrap around using `math_utils.wrapindex`
+ * Gets the element at `index` in `iter`. Indices wrap around using
+ * {@link math_utils.wrapindex}. If `index` is a {@link Vec}, `iter` will be
+ * treated as a grid, or if `index` is a list of integers, a list of elements
+ * at those indices will be returned.
+ * @function
  * @template T
- * @param {Iterable.<T>} iter The iterable to get elements from
- * @param {number|number[]} index The index or indices to get
- * @returns {T|T[]}
+ * @param {Iterable.<T|Iterable.<T>>} iter The iterable to get elements from
+ * @param {number|Vec|number[]} index The index/indicies to get
+ * @returns {T}
  */
-iter_utils.at = (iter, index) => {
+iter_utils.at = attach_to(Array, (iter, index) => {
 	const array = [...iter]
+
 	if (type_checks.isint(index)) {
 		return array[math_utils.wrapindex(index, array.length)];
+	} else if (index instanceof Vec) {
+		return iter?.[index.y]?.[index.x]
 	} else if (type_checks.isarr(index) && index.every(type_checks.isint)) {
 		return index.map(i => iter_utils.at(array, i));
 	} else {
 		throw new Error(`Invalid index/indicies ${JSON.stringify(index)}`);
 	}
-}
+})
 
 const count = (iter, value, string_like_match = false, overlapping = false) => {
 	const array = [...iter]
@@ -863,7 +869,7 @@ const misc_utils = {}
 
 /**
  * **[Global]** Checks `a` and `b` are equal. In theory this works for any two values,
- * whethere they're primitives, arrays or some other object.
+ * whether they're primitives, arrays or some other object.
  * @function
  * @param {any} a
  * @param {any} b

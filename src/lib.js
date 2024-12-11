@@ -1,5 +1,6 @@
 import { chain_proxy, attach_links, getter_chain_proxy } from "./proxies.js"
 import functions from "./functions.js"
+import { Vec } from "./classes.js"
 
 // copy all functions into the global scope
 for (const func_name in functions) {
@@ -13,25 +14,27 @@ Object.defineProperty(globalThis, "it", {
 
 globalThis.get = getter_chain_proxy(x => x)
 
+const attach_to_type = (type, func_name) => {
+	type.prototype[func_name] = function(...args) { return functions[func_name](this, ...args) }
+
+	type.prototype[func_name].is_nildadic = !!globalThis[func_name].toString()
+		.match(/^function\([\d\w_$]+\)|^\(?[\d\w_$]+\)?\s*=>/)
+	// did i just do a regex match on a function... what am i creating
+
+	// the keep_global property will need to be accessed on the method later so we need to copy it over
+	if (globalThis[func_name].keep_global) type.prototype[func_name].keep_global = true
+}
+
 // for each global function make a copy that's a method (e.g. eq(a, b) -> a.eq(b))
 for (const func_name in functions) {
-	if (Object.getOwnPropertyNames(Object.prototype).includes(func_name)) {
-		// don't add methods that already exist
-		console.warn(`Globally defined function ${func_name} will not be added as a method`)
-	} else {
-		Object.prototype[func_name] = function(...args) { return functions[func_name](this, ...args) }
-
-		Object.prototype[func_name].is_nildadic = !!globalThis[func_name].toString().match(/^function\([\d\w_$]+\)|^\(?[\d\w_$]+\)?\s*=>/)
-		// did i just do a regex match on a function... what am i creating
-
-		// the keep_global property will need to be accessed on the method later so we need to copy it over
-		if (globalThis[func_name].keep_global) Object.prototype[func_name].keep_global = true
-	}
+	attach_to_type(Object, func_name)
+	if (functions[func_name].attach_to)
+		attach_to_type(functions[func_name].attach_to, func_name)
 }
 
 // make a) a global chainable copy of each method (e.g. array.split(delim) -> array => array.split(delim))
 // and b) if the method is niladic, a getter
-for (const type of [Number, String, Array, Boolean, Set, Object]) {
+for (const type of [Number, String, Array, Boolean, Set, Object, Vec]) {
 	for (const prop_name of Object.getOwnPropertyNames(type.prototype)) {
 		if (prop_name === "size" && type === Set) continue;
 

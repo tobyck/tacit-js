@@ -29,9 +29,9 @@ Firstly, besides the tacit capabilities, this library also adds some useful util
 
 Functions in tacit chains can also have flags, which are placed in the function name after a `$`. The flags available are:
 
- - `a`: take arguments as a single list.
- - `f`: evaluate args as functions on the chain's argument before passing them to the function.
  - `t`: explicitly pass the `this` arg (i.e. the object that the method is being called on). This results what would have been `this` being the first arg to the function.
+ - `f`: evaluate args as functions on the chain's argument before passing them to the function.
+ - `a`: make the function take a single array of args
  - `d`: debug. Prints args to the console.
 
 _Note: if a function with flags is the first link in a chain, the leading `it.` is compulsory._

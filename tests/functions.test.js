@@ -69,6 +69,20 @@ describe("lastn", () => {
 	test("long", () => expect(f.lastn([1, 2, 3, 4], 2)).toEqual([3, 4]))
 })
 
+describe("append", () => {
+	test(() => {
+		const array = [1, 2, 3]
+		expect(f.append(array, 4)).toEqual([1, 2, 3, 4])
+		expect(array).toEqual([1, 2, 3, 4])
+	})
+})
+
+describe("last", () => {
+	test("empty", () => expect(f.last([])).toBeUndefined())
+	test("single", () => expect(f.last([1])).toBe(1))
+	test("multiple", () => expect(f.last([1, 2, 3])).toBe(3))
+})
+
 describe("dropnth", () => {
 	test("empty", () => expect(f.dropnth([], 3)).toEqual([]))
 	test("drop first", () => expect(f.dropnth([1, 2, 3], 0)).toEqual([2, 3]))

@@ -84,9 +84,9 @@
             <br>
             <p>Functions in tacit chains can also have flags, which are placed in the function name after a <code>$</code>. The flags available are:</p>
             <ul>
-              <li><code>a</code>: take arguments as a single list.</li>
-              <li><code>f</code>: evaluate args as functions on the chain's argument before passing them to the function.</li>
               <li><code>t</code>: explicitly pass the <code>this</code> arg (i.e. the object that the method is being called on). This results what would have been <code>this</code> being the first arg to the function.</li>
+              <li><code>f</code>: evaluate args as functions on the chain's argument before passing them to the function.</li>
+              <li><code>a</code>: make the function take a single array of args</li>
               <li><code>d</code>: debug. Prints args to the console.</li>
             </ul>
             <p><em>Note: if a function with flags is the first link in a chain, the leading <code>it.</code> is compulsory.</em></p>
@@ -147,12 +147,12 @@
             </ul>
             <br>
             <p>Using ES module syntax:</p>
-            <pre class="prettyprint source lang-js"><code>import &quot;tacit-js&quot;
+            <pre class="prettyprint source lang-js"><code>import &quot;@toby_ck/tacit-js&quot;
 
 // everything is automatically put in the global scope
 </code></pre>
             <p>Or with CommonJS:</p>
-            <pre class="prettyprint source lang-js"><code>require(&quot;tacit-js&quot;)
+            <pre class="prettyprint source lang-js"><code>require(&quot;@toby_ck/tacit-js&quot;)
 </code></pre>
           </article>
           <div class="symbol-index">
@@ -173,7 +173,7 @@
                       <dd>
                       </dd>
                       <dt class="symbol-index-name">
-                        <a href="Vec.html#clone" class="!symbol-index-name">Vec#<wbr>clone()</a>
+                        <a href="Vec.html#clone" class="!symbol-index-name">Vec#<wbr>clone</a>
                       </dt>
                       <dd>
                       </dd>
@@ -182,15 +182,15 @@
                       </dt>
                       <dd>
                       </dd>
-                    </dl>
-                  </div>
-                  <div class="symbol-index-column">
-                    <dl class="symbol-index-list">
                       <dt class="symbol-index-name">
                         <a href="Vec.html#down" class="!symbol-index-name">Vec#<wbr>down([n])</a>
                       </dt>
                       <dd>
                       </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
                       <dt class="symbol-index-name">
                         <a href="Vec.html#left" class="!symbol-index-name">Vec#<wbr>left([n])</a>
                       </dt>
@@ -202,7 +202,17 @@
                       <dd>
                       </dd>
                       <dt class="symbol-index-name">
+                        <a href="Vec.html#neighbors" class="!symbol-index-name">Vec#<wbr>neighbors</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
                         <a href="Vec.html#right" class="!symbol-index-name">Vec#<wbr>right([n])</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="Vec.html#size" class="!symbol-index-name">Vec#<wbr>size</a>
                       </dt>
                       <dd>
                       </dd>
@@ -210,11 +220,6 @@
                   </div>
                   <div class="symbol-index-column">
                     <dl class="symbol-index-list">
-                      <dt class="symbol-index-name">
-                        <a href="Vec.html#size" class="!symbol-index-name">Vec#<wbr>size</a>
-                      </dt>
-                      <dd>
-                      </dd>
                       <dt class="symbol-index-name">
                         <a href="Vec.html#sub" class="!symbol-index-name">Vec#<wbr>sub(other)</a>
                       </dt>
@@ -354,15 +359,15 @@
                       </dt>
                       <dd>
                       </dd>
-                    </dl>
-                  </div>
-                  <div class="symbol-index-column">
-                    <dl class="symbol-index-list">
                       <dt class="symbol-index-name">
                         <a href="iter_utils.html#.filterout" class="!symbol-index-name">iter_utils.<wbr>filterout(array, filter_fn)</a>
                       </dt>
                       <dd>
                       </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
                       <dt class="symbol-index-name">
                         <a href="iter_utils.html#.first" class="!symbol-index-name">iter_utils.<wbr>first(iter)</a>
                       </dt>
@@ -399,6 +404,11 @@
                       <dd>
                       </dd>
                       <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.none" class="!symbol-index-name">iter_utils.<wbr>none(array, fn)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
                         <a href="iter_utils.html#.nsort" class="!symbol-index-name">iter_utils.<wbr>nsort(iter)</a>
                       </dt>
                       <dd>
@@ -413,15 +423,15 @@
                       </dt>
                       <dd>
                       </dd>
-                    </dl>
-                  </div>
-                  <div class="symbol-index-column">
-                    <dl class="symbol-index-list">
                       <dt class="symbol-index-name">
                         <a href="iter_utils.html#.prod" class="!symbol-index-name">iter_utils.<wbr>prod(iter)</a>
                       </dt>
                       <dd>
                       </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
                       <dt class="symbol-index-name">
                         <a href="iter_utils.html#.rev" class="!symbol-index-name">iter_utils.<wbr>rev(iter)</a>
                       </dt>
@@ -939,7 +949,7 @@
   <footer id="jsdoc-footer" class="jsdoc-footer">
     <div id="jsdoc-footer-container">
       <p>
-        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.4 on December 11, 2024.
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.4 on December 12, 2024.
       </p>
     </div>
   </footer>
