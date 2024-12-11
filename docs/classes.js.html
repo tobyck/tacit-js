@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="generator" content="JSDoc 4.0.4">
+  <meta charset="utf-8">
+  <title>Source: classes.js</title>
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
+  <link href="css/baseline.css" rel="stylesheet">
+</head>
+
+<body onload="prettyPrint()">
+  <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
+    <div id="jsdoc-navbar-container">
+      <div id="jsdoc-navbar-content">
+        <a href="index.html" class="jsdoc-navbar-package-name">Home</a>
+      </div>
+    </div>
+  </nav>
+  <div id="jsdoc-body-container">
+    <div id="jsdoc-content">
+      <div id="jsdoc-content-container">
+        <div id="jsdoc-banner" role="banner">
+        </div>
+        <div id="jsdoc-main" role="main">
+          <header class="page-header">
+            <h1>Source: classes.js</h1>
+          </header>
+          <article>
+            <pre class="prettyprint linenums"><code>import &quot;./lib.js&quot;
+
+/**
+ * Overrides the default set methods to use &#x60;JSON.stringify&#x60;. This allows it to
+ * work with objects and arrays. See the docs for the built in [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set).
+ * @extends {Set}
+ */
+export class _Set extends Set {
+	/**
+	 * Creates a new set. Can also be done with {@link constructors.set}.
+	 * @param {Iterable.&amp;lt;*&gt;} iterable Optional iterable to initialize the set with
+	 * @returns {_Set}
+	 */
+	constructor(iterable &#x3D; []) {
+		super()
+		for (const element of iterable) {
+			this.add(element)
+		}
+	}
+
+	add(item) {
+		return super.add(JSON.stringify(item))
+	}
+
+	has(item) {
+		return super.has(JSON.stringify(item))
+	}
+
+	delete(item) {
+		return super.delete(JSON.stringify(item))
+	}
+
+	*[Symbol.iterator]() {
+		for (const item of super[Symbol.iterator]()) {
+			yield JSON.parse(item)
+		}
+	}
+}
+
+/** Represents a 2D vector. */
+export class Vec {
+	/**
+	 * Creates a new vector. Can also be done with {@link constructors.vec}.
+	 * @param {number} x The x component
+	 * @param {number} y The y component
+	 * @returns {Vec}
+	 */
+	constructor(x, y) {
+		this.x &#x3D; x
+		this.y &#x3D; y
+	}
+
+	/**
+	 * Moves the vector up by &#x60;n&#x60; units (decreases &#x60;y&#x60;), in place.
+	 * @param {number} [n&#x3D;1] The number of units to move
+	 * @returns {Vec} The new vector
+	 */
+	up(n &#x3D; 1) { this.y -&#x3D; n; return this }
+
+	/**
+	 * Moves the vector down by &#x60;n&#x60; units (increases &#x60;y&#x60;), in place.
+	 * @param {number} [n&#x3D;1] The number of units to move
+	 * @returns {Vec} The new vector
+	 */
+	down(n &#x3D; 1) { this.y +&#x3D; n; return this }
+
+	/**
+	 * Moves the vector left by &#x60;n&#x60; units (decreases &#x60;x&#x60;), in place.
+	 * @param {number} [n&#x3D;1] The number of units to move
+	 * @returns {Vec} The new vector
+	 */
+	left(n &#x3D; 1) { this.x -&#x3D; n; return this }
+
+	/**
+	 * Moves the vector right by &#x60;n&#x60; units (increases &#x60;x&#x60;), in place.
+	 * @param {number} [n&#x3D;1] The number of units to move
+	 * @returns {Vec} The new vector
+	 */
+	right(n &#x3D; 1) { this.x +&#x3D; n; return this }
+
+	/**
+	 * Add another vector to this one
+	 * @param {Vec} other The other vector
+	 * @returns {Vec} A new vector
+	 */
+	add(other) {
+		return new Vec(this.x + other.x, this.y + other.y)
+	}
+
+	/**
+	 * Subtract another vector from this one
+	 * @param {Vec} other The other vector
+	 * @returns {Vec} A new vector
+	 */
+	sub(other) {
+		return new Vec(this.x - other.x, this.y - other.y)
+	}
+
+	/**
+	 * Multiplies this vector by &#x60;factor&#x60;
+	 * @param {number} factor The factor to multiply by
+	 * @returns {Vec} A new vector
+	 */
+	mul(factor) {
+		return new Vec(this.x * factor, this.y * factor)
+	}
+
+	/**
+	 * Divides this vector by &#x60;factor&#x60;
+	 * @param {number} factor The factor to divide by
+	 * @returns {Vec} A new vector
+	 */
+	div(factor) {
+		return new Vec(this.x / factor, this.y / factor)
+	}
+
+	/**
+	 * Gets the size of the vector
+	 * @returns {number}
+	 */
+	get size() {
+		return Math.hypot(this.x, this.y)
+	}
+
+	/**
+	 * Clones the vector
+	 * @returns {Vec}
+	 */
+	clone() {
+		return new Vec(this.x, this.y)
+	}
+
+	/**
+	 * Returns &#x60;&quot;(x, y)&quot;&#x60;
+	 * @returns {string}
+	 */
+	toString() {
+		return &#x60;(${this.x}, ${this.y})&#x60;
+	}
+
+	*[Symbol.iterator]() {
+		yield this.x
+		yield this.y
+	}
+
+	[Symbol.toPrimitive](hint) {
+		if (hint &#x3D;&#x3D;&#x3D; &quot;string&quot;) return this.toString()
+		return this.size
+	}
+}
+</code></pre>
+          </article>
+        </div>
+      </div>
+      <nav id="jsdoc-toc-nav" role="navigation"></nav>
+    </div>
+  </div>
+  <footer id="jsdoc-footer" class="jsdoc-footer">
+    <div id="jsdoc-footer-container">
+      <p>
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.4 on December 11, 2024.
+      </p>
+    </div>
+  </footer>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/tree.jquery.js"></script>
+  <script src="scripts/prettify.js"></script>
+  <script src="scripts/jsdoc-toc.js"></script>
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/scrollanchor.js"></script>
+</body>
+
+</html>

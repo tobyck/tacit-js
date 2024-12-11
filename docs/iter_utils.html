@@ -1,0 +1,1834 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="generator" content="JSDoc 4.0.4">
+  <meta charset="utf-8">
+  <title>Namespace: iter_utils</title>
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
+  <link href="css/baseline.css" rel="stylesheet">
+</head>
+
+<body onload="prettyPrint()">
+  <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
+    <div id="jsdoc-navbar-container">
+      <div id="jsdoc-navbar-content">
+        <a href="index.html" class="jsdoc-navbar-package-name">Home</a>
+      </div>
+    </div>
+  </nav>
+  <div id="jsdoc-body-container">
+    <div id="jsdoc-content">
+      <div id="jsdoc-content-container">
+        <div id="jsdoc-main" role="main">
+          <header class="page-header">
+            <div class="symbol-detail-labels"><span class="label label-kind">namespace</span></div>
+            <h1><small></small><span class="symbol-name">iter_utils</span></h1>
+            <p class="source-link">Source: <a href="functions.js.html#source-line-310">functions.<wbr>js:310</a></p>
+            <div class="symbol-description">
+              <p>Functions which operate on iterable types</p>
+            </div>
+            <dl class="dl-compact">
+            </dl>
+          </header>
+          <section id="summary">
+            <div class="summary-callout">
+              <h2 class="summary-callout-heading">Methods</h2>
+              <div class="summary-content">
+                <div class="summary-column">
+                  <dl class="dl-summary-callout">
+                    <dt><a href="iter_utils.html#.alleq">alleq(iter)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.append">append(array, .<wbr>.<wbr>.<wbr>items)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.at">at(iter, index)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.chunks">chunks(iter[, size])</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.count">count(iter, value[, string_like_match])</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.countol">countol(iter, value[, string_like_match])</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.deltas">deltas(iter)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.dropnth">dropnth(iter, index)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.each">each(iter, callback)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.everynth">everynth(iter, n[, start])</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.filterout">filterout(array, filter_fn)</a></dt>
+                    <dd>
+                    </dd>
+                  </dl>
+                </div>
+                <div class="summary-column">
+                  <dl class="dl-summary-callout">
+                    <dt><a href="iter_utils.html#.first">first(iter)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.firstn">firstn(iter, n)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.for">for(iter, callback)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.last">last(iter)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.lastn">lastn(iter, n)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.max">max(iter)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.min">min(iter)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.nsort">nsort(iter)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.perms">perms(iter)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.prepend">prepend(array, .<wbr>.<wbr>.<wbr>items)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.prod">prod(iter)</a></dt>
+                    <dd>
+                    </dd>
+                  </dl>
+                </div>
+                <div class="summary-column">
+                  <dl class="dl-summary-callout">
+                    <dt><a href="iter_utils.html#.rev">rev(iter)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.rsort">rsort(iter)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.rsortby">rsortby(iter, func)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.sliding">sliding(iter, size[, wrap])</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.sortby">sortby(iter, func)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.sorted">sorted(iter, compare_fn)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.sum">sum(iter)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.swap">swap(array, index_a, index_b)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.uniq">uniq(iter)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.zip">zip(.<wbr>.<wbr>.<wbr>iters)</a></dt>
+                    <dd>
+                    </dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Methods</h2>
+            <section>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".alleq"><span class="symbol-name">alleq</span><span class="signature"><span class="signature-params">(iter)</span>&nbsp;&rarr; <span class="signature-returns"> boolean</span></span></h3>
+              <p>Checks if all items in an iterable are equal</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing any type</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to check</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>boolean</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".append"><span class="symbol-name">append</span><span class="signature"><span class="signature-params">(array, ...items)</span>&nbsp;&rarr; <span class="signature-returns"> Array of T</span></span></h3>
+              <p>Same as the built in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push">Array.push</a></p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>array</p>
+                      </td>
+                      <td>
+                        <p>Array of T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The array to append to</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>items</p>
+                      </td>
+                      <td>
+                        <p>T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The items to append</p>
+                        <p>Value can be repeated.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of T</code> 
+                  <p>The resulting array</p>
+                  </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".at"><span class="symbol-name">at</span><span class="signature"><span class="signature-params">(iter, index)</span>&nbsp;&rarr; <span class="signature-returns"> (T or Array of T)</span></span></h3>
+              <p>Gets the element at index <code>index</code> of <code>iter</code>. If <code>index</code> is an array of
+                indices, returns an array of the elements at those indices. Indicies will
+                wrap around using <code>math_utils.wrapindex</code></p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to get elements from</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>index</p>
+                      </td>
+                      <td>
+                        <p>(number or Array of number)</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The index or indices to get</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>(T or Array of T)</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".chunks"><span class="symbol-name">chunks</span><span class="signature"><span class="signature-params">(iter[, size])</span>&nbsp;&rarr; <span class="signature-returns"> Array of Array of T</span></span></h3>
+              <p>Creates a list of contiguous non-overlapping chunks of <code>iter</code>, each of
+                length <code>size</code></p>
+              <section>
+                <h4>
+                  Examples
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>[1, 2, 3, 4, 5, 6].chunks() // [[1, 2], [3, 4], [5, 6]]</code></pre>
+                </div>
+                <div>
+                  <pre class="prettyprint"><code>[1, 2, 3, 4, 5, 6].chunks(3) // [[1, 2, 3], [4, 5, 6]]</code></pre>
+                </div>
+              </section>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing any type</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to create chunks from</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>size</p>
+                      </td>
+                      <td>
+                        <p>number</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>The size of each chunk</p>
+                        <p>Defaults to <code>2</code>.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of Array of T</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".count"><span class="symbol-name">count</span><span class="signature"><span class="signature-params">(iter, value[, string_like_match])</span>&nbsp;&rarr; <span class="signature-returns"> number</span></span></h3>
+              <p>Counts the number of times <code>value</code> appears in <code>iter</code>. If <code>value</code> is a
+                function, it's will do the same as <code>.filter(f).length</code>, if <code>iter</code> is a
+                string or <code>string_like_match</code> is explicitly set to <code>true</code>, <code>[&quot;a&quot;, &quot;b&quot;]</code> will
+                match <code>abcd</code> or [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;] as well as something like
+                [&quot;arstneio&quot;, [&quot;a&quot;, &quot;b], 4].</p>
+              <section>
+                <h4>
+                  Examples
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>[4, 2, 3, 1, 2].count(2) // 2</code></pre>
+                </div>
+                <div>
+                  <pre class="prettyprint"><code>&quot;abababa&quot;.count(&quot;aba&quot;) // 2</code></pre>
+                </div>
+                <div>
+                  <pre class="prettyprint"><code>[3, 2, 1, 2, 1].count([2, 1]) // 0</code></pre>
+                </div>
+                <div>
+                  <pre class="prettyprint"><code>[3, 2, 1, 2, 1].count([2, 1], true) // 2</code></pre>
+                </div>
+              </section>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing any type</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to count values in</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>value</p>
+                      </td>
+                      <td>
+                        <p>any</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The value to count</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>string_like_match</p>
+                      </td>
+                      <td>
+                        <p>boolean</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>(See description)</p>
+                        <p>Defaults to <code>false</code>.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>number</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".countol"><span class="symbol-name">countol</span><span class="signature"><span class="signature-params">(iter, value[, string_like_match])</span>&nbsp;&rarr; <span class="signature-returns"> number</span></span></h3>
+              <p>Same as <code>iter_utils.count</code> but counts overlapping matches</p>
+              <section>
+                <h4>
+                  Examples
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>&quot;abababa&quot;.countol(&quot;aba&quot;) // 3</code></pre>
+                </div>
+                <div>
+                  <pre class="prettyprint"><code>[1, 2, 1, 2, 1].countol([1, 2, 1]) // 2</code></pre>
+                </div>
+              </section>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing any type</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to count values in</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>value</p>
+                      </td>
+                      <td>
+                        <p>any</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The value to count</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>string_like_match</p>
+                      </td>
+                      <td>
+                        <p>boolean</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>(See description)</p>
+                        <p>Defaults to <code>false</code>.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>number</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".deltas"><span class="symbol-name">deltas</span><span class="signature"><span class="signature-params">(iter)</span>&nbsp;&rarr; <span class="signature-returns"> Array of number</span></span></h3>
+              <p>Gets the differences between consecutive elements of an iterable</p>
+              <section>
+                <h4>
+                  Example
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>[1, 2, 9, -4].deltas // [1, 7, -13]</code></pre>
+                </div>
+              </section>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing number</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to get deltas from</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of number</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".dropnth"><span class="symbol-name">dropnth</span><span class="signature"><span class="signature-params">(iter, index)</span>&nbsp;&rarr; <span class="signature-returns"> Array of T</span></span></h3>
+              <p>Removes the nth element from an iterable value</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to remove an element from</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>index</p>
+                      </td>
+                      <td>
+                        <p>number</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The index of the element to remove</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of T</code> 
+                  <p>The resulting array</p>
+                  </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".each"><span class="symbol-name">each</span><span class="signature"><span class="signature-params">(iter, callback)</span>&nbsp;&rarr; <span class="signature-returns"> Iterable containing T</span></span></h3>
+              <p>Same as the built in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">Array.forEach</a></p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to iterate over</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>callback</p>
+                      </td>
+                      <td>
+                        <p>function(T, number, Iterable containing T)</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The callback to call for each element (see the MDN link for more info)</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Iterable containing T</code> 
+                  <p>The original iterable</p>
+                  </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".everynth"><span class="symbol-name">everynth</span><span class="signature"><span class="signature-params">(iter, n[, start])</span>&nbsp;&rarr; <span class="signature-returns"> Array of T</span></span></h3>
+              <p>Return a list with every <code>n</code>th element of <code>iter</code> starting at index <code>start</code></p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to get elements from</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>n</p>
+                      </td>
+                      <td>
+                        <p>number</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The step size</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>start</p>
+                      </td>
+                      <td>
+                        <p>number</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>The starting index</p>
+                        <p>Defaults to <code>0</code>.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of T</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".filterout"><span class="symbol-name">filterout</span><span class="signature"><span class="signature-params">(array, filter_fn)</span>&nbsp;&rarr; <span class="signature-returns"> Array of T</span></span></h3>
+              <p>Same as the built in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">Array.filter</a>
+                but inverted. For consistency with builtins like <code>Array.filter</code> and <code>Array.map</code> which <em>don't</em> work on any iterable. This must also be called on an array.</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>array</p>
+                      </td>
+                      <td>
+                        <p>Array of T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to filter</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>filter_fn</p>
+                      </td>
+                      <td>
+                        <p>function(T)</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The filter function</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of T</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".first"><span class="symbol-name">first</span><span class="signature"><span class="signature-params">(iter)</span>&nbsp;&rarr; <span class="signature-returns"> any</span></span></h3>
+              <p>Gets the first element of an iterable value</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing any type</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to get the first element from</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>any</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".firstn"><span class="symbol-name">firstn</span><span class="signature"><span class="signature-params">(iter, n)</span>&nbsp;&rarr; <span class="signature-returns"> Array of T</span></span></h3>
+              <p>Gets the first <code>n</code> elements of an iterable value and returns them in an array</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to get elements from</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>n</p>
+                      </td>
+                      <td>
+                        <p>number</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The number of elements to get</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of T</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".for"><span class="symbol-name">for</span><span class="signature"><span class="signature-params">(iter, callback)</span>&nbsp;&rarr; <span class="signature-returns"> Iterable containing T</span></span></h3>
+              <p>Same as the built in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">Array.forEach</a></p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to iterate over</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>callback</p>
+                      </td>
+                      <td>
+                        <p>function(T, number, Iterable containing T)</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The callback to call for each element (see the MDN link for more info)</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Iterable containing T</code> 
+                  <p>The original iterable</p>
+                  </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".last"><span class="symbol-name">last</span><span class="signature"><span class="signature-params">(iter)</span>&nbsp;&rarr; <span class="signature-returns"> any</span></span></h3>
+              <p>Gets the last element of an iterable value</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing any type</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to get the last element from</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>any</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".lastn"><span class="symbol-name">lastn</span><span class="signature"><span class="signature-params">(iter, n)</span>&nbsp;&rarr; <span class="signature-returns"> Array of T</span></span></h3>
+              <p>Gets the last <code>n</code> elements of an iterable value and returns them in an array</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to get elements from</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>n</p>
+                      </td>
+                      <td>
+                        <p>number</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The number of elements to get</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of T</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".max"><span class="symbol-name">max</span><span class="signature"><span class="signature-params">(iter)</span>&nbsp;&rarr; <span class="signature-returns"> number</span></span></h3>
+              <p>Same as the built in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max">Math.max</a>
+                but it takes an iterable as a single argument</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing any type</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to find the maximum of</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>number</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".min"><span class="symbol-name">min</span><span class="signature"><span class="signature-params">(iter)</span>&nbsp;&rarr; <span class="signature-returns"> number</span></span></h3>
+              <p>Same as the built in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min">Math.min</a>
+                but it takes an iterable as a single argument</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing any type</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to find the minimum of</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>number</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".nsort"><span class="symbol-name">nsort</span><span class="signature"><span class="signature-params">(iter)</span>&nbsp;&rarr; <span class="signature-returns"> Array of T</span></span></h3>
+              <p>Sorts an iterable (of numbers) in ascending order</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to sort</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of T</code> 
+                  <p>The sorted array</p>
+                  </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".perms"><span class="symbol-name">perms</span><span class="signature"><span class="signature-params">(iter)</span>&nbsp;&rarr; <span class="signature-returns"> Array of Array of T</span></span></h3>
+              <p>Generates all permutations of an iterable</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of Array of T</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".prepend"><span class="symbol-name">prepend</span><span class="signature"><span class="signature-params">(array, ...items)</span>&nbsp;&rarr; <span class="signature-returns"> Array of T</span></span></h3>
+              <p>Same as the built in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift">Array.unshift</a></p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>array</p>
+                      </td>
+                      <td>
+                        <p>Array of T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The array to prepend to</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>items</p>
+                      </td>
+                      <td>
+                        <p>T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The items to prepend</p>
+                        <p>Value can be repeated.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of T</code> 
+                  <p>The resulting array</p>
+                  </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".prod"><span class="symbol-name">prod</span><span class="signature"><span class="signature-params">(iter)</span>&nbsp;&rarr; <span class="signature-returns"> number</span></span></h3>
+              <p>Calculates the product of all values in an iterable</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing any type</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>number</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".rev"><span class="symbol-name">rev</span><span class="signature"><span class="signature-params">(iter)</span>&nbsp;&rarr; <span class="signature-returns"> Array of T</span></span></h3>
+              <p>Reverses the elements of an iterable (not in place)</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to reverse</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of T</code> 
+                  <p>The reversed array</p>
+                  </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".rsort"><span class="symbol-name">rsort</span><span class="signature"><span class="signature-params">(iter)</span>&nbsp;&rarr; <span class="signature-returns"> Array of T</span></span></h3>
+              <p>Sorts an iterable (of numbers) in descending order</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing any type</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to sort</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of T</code> 
+                  <p>The sorted array</p>
+                  </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".rsortby"><span class="symbol-name">rsortby</span><span class="signature"><span class="signature-params">(iter, func)</span>&nbsp;&rarr; <span class="signature-returns"> Array of T</span></span></h3>
+              <p>Sorts an iterable in descending order by the result of applying a given
+                function to each element</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to sort</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>func</p>
+                      </td>
+                      <td>
+                        <p>function(T)</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The function to apply to each element</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of T</code> 
+                  <p>The sorted array</p>
+                  </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".sliding"><span class="symbol-name">sliding</span><span class="signature"><span class="signature-params">(iter, size[, wrap])</span>&nbsp;&rarr; <span class="signature-returns"> Array of Array of T</span></span></h3>
+              <p>Creates a list of sublists of length <code>size</code> each of which is a sliding
+                window looking into <code>iter</code> starting at index <code>0</code> moving along by 1 each
+                time. If <code>loop</code> is true, there will be some extra windows at the end which
+                wrap around to the start.</p>
+              <section>
+                <h4>
+                  Examples
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>[1, 2, 3, 4, 5].sliding(3) // [[1, 2, 3], [2, 3, 4], [3, 4, 5]]</code></pre>
+                </div>
+                <div>
+                  <pre class="prettyprint"><code>[1, 2, 3].sliding(2, true) // [[1, 2], [2, 3], [3, 1]]</code></pre>
+                </div>
+              </section>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing Array of T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to create sliding windows from</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>size</p>
+                      </td>
+                      <td>
+                        <p>number</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The size of the sliding window</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>wrap</p>
+                      </td>
+                      <td>
+                        <p>boolean</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>Whether to include windows that wrap around</p>
+                        <p>Defaults to <code>false</code>.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of Array of T</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".sortby"><span class="symbol-name">sortby</span><span class="signature"><span class="signature-params">(iter, func)</span>&nbsp;&rarr; <span class="signature-returns"> Array of T</span></span></h3>
+              <p>Sorts an iterable in ascending order by the result of applying a given
+                function to each element</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to sort</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>func</p>
+                      </td>
+                      <td>
+                        <p>function(T)</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The function to apply to each element</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of T</code> 
+                  <p>The sorted array</p>
+                  </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".sorted"><span class="symbol-name">sorted</span><span class="signature"><span class="signature-params">(iter, compare_fn)</span>&nbsp;&rarr; <span class="signature-returns"> Array of T</span></span></h3>
+              <p>Sorts an iterable given a comparison function (same as <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">Array.sort</a>)
+                but not in place</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to sort</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>compare_fn</p>
+                      </td>
+                      <td>
+                        <p>function(T, T)</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The comparison function</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of T</code> 
+                  <p>The sorted array</p>
+                  </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".sum"><span class="symbol-name">sum</span><span class="signature"><span class="signature-params">(iter)</span>&nbsp;&rarr; <span class="signature-returns"> (number or string)</span></span></h3>
+              <p>Sums the elements of an iterable value</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing any type</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to sum</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>(number or string)</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".swap"><span class="symbol-name">swap</span><span class="signature"><span class="signature-params">(array, index_a, index_b)</span>&nbsp;&rarr; <span class="signature-returns"> Array of T</span></span></h3>
+              <p>Swaps the elements at indices <code>index_a</code> and <code>index_b</code> in <code>array</code>. Only works
+                on arrays so that it can be done in place.</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>array</p>
+                      </td>
+                      <td>
+                        <p>Array of T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The array to swap elements in</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>index_a</p>
+                      </td>
+                      <td>
+                        <p>number</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The index of the first element to swap</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>index_b</p>
+                      </td>
+                      <td>
+                        <p>number</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The index of the second element to swap</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of T</code> 
+                  <p>The resulting array</p>
+                  </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".uniq"><span class="symbol-name">uniq</span><span class="signature"><span class="signature-params">(iter)</span>&nbsp;&rarr; <span class="signature-returns"> <a href="-_Set.html">_Set</a></span></span></h3>
+              <p>Creates a new <a href="-_Set.html">_Set</a> from an iterable. Same as <a href="constructors.html#.set">constructors.set</a>.</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing any type</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to create a set from</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="-_Set.html">_Set</a></code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".zip"><span class="symbol-name">zip</span><span class="signature"><span class="signature-params">(...iters)</span>&nbsp;&rarr; <span class="signature-returns"> Array of Array of T</span></span></h3>
+              <p><strong>[Global]</strong> Zips multiple iterable into a single array of arrays, each containing a
+                single element from each iterable. If only one iterable is passed, it will
+                be transposed. Note: this function assumes that all iterables passed to it
+                are the same length.</p>
+              <section>
+                <h4>
+                  Examples
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>zip([1, 2, 3], [4, 5, 6]) // [[1, 4], [2, 5], [3, 6]]</code></pre>
+                </div>
+                <div>
+                  <pre class="prettyprint"><code>zip([[1, 2], [3, 4]]) // [[1, 3], [2, 4]]</code></pre>
+                </div>
+              </section>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iters</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing Array of T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterables to zip</p>
+                        <p>Value can be repeated.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of Array of T</code> </p>
+                </dd>
+              </dl>
+            </section>
+          </section>
+        </div>
+      </div>
+      <nav id="jsdoc-toc-nav" role="navigation"></nav>
+    </div>
+  </div>
+  <footer id="jsdoc-footer" class="jsdoc-footer">
+    <div id="jsdoc-footer-container">
+      <p>
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.4 on December 11, 2024.
+      </p>
+    </div>
+  </footer>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/tree.jquery.js"></script>
+  <script src="scripts/prettify.js"></script>
+  <script src="scripts/jsdoc-toc.js"></script>
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/scrollanchor.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,954 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="generator" content="JSDoc 4.0.4">
+  <meta charset="utf-8">
+  <title>Home</title>
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
+  <link href="css/baseline.css" rel="stylesheet">
+</head>
+
+<body onload="prettyPrint()">
+  <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
+    <div id="jsdoc-navbar-container">
+      <div id="jsdoc-navbar-content">
+        <a href="index.html" class="jsdoc-navbar-package-name">Home</a>
+      </div>
+    </div>
+  </nav>
+  <div id="jsdoc-body-container">
+    <div id="jsdoc-content">
+      <div id="jsdoc-content-container">
+        <div id="jsdoc-banner" role="banner">
+        </div>
+        <div id="jsdoc-main" role="main">
+          <article>
+            <h1>Tacit.js</h1>
+            <p>Docs: <a href="https://tobyck.github.io/tacit-js">tobyck.github.io/tacit-js</a> <br>
+              GitHub: <a href="https://tobyck.github.io/tacit-js">github.com/tobyck/tacit-js</a></p>
+            <h2>Usage</h2>
+            <p>Firstly, besides the tacit capabilities, this library also adds some useful utility functions. You can explore them if you scroll past the installation section, or use the side bar on the left. Note that despite namespaces like <code>type_casts</code> or <code>iter_utils</code> appearing in the docs, most of these functions <strong>only exist</strong> as methods the <code>Object</code> prototype (meaning you can essentially use them on anything) besides a few which have a global version <em>as well</em> (these are tagged with <code>[Global]</code> in the docs). Anyway, on to the tacit stuff:</p>
+            <ul>
+              <li>The global <code>it</code> starts a <a href="https://en.wikipedia.org/wiki/Tacit_programming">tacit chain</a>.</li>
+              <li>In a chain you may access properties or call any method or global function, builtin or defined by this library.</li>
+              <li>All tacit chains are monadic, and <code>it</code> may also refer to the argument.</li>
+              <li>If you're calling a function without any arguments you may optionally omit the parentheses.</li>
+              <li>If the first link in a chain isn't already in the global scope you may omit the leading <code>it.</code>. This will be the case for every builtin method/property, and most functions defined by this library.</li>
+              <li>If the last &quot;link&quot; in a chain isn't an explicit function call you will need to force the chain to end by appending <code>.it</code>.</li>
+            </ul>
+            <table>
+              <thead>
+                <tr>
+                  <th>Tacit chain</th>
+                  <th>Equivalent</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>it.repeat(3)</code></td>
+                  <td><code>str =&gt; str.repeat(3)</code></td>
+                </tr>
+                <tr>
+                  <td><code>repeat(3)</code></td>
+                  <td>Same thing (there's no global <code>repeat(str, times)</code> so we can drop the leading <code>it.</code>)</td>
+                </tr>
+                <tr>
+                  <td><code>mul(3).add(1)</code></td>
+                  <td><code>num =&gt; num * 3 + 1</code></td>
+                </tr>
+                <tr>
+                  <td><code>it.isnum()</code></td>
+                  <td><code>val =&gt; typeof val === &quot;number&quot;</code> (<code>isnum</code> is global already so we need the leading <code>it.</code>)</td>
+                </tr>
+                <tr>
+                  <td><code>mul(it).div(2).toFixed(2)</code></td>
+                  <td><code>num =&gt; (num * num / 2).toFixed(2)</code></td>
+                </tr>
+                <tr>
+                  <td><code>str.len.it</code></td>
+                  <td><code>val =&gt; val.toString().length</code></td>
+                </tr>
+                <tr>
+                  <td><code>trim.split(&quot;, &quot;)</code></td>
+                  <td><code>str =&gt; str.trim().split(&quot;, &quot;)</code></td>
+                </tr>
+                <tr>
+                  <td><code>match(/\d+/)[0].len.it</code></td>
+                  <td><code>str =&gt; str.match(/\d+/)[0].length</code></td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+            <p>Functions in tacit chains can also have flags, which are placed in the function name after a <code>$</code>. The flags available are:</p>
+            <ul>
+              <li><code>a</code>: take arguments as a single list.</li>
+              <li><code>f</code>: evaluate args as functions on the chain's argument before passing them to the function.</li>
+              <li><code>t</code>: explicitly pass the <code>this</code> arg (i.e. the object that the method is being called on). This results what would have been <code>this</code> being the first arg to the function.</li>
+              <li><code>d</code>: debug. Prints args to the console.</li>
+            </ul>
+            <p><em>Note: if a function with flags is the first link in a chain, the leading <code>it.</code> is compulsory.</em></p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Tacit chain</th>
+                  <th>Equivalent</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>chcode.add$t(s)</code></td>
+                  <td><code>char =&gt; s.add(char.charCodeAt(0))</code></td>
+                </tr>
+                <tr>
+                  <td><code>it.mul$fd(it.add(1))</code></td>
+                  <td><code>num =&gt; { print(num, num + 1); return num * (num + 1) }</code></td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+            <p>If you only need to access properties, you can start the chain with <code>get</code> instead, and you won't have to end with <code>.it</code>:</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Tacit chain</th>
+                  <th>Equivalent</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>get[1].length</code></td>
+                  <td><code>val =&gt; val[1].length</code></td>
+                </tr>
+                <tr>
+                  <td><code>get.some_prop[0].another_prop</code></td>
+                  <td><code>val =&gt; val.some_prop[0].another_prop</code></td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+            <p>Lastly, all methods <em>in this library</em> (not builtin ones) which take no arguments (not even optional ones) are replaced by getters so you can omit the parentheses like in tacit chains:</p>
+            <ul>
+              <li><code>[1, 2, 1, 3, 3, 1].uniq.arr</code> (both of these functions are niladic)</li>
+              <li><code>&quot; hello &quot;.trim().first</code> (we need the <code>()</code> on <code>trim</code> because it's builtin)</li>
+            </ul>
+            <p>These may also be used in <code>get</code> chains:</p>
+            <pre class="prettyprint source lang-js"><code>&quot;foo bar baz&quot;.words.map(get.chars).pr // prints [[&quot;f&quot;, &quot;o&quot;, &quot;o&quot;], [&quot;b&quot;, &quot;a&quot;, &quot;r&quot;], [&quot;b&quot;, &quot;a&quot;, &quot;z&quot;]]
+</code></pre>
+            <h2>Installation</h2>
+            <p>Install with you favourite JS package manager:</p>
+            <ul>
+              <li>npm: <code>npm install tacit-js</code></li>
+              <li>Yarn: <code>yarn add tacit-js</code></li>
+              <li>pnpm: <code>pnpm add tacit-js</code></li>
+              <li>Bun: <code>bun add tacit-js</code></li>
+            </ul>
+            <br>
+            <p>Using ES module syntax:</p>
+            <pre class="prettyprint source lang-js"><code>import &quot;tacit-js&quot;
+
+// everything is automatically put in the global scope
+</code></pre>
+            <p>Or with CommonJS:</p>
+            <pre class="prettyprint source lang-js"><code>require(&quot;tacit-js&quot;)
+</code></pre>
+          </article>
+          <div class="symbol-index">
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="Vec">Vec</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="Vec.html" class="!symbol-index-name">Vec(x, y)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="Vec.html#add" class="!symbol-index-name">Vec#<wbr>add(other)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="Vec.html#clone" class="!symbol-index-name">Vec#<wbr>clone()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="Vec.html#div" class="!symbol-index-name">Vec#<wbr>div(factor)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="Vec.html#down" class="!symbol-index-name">Vec#<wbr>down([n])</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="Vec.html#left" class="!symbol-index-name">Vec#<wbr>left([n])</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="Vec.html#mul" class="!symbol-index-name">Vec#<wbr>mul(factor)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="Vec.html#right" class="!symbol-index-name">Vec#<wbr>right([n])</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="Vec.html#size" class="!symbol-index-name">Vec#<wbr>size</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="Vec.html#sub" class="!symbol-index-name">Vec#<wbr>sub(other)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="Vec.html#toString" class="!symbol-index-name">Vec#<wbr>toString()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="Vec.html#up" class="!symbol-index-name">Vec#<wbr>up([n])</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="_Set">_Set</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="-_Set.html" class="!symbol-index-name">_Set(iterable)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="constructors">constructors</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="constructors.html" class="!symbol-index-name">constructors</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="constructors.html#.set" class="!symbol-index-name">constructors.<wbr>set(iter)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="constructors.html#.vec" class="!symbol-index-name">constructors.<wbr>vec(x, y)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="iter_utils">iter_utils</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html" class="!symbol-index-name">iter_utils</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.alleq" class="!symbol-index-name">iter_utils.<wbr>alleq(iter)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.append" class="!symbol-index-name">iter_utils.<wbr>append(array, .<wbr>.<wbr>.<wbr>items)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.at" class="!symbol-index-name">iter_utils.<wbr>at(iter, index)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.chunks" class="!symbol-index-name">iter_utils.<wbr>chunks(iter[, size])</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.count" class="!symbol-index-name">iter_utils.<wbr>count(iter, value[, string_like_match])</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.countol" class="!symbol-index-name">iter_utils.<wbr>countol(iter, value[, string_like_match])</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.deltas" class="!symbol-index-name">iter_utils.<wbr>deltas(iter)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.dropnth" class="!symbol-index-name">iter_utils.<wbr>dropnth(iter, index)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.each" class="!symbol-index-name">iter_utils.<wbr>each(iter, callback)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.everynth" class="!symbol-index-name">iter_utils.<wbr>everynth(iter, n[, start])</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.filterout" class="!symbol-index-name">iter_utils.<wbr>filterout(array, filter_fn)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.first" class="!symbol-index-name">iter_utils.<wbr>first(iter)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.firstn" class="!symbol-index-name">iter_utils.<wbr>firstn(iter, n)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.for" class="!symbol-index-name">iter_utils.<wbr>for(iter, callback)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.last" class="!symbol-index-name">iter_utils.<wbr>last(iter)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.lastn" class="!symbol-index-name">iter_utils.<wbr>lastn(iter, n)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.max" class="!symbol-index-name">iter_utils.<wbr>max(iter)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.min" class="!symbol-index-name">iter_utils.<wbr>min(iter)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.nsort" class="!symbol-index-name">iter_utils.<wbr>nsort(iter)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.perms" class="!symbol-index-name">iter_utils.<wbr>perms(iter)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.prepend" class="!symbol-index-name">iter_utils.<wbr>prepend(array, .<wbr>.<wbr>.<wbr>items)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.prod" class="!symbol-index-name">iter_utils.<wbr>prod(iter)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.rev" class="!symbol-index-name">iter_utils.<wbr>rev(iter)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.rsort" class="!symbol-index-name">iter_utils.<wbr>rsort(iter)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.rsortby" class="!symbol-index-name">iter_utils.<wbr>rsortby(iter, func)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.sliding" class="!symbol-index-name">iter_utils.<wbr>sliding(iter, size[, wrap])</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.sortby" class="!symbol-index-name">iter_utils.<wbr>sortby(iter, func)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.sorted" class="!symbol-index-name">iter_utils.<wbr>sorted(iter, compare_fn)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.sum" class="!symbol-index-name">iter_utils.<wbr>sum(iter)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.swap" class="!symbol-index-name">iter_utils.<wbr>swap(array, index_a, index_b)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.uniq" class="!symbol-index-name">iter_utils.<wbr>uniq(iter)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="iter_utils.html#.zip" class="!symbol-index-name">iter_utils.<wbr>zip(.<wbr>.<wbr>.<wbr>iters)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="logic_utils">logic_utils</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="logic_utils.html" class="!symbol-index-name">logic_utils</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="logic_utils.html#.and" class="!symbol-index-name">logic_utils.<wbr>and(a, b)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="logic_utils.html#.not" class="!symbol-index-name">logic_utils.<wbr>not(a)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="logic_utils.html#.or" class="!symbol-index-name">logic_utils.<wbr>or(a, b)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="logic_utils.html#.xor" class="!symbol-index-name">logic_utils.<wbr>xor(a, b)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="math_utils">math_utils</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="math_utils.html" class="!symbol-index-name">math_utils</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="math_utils.html#.abs" class="!symbol-index-name">math_utils.<wbr>abs(n)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="math_utils.html#.absdiff" class="!symbol-index-name">math_utils.<wbr>absdiff(a, b)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="math_utils.html#.add" class="!symbol-index-name">math_utils.<wbr>add(a, b)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="math_utils.html#.ceil" class="!symbol-index-name">math_utils.<wbr>ceil(n)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="math_utils.html#.div" class="!symbol-index-name">math_utils.<wbr>div(a, b)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="math_utils.html#.even" class="!symbol-index-name">math_utils.<wbr>even(n)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="math_utils.html#.exp" class="!symbol-index-name">math_utils.<wbr>exp(b, e[, m])</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="math_utils.html#.floor" class="!symbol-index-name">math_utils.<wbr>floor(n)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="math_utils.html#.gt" class="!symbol-index-name">math_utils.<wbr>gt(a, b)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="math_utils.html#.gte" class="!symbol-index-name">math_utils.<wbr>gte(a, b)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="math_utils.html#.lt" class="!symbol-index-name">math_utils.<wbr>lt(a, b)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="math_utils.html#.lte" class="!symbol-index-name">math_utils.<wbr>lte(a, b)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="math_utils.html#.mod" class="!symbol-index-name">math_utils.<wbr>mod(a, b)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="math_utils.html#.mul" class="!symbol-index-name">math_utils.<wbr>mul(a, b)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="math_utils.html#.odd" class="!symbol-index-name">math_utils.<wbr>odd(n)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="math_utils.html#.round" class="!symbol-index-name">math_utils.<wbr>round(n)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="math_utils.html#.sign" class="!symbol-index-name">math_utils.<wbr>sign(n)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="math_utils.html#.sqrt" class="!symbol-index-name">math_utils.<wbr>sqrt(n)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="math_utils.html#.sub" class="!symbol-index-name">math_utils.<wbr>sub(a, b)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="math_utils.html#.wrapindex" class="!symbol-index-name">math_utils.<wbr>wrapindex(index, length)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="misc_utils">misc_utils</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="misc_utils.html" class="!symbol-index-name">misc_utils</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="misc_utils.html#.eq" class="!symbol-index-name">misc_utils.<wbr>eq(a, b)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="misc_utils.html#.len" class="!symbol-index-name">misc_utils.<wbr>len(value)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="misc_utils.html#.neq" class="!symbol-index-name">misc_utils.<wbr>neq(a, b)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="misc_utils.html#.pr" class="!symbol-index-name">misc_utils.<wbr>pr(value)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="misc_utils.html#.print" class="!symbol-index-name">misc_utils.<wbr>print(.<wbr>.<wbr>.<wbr>values)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="misc_utils.html#.range" class="!symbol-index-name">misc_utils.<wbr>range(a[, b][, step])</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="misc_utils.html#.wrap" class="!symbol-index-name">misc_utils.<wbr>wrap</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="object_utils">object_utils</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="object_utils.html" class="!symbol-index-name">object_utils</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="object_utils.html#.entries" class="!symbol-index-name">object_utils.<wbr>entries(obj)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="object_utils.html#.keys" class="!symbol-index-name">object_utils.<wbr>keys(obj)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="object_utils.html#.values" class="!symbol-index-name">object_utils.<wbr>values(obj)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="string_utils">string_utils</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="string_utils.html" class="!symbol-index-name">string_utils</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="string_utils.html#.chars" class="!symbol-index-name">string_utils.<wbr>chars(str)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="string_utils.html#.chcode" class="!symbol-index-name">string_utils.<wbr>chcode(char)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="string_utils.html#.csv" class="!symbol-index-name">string_utils.<wbr>csv(str)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="string_utils.html#.groups" class="!symbol-index-name">string_utils.<wbr>groups(str)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="string_utils.html#.ints" class="!symbol-index-name">string_utils.<wbr>ints(str)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="string_utils.html#.isdigit" class="!symbol-index-name">string_utils.<wbr>isdigit(char)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="string_utils.html#.lines" class="!symbol-index-name">string_utils.<wbr>lines(str)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="string_utils.html#.nums" class="!symbol-index-name">string_utils.<wbr>nums(str)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="string_utils.html#.words" class="!symbol-index-name">string_utils.<wbr>words(str)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="type_casts">type_casts</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="type_casts.html" class="!symbol-index-name">type_casts</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="type_casts.html#.arr" class="!symbol-index-name">type_casts.<wbr>arr(value)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="type_casts.html#.bool" class="!symbol-index-name">type_casts.<wbr>bool(value)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="type_casts.html#.int" class="!symbol-index-name">type_casts.<wbr>int(value)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="type_casts.html#.num" class="!symbol-index-name">type_casts.<wbr>num(value)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="type_casts.html#.str" class="!symbol-index-name">type_casts.<wbr>str(value)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="type_checks">type_checks</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="type_checks.html" class="!symbol-index-name">type_checks</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="type_checks.html#.isarr" class="!symbol-index-name">type_checks.<wbr>isarr(value)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="type_checks.html#.isbool" class="!symbol-index-name">type_checks.<wbr>isbool(value)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="type_checks.html#.isfunc" class="!symbol-index-name">type_checks.<wbr>isfunc(value)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="type_checks.html#.isint" class="!symbol-index-name">type_checks.<wbr>isint(value)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="type_checks.html#.isiter" class="!symbol-index-name">type_checks.<wbr>isiter(value)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="type_checks.html#.isnum" class="!symbol-index-name">type_checks.<wbr>isnum(value)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="type_checks.html#.isobj" class="!symbol-index-name">type_checks.<wbr>isobj(value)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="type_checks.html#.isstr" class="!symbol-index-name">type_checks.<wbr>isstr(value)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="type_checks.html#.type" class="!symbol-index-name">type_checks.<wbr>type(value)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <nav id="jsdoc-toc-nav" role="navigation"></nav>
+    </div>
+  </div>
+  <footer id="jsdoc-footer" class="jsdoc-footer">
+    <div id="jsdoc-footer-container">
+      <p>
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.4 on December 11, 2024.
+      </p>
+    </div>
+  </footer>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/tree.jquery.js"></script>
+  <script src="scripts/prettify.js"></script>
+  <script src="scripts/jsdoc-toc.js"></script>
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/scrollanchor.js"></script>
+</body>
+
+</html>

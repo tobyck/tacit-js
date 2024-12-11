@@ -1,0 +1,1024 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="generator" content="JSDoc 4.0.4">
+  <meta charset="utf-8">
+  <title>Source: functions.js</title>
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
+  <link href="css/baseline.css" rel="stylesheet">
+</head>
+
+<body onload="prettyPrint()">
+  <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
+    <div id="jsdoc-navbar-container">
+      <div id="jsdoc-navbar-content">
+        <a href="index.html" class="jsdoc-navbar-package-name">Home</a>
+      </div>
+    </div>
+  </nav>
+  <div id="jsdoc-body-container">
+    <div id="jsdoc-content">
+      <div id="jsdoc-content-container">
+        <div id="jsdoc-banner" role="banner">
+        </div>
+        <div id="jsdoc-main" role="main">
+          <header class="page-header">
+            <h1>Source: functions.js</h1>
+          </header>
+          <article>
+            <pre class="prettyprint linenums"><code>import { _Set, Vec } from &quot;./classes.js&quot;
+
+const keep_global &#x3D; func &#x3D;&gt; {
+	func.keep_global &#x3D; true
+	return func
+}
+
+/** @namespace */
+const type_checks &#x3D; {}
+
+/** 
+ * **[Global]** Checks if a value is a number or a big int
+ * @function
+ * @param {any} value Value to check
+ * @returns {boolean}
+ */
+type_checks.isnum &#x3D; keep_global(x &#x3D;&gt; typeof x &#x3D;&#x3D;&#x3D; &quot;number&quot; || typeof x &#x3D;&#x3D;&#x3D; &quot;bigint&quot;)
+
+/** 
+ * **[Global]** Same as the built in [Number.isInteger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger)
+ * @function
+ * @param {any} value Value to check
+ * @returns {boolean}
+ */
+type_checks.isint &#x3D; keep_global(Number.isInteger)
+
+/** 
+ * **[Global]** Checks if a value is a string
+ * @function
+ * @param {any} value Value to check
+ * @returns {boolean}
+ */
+type_checks.isstr &#x3D; keep_global(x &#x3D;&gt; typeof x &#x3D;&#x3D;&#x3D; &quot;string&quot;)
+
+/** 
+ * **[Global]** Checks if a value is an array (alias for Array.isArray)
+ * @function
+ * @param {any} value Value to check
+ * @returns {boolean}
+ */
+type_checks.isarr &#x3D; keep_global(Array.isArray)
+
+/** 
+ * **[Global]** Checks if a value is a boolean
+ * @function
+ * @param {any} value Value to check
+ * @returns {boolean}
+ */
+type_checks.isbool &#x3D; keep_global(x &#x3D;&gt; typeof x &#x3D;&#x3D;&#x3D; &quot;boolean&quot;)
+
+/** 
+ * **[Global]** Checks if a value is a function
+ * @function
+ * @param {any} value Value to check
+ * @returns {boolean}
+ */
+type_checks.isfunc &#x3D; keep_global(x &#x3D;&gt; typeof x &#x3D;&#x3D;&#x3D; &quot;function&quot;)
+
+/**
+ * **[Global]** Checks if a value is an object
+ * @function
+ * @param {any} value Value to check
+ * @returns {boolean}
+ */
+type_checks.isobj &#x3D; keep_global(x &#x3D;&gt; typeof x &#x3D;&#x3D;&#x3D; &quot;object&quot;)
+
+/** 
+ * **[Global]** Gets the type of a value using typeof
+ * @function
+ * @param {any} value Value to get the type of
+ * @returns {boolean}
+ */
+type_checks.type &#x3D; keep_global(x &#x3D;&gt; typeof x)
+
+/** 
+ * **[Global]** Checks if a type is iterable
+ * @function
+ * @param {any} value Value to check
+ * @returns {boolean}
+ */
+type_checks.isiter &#x3D; keep_global(x &#x3D;&gt; typeof x[Symbol.iterator] &#x3D;&#x3D;&#x3D; &quot;function&quot;)
+
+/** @namespace */
+const type_casts &#x3D; {}
+
+/**
+ * Casts a value to a number using the &#x60;Number&#x60; constructor. If &#x60;value&#x60; is a string
+ * then a number will be extracted with regex before casting.
+ * @param {any} value
+ * @returns {number}
+ */
+type_casts.num &#x3D; value &#x3D;&gt; {
+	if (type_checks.isstr(value)) {
+		const match &#x3D; value.match(/-?\d+(\.\d+)?/)[0]
+		return match ? Number(match) : null
+	}
+
+	return Number(value)
+}
+
+/**
+ * Casts a value to an integer using parseInt. If &#x60;value&#x60; is a string an int
+ * will be extracted with regex before casting).
+ * @param {any} value Value to cast
+ * @returns {number}
+ */
+type_casts.int &#x3D; value &#x3D;&gt; parseInt(type_casts.num(value))
+
+/**
+ * Casts a value to a string. If &#x60;value&#x60; is an array, it will be joined by &quot;&quot;.
+ * @param {any} value Value to cast
+ */
+type_casts.str &#x3D; value &#x3D;&gt; {
+	if (type_checks.isarr(value)) return value.join(&quot;&quot;)
+	if (type_checks.isobj(value)) {
+		const str &#x3D; value.toString()
+		return str &#x3D;&#x3D;&#x3D; &quot;[object Object]&quot; ? JSON.stringify(value) : str
+	}
+	return value.toString()
+}
+
+/**
+ * Casts a value to an array. If &#x60;value&#x60; is a number, an array of length &#x60;value&#x60;
+ * will be created
+ * @param {any} value Value to cast
+ * @returns {Array}
+ */
+type_casts.arr &#x3D; (value) &#x3D;&gt; {
+	if (type_checks.isnum(value)) return Array(value)
+	return Array.from(value)
+}
+
+/**
+ * Casts a value to a boolean (alias for Boolean constructor)
+ * @param {any} value Value to cast
+ * @returns {boolean}
+ */
+type_casts.bool &#x3D; value &#x3D;&gt; Boolean(value)
+
+/** @namespace */
+const math_utils &#x3D; {}
+
+/** 
+ * Casts &#x60;a&#x60; and &#x60;b&#x60; using &#x60;Number&#x60; constructor, then adds them using &#x60;+&#x60; operator
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
+ */
+math_utils.add &#x3D; (a, b) &#x3D;&gt; Number(a) + Number(b)
+
+/** 
+ * Casts &#x60;a&#x60; and &#x60;b&#x60; using &#x60;Number&#x60; constructor, then subtracts them using &#x60;-&#x60; operator
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
+ */
+math_utils.sub &#x3D; (a, b) &#x3D;&gt; Number(a) - Number(b)
+
+/** 
+ * Casts &#x60;a&#x60; and &#x60;b&#x60; using &#x60;Number&#x60; constructor, then multiplies them using &#x60;*&#x60; operator
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
+ */
+math_utils.mul &#x3D; (a, b) &#x3D;&gt; Number(a) * Number(b)
+
+/** 
+ * Casts &#x60;a&#x60; and &#x60;b&#x60; using &#x60;Number&#x60; constructor, then divides them using &#x60;/&#x60; operator
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
+ */
+math_utils.div &#x3D; (a, b) &#x3D;&gt; Number(a) / Number(b)
+
+/** 
+ * Casts &#x60;a&#x60; and &#x60;b&#x60; using &#x60;Number&#x60; constructor, then calculates &#x60;a % b&#x60; 
+ * (note: this is not true modulo, just remainder after division)
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
+ */
+math_utils.mod &#x3D; (a, b) &#x3D;&gt; Number(a) % Number(b)
+
+/** 
+ * Calculates &#x60;b ** m&#x60; (optionally modulo &#x60;m&#x60;)
+ * @param {number} b
+ * @param {number} e
+ * @param {number} [m]
+ * @return {number}
+ */
+math_utils.exp &#x3D; (b, e, m &#x3D; null) &#x3D;&gt; {
+	if (m) {
+		// naive solution but it does the job
+		if (m &#x3D;&#x3D; 1) return 0
+		let ret &#x3D; 1
+		for (let i &#x3D; 0; i &amp;lt; e; i++)
+			ret &#x3D; (ret * b) % m
+		return ret
+	} else return b ** e
+}
+
+/**
+ * Returns the absolute difference between &#x60;a&#x60; and &#x60;b&#x60;
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
+ */
+math_utils.absdiff &#x3D; (a, b) &#x3D;&gt; Math.abs(a - b)
+
+/**
+ * Checks if &#x60;a&#x60; is greater than &#x60;b&#x60;
+ * @param {number} a
+ * @param {number} b
+ * @returns {boolean}
+ */
+math_utils.gt &#x3D; (a, b) &#x3D;&gt; a &gt; b
+
+/**
+ * Checks if &#x60;a&#x60; is less than &#x60;b&#x60;
+ * @param {number} a
+ * @param {number} b
+ * @returns {boolean}
+ */
+math_utils.lt &#x3D; (a, b) &#x3D;&gt; a &amp;lt; b
+
+/**
+ * Checks if &#x60;a&#x60; is greater than or equal to &#x60;b&#x60;
+ * @param {number} a
+ * @param {number} b
+ * @returns {boolean}
+ */
+math_utils.gte &#x3D; (a, b) &#x3D;&gt; a &gt;&#x3D; b
+
+/**
+ * Checks if &#x60;a&#x60; is less than or equal to &#x60;b&#x60;
+ * @param {number} a
+ * @param {number} b
+ * @returns {boolean}
+ */
+math_utils.lte &#x3D; (a, b) &#x3D;&gt; a &amp;lt;&#x3D; b
+
+/**
+ * Checks if &#x60;n&#x60; is odd
+ * @param {number} n
+ * @returns {boolean}
+ */
+math_utils.odd &#x3D; n &#x3D;&gt; n % 2 &#x3D;&#x3D;&#x3D; 1
+
+/**
+ * Checks if &#x60;n&#x60; is even
+ * @param {number} n
+ * @returns {boolean}
+ */
+math_utils.even &#x3D; n &#x3D;&gt; n % 2 &#x3D;&#x3D;&#x3D; 0
+
+/**
+ * Calculates the absolute value of &#x60;n&#x60;
+ * @param {number} n
+ * @returns {number}
+ */
+math_utils.abs &#x3D; n &#x3D;&gt; Math.abs(n)
+
+/**
+ * Calculates the square root of &#x60;n&#x60;
+ * @param {number} n
+ * @returns {number}
+ */
+math_utils.sqrt &#x3D; n &#x3D;&gt; Math.sqrt(n)
+
+/**
+ * Calculates the sign of &#x60;n&#x60;
+ * @param {number} n
+ * @returns {number}
+ */
+math_utils.sign &#x3D; n &#x3D;&gt; Math.sign(n)
+
+/**
+ * Rounds &#x60;n&#x60; down to the nearest integer
+ * @param {number} n
+ * @returns {number}
+ */
+math_utils.floor &#x3D; n &#x3D;&gt; Math.floor(n)
+
+/**
+ * Rounds &#x60;n&#x60; up to the nearest integer
+ * @param {number} n
+ * @returns {number}
+ */
+math_utils.ceil &#x3D; n &#x3D;&gt; Math.ceil(n)
+
+/**
+ * Rounds &#x60;n&#x60; to the nearest integer
+ * @param {number} n
+ * @returns {number}
+ */
+math_utils.round &#x3D; n &#x3D;&gt; Math.round(n)
+
+/**
+ * Wraps &#x60;index&#x60; around &#x60;length&#x60; (for indexing into to arrays, strings, etc.)
+ * @param {number} index
+ * @param {number} length
+ * @returns {number}
+ */
+math_utils.wrapindex &#x3D; (index, length) &#x3D;&gt; (index % length + length) % length
+
+/**
+ * Functions which operate on iterable types
+ * @namespace
+ */
+const iter_utils &#x3D; {}
+
+/**
+ * Gets the first &#x60;n&#x60; elements of an iterable value and returns them in an array
+ * @template T
+ * @param {Iterable.&amp;lt;T&gt;} iter The iterable to get elements from
+ * @param {number} n The number of elements to get
+ * @returns {T[]}
+ */
+iter_utils.firstn &#x3D; (iter, n) &#x3D;&gt; [...iter].slice(0, n)
+
+/**
+ * Gets the last &#x60;n&#x60; elements of an iterable value and returns them in an array
+ * @template T
+ * @param {Iterable.&amp;lt;T&gt;} iter The iterable to get elements from
+ * @param {number} n The number of elements to get
+ * @returns {T[]}
+ */
+iter_utils.lastn &#x3D; (iter, n) &#x3D;&gt; !n ? [] : [...iter].slice(-n)
+
+/**
+ * Gets the first element of an iterable value
+ * @param {Iterable.&amp;lt;*&gt;} iter The iterable to get the first element from
+ * @returns {any}
+ */
+iter_utils.first &#x3D; iter &#x3D;&gt; [...iter][0]
+
+/**
+ * Gets the last element of an iterable value
+ * @param {Iterable.&amp;lt;*&gt;} iter The iterable to get the last element from
+ * @returns {any}
+ */
+iter_utils.last &#x3D; iter &#x3D;&gt; (array &#x3D; [...iter], array[array.length - 1])
+
+/**
+ * Removes the nth element from an iterable value
+ * @template T
+ * @param {Iterable.&amp;lt;T&gt;} iter The iterable to remove an element from
+ * @param {number} index The index of the element to remove
+ * @returns {T[]} The resulting array
+ */
+iter_utils.dropnth &#x3D; (iter, index) &#x3D;&gt; {
+	const array &#x3D; [...iter]
+	array.splice(math_utils.wrapindex(index, array.length), 1)
+	return array
+};
+
+/**
+ * Sums the elements of an iterable value
+ * @param {Iterable.&amp;lt;*&gt;} iter The iterable to sum
+ * @returns {number|string}
+ */
+iter_utils.sum &#x3D; iter &#x3D;&gt; [...iter].reduce((acc, cur) &#x3D;&gt; acc + cur)
+
+/**
+ * Calculates the product of all values in an iterable
+ * @param {Iterable.&amp;lt;*&gt;} iter The iterable
+ * @returns {number}
+ */
+iter_utils.prod &#x3D; iter &#x3D;&gt; [...iter].reduce((acc, cur) &#x3D;&gt; acc * cur)
+
+/**
+ * Reverses the elements of an iterable (not in place)
+ * @template T
+ * @param {Iterable.&amp;lt;T&gt;} iter The iterable to reverse
+ * @returns {T[]} The reversed array
+ */
+iter_utils.rev &#x3D; iter &#x3D;&gt; [...iter].reverse()
+
+/**
+ * **[Global]** Zips multiple iterable into a single array of arrays, each containing a
+ * single element from each iterable. If only one iterable is passed, it will
+ * be transposed. Note: this function assumes that all iterables passed to it
+ * are the same length.
+ * @template T
+ * @function
+ * @param {...Iterable.&amp;lt;T[]&gt;} iters The iterables to zip
+ * @returns {T[][]}
+ * @example zip([1, 2, 3], [4, 5, 6]) // [[1, 4], [2, 5], [3, 6]]
+ * @example zip([[1, 2], [3, 4]]) // [[1, 3], [2, 4]]
+ */
+iter_utils.zip &#x3D; keep_global((...iters) &#x3D;&gt; {
+	if (!iters.length) return [];
+
+	if (iters.length &#x3D;&#x3D;&#x3D; 1) {
+		if (!iters[0].length) return [];
+		iters &#x3D; iters[0]
+	}
+
+	const ret &#x3D; [];
+	for (let i &#x3D; 0; i &amp;lt; iters[0].length; i++) {
+		ret.push(iters.map(x &#x3D;&gt; x[i]));
+	}
+	return ret;
+})
+
+/**
+ * Creates a new {@link _Set} from an iterable. Same as {@link constructors.set}.
+ * @param {Iterable.&amp;lt;*&gt;} iter The iterable to create a set from
+ * @returns {_Set}
+ */
+iter_utils.uniq &#x3D; iter &#x3D;&gt; new _Set(iter)
+
+/**
+ * Sorts an iterable given a comparison function (same as [Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort))
+ * but not in place
+ * @template T
+ * @param {Iterable.&amp;lt;T&gt;} iter The iterable to sort
+ * @param {function(T, T): number} compare_fn The comparison function
+ * @returns {T[]} The sorted array
+ */
+iter_utils.sorted &#x3D; (iter, compare_fn) &#x3D;&gt; [...iter].sort(compare_fn)
+
+/**
+ * Sorts an iterable (of numbers) in ascending order
+ * @template T
+ * @param {Iterable.&amp;lt;T&gt;} iter The iterable to sort
+ * @returns {T[]} The sorted array
+ */
+iter_utils.nsort &#x3D; iter &#x3D;&gt; [...iter].sort((a, b) &#x3D;&gt; a - b)
+
+/**
+ * Sorts an iterable (of numbers) in descending order
+ * @param {Iterable.&amp;lt;*&gt;} iter The iterable to sort
+ * @returns {T[]} The sorted array
+ */
+iter_utils.rsort &#x3D; iter &#x3D;&gt; [...iter].sort((a, b) &#x3D;&gt; b - a)
+
+/**
+ * Sorts an iterable in ascending order by the result of applying a given
+ * function to each element
+ * @template T
+ * @param {Iterable.&amp;lt;T&gt;} iter The iterable to sort
+ * @param {function(T)} func The function to apply to each element
+ * @returns {T[]} The sorted array
+ */
+iter_utils.sortby &#x3D; (iter, func) &#x3D;&gt; iter.sort((a, b) &#x3D;&gt; func(a) - func(b))
+
+/**
+ * Sorts an iterable in descending order by the result of applying a given
+ * function to each element
+ * @template T
+ * @param {Iterable.&amp;lt;T&gt;} iter The iterable to sort
+ * @param {function(T)} func The function to apply to each element
+ * @returns {T[]} The sorted array
+ */
+iter_utils.rsortby &#x3D; (iter, func) &#x3D;&gt; iter.sort((a, b) &#x3D;&gt; func(b) - func(a))
+
+/** 
+ * Same as the built in [Array.forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
+ * @template T
+ * @param {Iterable.&amp;lt;T&gt;} iter The iterable to iterate over
+ * @param {function(T, number, Iterable.&amp;lt;T&gt;)} callback The callback to call for each element (see the MDN link for more info)
+ * @returns {Iterable.&amp;lt;T&gt;} The original iterable
+ */
+iter_utils.for &#x3D; (iter, callback) &#x3D;&gt; {
+	[...iter].forEach(callback)
+	return iter
+}
+
+/** 
+ * Same as the built in [Array.forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
+ * @function
+ * @template T
+ * @param {Iterable.&amp;lt;T&gt;} iter The iterable to iterate over
+ * @param {function(T, number, Iterable.&amp;lt;T&gt;)} callback The callback to call for each element (see the MDN link for more info)
+ * @returns {Iterable.&amp;lt;T&gt;} The original iterable
+ */
+iter_utils.each &#x3D; iter_utils.for
+
+/**
+ * Same as the built in [Math.min](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min)
+ * but it takes an iterable as a single argument
+ * @param {Iterable.&amp;lt;*&gt;} iter The iterable to find the minimum of
+ * @returns {number}
+ */
+iter_utils.min &#x3D; iter &#x3D;&gt; Math.min(...iter)
+
+/**
+ * Same as the built in [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max)
+ * but it takes an iterable as a single argument
+ * @param {Iterable.&amp;lt;*&gt;} iter The iterable to find the maximum of
+ * @returns {number}
+ */
+iter_utils.max &#x3D; iter &#x3D;&gt; Math.max(...iter)
+
+/**
+ * Same as the built in [Array.push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push)
+ * @template T
+ * @param {T[]} array The array to append to
+ * @param {...T} items The items to append
+ * @returns {T[]} The resulting array
+ */
+iter_utils.append &#x3D; (array, ...items) &#x3D;&gt; (array.push(...items), array)
+
+/**
+ * Same as the built in [Array.unshift](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift)
+ * @template T
+ * @param {T[]} array The array to prepend to
+ * @param {...T} items The items to prepend
+ * @returns {T[]} The resulting array
+ */
+iter_utils.prepend &#x3D; (array, ...items) &#x3D;&gt; (array.unshift(...items), array)
+
+/**
+ * Checks if all items in an iterable are equal
+ * @param {Iterable.&amp;lt;*&gt;} iter The iterable to check
+ * @returns {boolean}
+ */
+iter_utils.alleq &#x3D; iter &#x3D;&gt; {
+	const array &#x3D; [...iter]
+	return array.every(item &#x3D;&gt; misc_utils.eq(item, array[0]))
+}
+
+/**
+ * Creates a list of sublists of length &#x60;size&#x60; each of which is a sliding
+ * window looking into &#x60;iter&#x60; starting at index &#x60;0&#x60; moving along by 1 each
+ * time. If &#x60;loop&#x60; is true, there will be some extra windows at the end which
+ * wrap around to the start.
+ * @template T
+ * @param {Iterable.&amp;lt;T[]&gt;} iter The iterable to create sliding windows from
+ * @param {number} size The size of the sliding window
+ * @param {boolean} [wrap&#x3D;false] Whether to include windows that wrap around
+ * @returns {T[][]}
+ * @example [1, 2, 3, 4, 5].sliding(3) // [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
+ * @example [1, 2, 3].sliding(2, true) // [[1, 2], [2, 3], [3, 1]]
+ */
+iter_utils.sliding &#x3D; (iter, size, wrap &#x3D; false) &#x3D;&gt; {
+	const array &#x3D; [...iter]
+	if (array.length &amp;lt; size) return array
+	const x &#x3D; wrap ? array.concat(array.slice(0, size - 1)) : array
+	return x.slice(0, -size + 1).map((_, i) &#x3D;&gt; x.slice(i, i + size))
+}
+
+/**
+ * Creates a list of contiguous non-overlapping chunks of &#x60;iter&#x60;, each of
+ * length &#x60;size&#x60;
+ * @template T
+ * @param {Iterable.&amp;lt;*&gt;} iter The iterable to create chunks from
+ * @param {number} [size&#x3D;2] The size of each chunk
+ * @returns {T[][]}
+ * @example [1, 2, 3, 4, 5, 6].chunks() // [[1, 2], [3, 4], [5, 6]]
+ * @example [1, 2, 3, 4, 5, 6].chunks(3) // [[1, 2, 3], [4, 5, 6]]
+ */
+iter_utils.chunks &#x3D; (iter, size &#x3D; 2) &#x3D;&gt; {
+	const ret &#x3D; []
+	for (let i &#x3D; 0; i &amp;lt; iter.length; i +&#x3D; size) {
+		ret.push(iter.slice(i, i + size))
+	}
+	return ret
+}
+
+/**
+ * Swaps the elements at indices &#x60;index_a&#x60; and &#x60;index_b&#x60; in &#x60;array&#x60;. Only works
+ * on arrays so that it can be done in place.
+ * @template T
+ * @param {T[]} array The array to swap elements in
+ * @param {number} index_a The index of the first element to swap
+ * @param {number} index_b The index of the second element to swap
+ * @returns {T[]} The resulting array
+ */
+iter_utils.swap &#x3D; (array, index_a, index_b) &#x3D;&gt; {
+	[array[index_a], array[index_b]] &#x3D; [array[index_b], array[index_a]]
+	return array
+}
+
+/**
+ * Generates all permutations of an iterable
+ * @template T
+ * @param {Iterable.&amp;lt;T&gt;} iter
+ * @returns {T[][]}
+ */
+iter_utils.perms &#x3D; iter &#x3D;&gt; {
+	const array &#x3D; [...iter]
+	if (!array.length) return []
+
+	const output &#x3D; []
+
+	const generate &#x3D; (k, array) &#x3D;&gt; {
+		if (k &#x3D;&#x3D;&#x3D; 1) {
+			output.push(array.slice())
+			return
+		}
+
+		generate(k - 1, array)
+
+		for (let i &#x3D; 0; i &amp;lt; k - 1; i++) {
+			if (k % 2 &#x3D;&#x3D;&#x3D; 0) iter_utils.swap(array, i, k - 1)
+			else iter_utils.swap(array, 0, k - 1)
+			generate(k - 1, array)
+		}
+	}
+
+	generate(array.length, array)
+	return output
+}
+
+/**
+ * Return a list with every &#x60;n&#x60;th element of &#x60;iter&#x60; starting at index &#x60;start&#x60;
+ * @template T
+ * @param {Iterable.&amp;lt;T&gt;} iter The iterable to get elements from
+ * @param {number} n The step size
+ * @param {number} [start&#x3D;0] The starting index
+ * @returns {T[]}
+ */
+iter_utils.everynth &#x3D; (iter, n, start &#x3D; 0) &#x3D;&gt; {
+	const ret &#x3D; [];
+	for (let i &#x3D; start; i &amp;lt; iter.length; i +&#x3D; n)
+		ret.push(iter[i])
+	return ret
+}
+
+/**
+ * Gets the element at index &#x60;index&#x60; of &#x60;iter&#x60;. If &#x60;index&#x60; is an array of
+ * indices, returns an array of the elements at those indices. Indicies will
+ * wrap around using &#x60;math_utils.wrapindex&#x60;
+ * @template T
+ * @param {Iterable.&amp;lt;T&gt;} iter The iterable to get elements from
+ * @param {number|number[]} index The index or indices to get
+ * @returns {T|T[]}
+ */
+iter_utils.at &#x3D; (iter, index) &#x3D;&gt; {
+	const array &#x3D; [...iter]
+	if (type_checks.isint(index)) {
+		return array[math_utils.wrapindex(index, array.length)];
+	} else if (type_checks.isarr(index) &amp;amp;&amp;amp; index.every(type_checks.isint)) {
+		return index.map(i &#x3D;&gt; iter_utils.at(array, i));
+	} else {
+		throw new Error(&#x60;Invalid index/indicies ${JSON.stringify(index)}&#x60;);
+	}
+}
+
+const count &#x3D; (iter, value, string_like_match &#x3D; false, overlapping &#x3D; false) &#x3D;&gt; {
+	const array &#x3D; [...iter]
+	if (typeof value &#x3D;&#x3D;&#x3D; &quot;function&quot;) return array.filter(value).length
+
+	string_like_match &#x3D; type_checks.isstr(iter) || string_like_match
+
+	if (type_checks.isiter(value) &amp;amp;&amp;amp; string_like_match) {
+		const to_find &#x3D; [...value]
+		let count &#x3D; 0
+
+		for (let i &#x3D; 0; i &amp;lt; array.length;) {
+			if (misc_utils.eq(array.slice(i, i + to_find.length), to_find)) {
+				count++
+				i +&#x3D; overlapping ? 1 : to_find.length
+			} else i++
+		}
+
+		return count
+	}
+
+	return array.filter(x &#x3D;&gt; misc_utils.eq(x, value)).length
+}
+
+/**
+ * Counts the number of times &#x60;value&#x60; appears in &#x60;iter&#x60;. If &#x60;value&#x60; is a
+ * function, it&#x27;s will do the same as &#x60;.filter(f).length&#x60;, if &#x60;iter&#x60; is a
+ * string or &#x60;string_like_match&#x60; is explicitly set to &#x60;true&#x60;, &#x60;[&quot;a&quot;, &quot;b&quot;]&#x60; will
+ * match &#x60;abcd&#x60; or [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;] as well as something like 
+ * [&quot;arstneio&quot;, [&quot;a&quot;, &quot;b], 4].
+ * @param {Iterable.&amp;lt;*&gt;} iter The iterable to count values in
+ * @param {any} value The value to count
+ * @param {boolean} [string_like_match&#x3D;false] (See description)
+ * @returns {number}
+ * @example [4, 2, 3, 1, 2].count(2) // 2
+ * @example &quot;abababa&quot;.count(&quot;aba&quot;) // 2
+ * @example [3, 2, 1, 2, 1].count([2, 1]) // 0
+ * @example [3, 2, 1, 2, 1].count([2, 1], true) // 2
+ */
+iter_utils.count &#x3D; (...args) &#x3D;&gt; count(...args)
+
+/**
+ * Same as &#x60;iter_utils.count&#x60; but counts overlapping matches
+ * @param {Iterable.&amp;lt;*&gt;} iter The iterable to count values in
+ * @param {any} value The value to count
+ * @param {boolean} [string_like_match&#x3D;false] (See description)
+ * @returns {number}
+ * @example &quot;abababa&quot;.countol(&quot;aba&quot;) // 3
+ * @example [1, 2, 1, 2, 1].countol([1, 2, 1]) // 2
+ */
+iter_utils.countol &#x3D; (iter, value, string_like_match &#x3D; false) &#x3D;&gt; count(iter, value, string_like_match, true)
+
+/**
+ * Same as the built in [Array.filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
+ * but inverted. For consistency with builtins like &#x60;Array.filter&#x60; and &#x60;Array.map&#x60; which _don&#x27;t_ work on any iterable. This must also be called on an array.
+ * @template T
+ * @param {T[]} array The iterable to filter
+ * @param {function(T): boolean} filter_fn The filter function
+ * @returns {T[]}
+ */
+iter_utils.filterout &#x3D; (array, filter_fn) &#x3D;&gt; array.filter((...args) &#x3D;&gt; !filter_fn(...args))
+
+/**
+ * Gets the differences between consecutive elements of an iterable
+ * @param {Iterable.&amp;lt;number&gt;} iter The iterable to get deltas from
+ * @returns {number[]}
+ * @example [1, 2, 9, -4].deltas // [1, 7, -13]
+ */
+iter_utils.deltas &#x3D; iter &#x3D;&gt; {
+	const array &#x3D; [...iter];
+
+	if (!array.length) return [];
+	if (array.length &#x3D;&#x3D;&#x3D; 1) return [0];
+
+	const ret &#x3D; [];
+	for (let i &#x3D; 0; i &amp;lt; array.length - 1; i++) {
+		ret.push(array[i + 1] - array[i]);
+	}
+	return ret;
+}
+
+/** @namespace */
+const string_utils &#x3D; {}
+
+/**
+ * Splits a string into an array of characters
+ * @param {string} str The string to split
+ * @returns {string[]}
+ */
+string_utils.chars &#x3D; str &#x3D;&gt; str.split(&quot;&quot;)
+
+/**
+ * Splits a string on spaces and trims each word
+ * @param {string} str The string to split
+ * @returns {string[]}
+ */
+string_utils.words &#x3D; str &#x3D;&gt; str.split(&quot; &quot;).map(s &#x3D;&gt; s.trim())
+
+/**
+ * Splits a string on &quot;\n&quot;
+ * @param {string} str The string to split
+ * @returns {string[]}
+ */
+string_utils.lines &#x3D; str &#x3D;&gt; str.split(&quot;\n&quot;)
+
+/**
+ * Splits a string on &quot;\n\n&quot;
+ * @param {string} str The string to split
+ * @returns {string[]}
+ */
+string_utils.groups &#x3D; str &#x3D;&gt; str.split(&quot;\n\n&quot;)
+
+/**
+ * Splits a string on commas and trims each element
+ * @param {string} str The string to split
+ * @returns {string[]}
+ */
+string_utils.csv &#x3D; str &#x3D;&gt; str.split(&quot;,&quot;).map(s &#x3D;&gt; s.trim())
+
+/**
+ * Checks if a character is a digit
+ * @param {string} char The character to check
+ * @returns {boolean}
+ */
+string_utils.isdigit &#x3D; char &#x3D;&gt; /^\d$/.test(char)
+
+/**
+ * Extracts all integers from a string and returns them in an array
+ * @param {string} str The string to extract integers from
+ * @returns {number[]}
+ */
+string_utils.ints &#x3D; str &#x3D;&gt; str.match(/-?\d+/g).map(type_casts.int)
+
+/**
+ * Extracts all numbers from a string and returns them in an array
+ * @param {string} str The string to extract numbers from
+ * @returns {number[]}
+ */
+string_utils.nums &#x3D; str &#x3D;&gt; str.match(/\d+(\.\d+)?/g).map(type_casts.num)
+
+/**
+ * Gets the ASCII code a character
+ * @param {string} char The character to get the code of
+ * @returns {number}
+ */
+string_utils.chcode &#x3D; char &#x3D;&gt; char.charCodeAt(0)
+
+/** @namespace */
+const logic_utils &#x3D; {}
+
+/**
+ * Returns &#x60;a &amp;amp;&amp;amp; b&#x60;. I.e. if &#x60;a&#x60; is truthy it returns &#x60;b&#x60;, otherwise it short
+ * circuits and returns &#x60;a&#x60;
+ * @param {any} a
+ * @param {any} b
+ * @returns {any}
+ */
+logic_utils.and &#x3D; (a, b) &#x3D;&gt; a &amp;amp;&amp;amp; b
+
+/**
+ * Returns &#x60;a || b&#x60;. I.e. if &#x60;a&#x60; is truthy it short circuits and returns &#x60;a&#x60;,
+ * otherwise it returns &#x60;b&#x60;
+ * @param {any} a
+ * @param {any} b
+ * @returns {any}
+ */
+logic_utils.or &#x3D; (a, b) &#x3D;&gt; a || b
+
+/**
+ * Returns logical NOT of &#x60;a&#x60;
+ * @param {any} a
+ * @returns {boolean}
+ */
+logic_utils.not &#x3D; a &#x3D;&gt; !a
+
+/**
+ * Returns logical XOR of &#x60;a&#x60; and &#x60;b&#x60;. I.e. returns true if exactly one of &#x60;a&#x60;
+ * and &#x60;b&#x60; are truthy, otherwise returns false
+ * @param {any} a
+ * @param {any} b
+ * @returns {boolean}
+ */
+logic_utils.xor &#x3D; (a, b) &#x3D;&gt; !!(!a ^ !b)
+
+/** @namespace */
+const object_utils &#x3D; {}
+
+/**
+ * Same as the built in [Object.keys](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)
+ * @param {object} obj The object to get keys from
+ * @returns {string[]}
+ */
+object_utils.keys &#x3D; obj &#x3D;&gt; Object.keys(obj)
+
+/**
+ * Same as the built in [Object.values](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values)
+ * @param {object} obj The object to get values from
+ * @returns {any[]}
+ */
+object_utils.values &#x3D; obj &#x3D;&gt; Object.values(obj)
+
+/**
+ * Same as the built in [Object.entries](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries)
+ * @param {object} obj The object to get entries from
+ * @returns {any[]} An array of key-value tuples
+ */
+object_utils.entries &#x3D; obj &#x3D;&gt; Object.entries(obj)
+
+/** @namespace */
+const misc_utils &#x3D; {}
+
+/**
+ * **[Global]** Checks &#x60;a&#x60; and &#x60;b&#x60; are equal. In theory this works for any two values,
+ * whethere they&#x27;re primitives, arrays or some other object.
+ * @function
+ * @param {any} a
+ * @param {any} b
+ * @returns {boolean}
+ */
+misc_utils.eq &#x3D; keep_global((a, b) &#x3D;&gt; {
+	if (Array.isArray(a) &amp;amp;&amp;amp; Array.isArray(b)) {
+		if (a.length !&#x3D;&#x3D; b.length) return false;
+		for (let i &#x3D; 0; i &amp;lt; a.length; i++)
+			if (!misc_utils.eq(a[i], b[i])) return false;
+		return true;
+	} else if (typeof a &#x3D;&#x3D;&#x3D; &quot;object&quot; &amp;amp;&amp;amp; typeof b &#x3D;&#x3D;&#x3D; &quot;object&quot;) {
+		return JSON.stringify(a) &#x3D;&#x3D;&#x3D; JSON.stringify(b);
+	} else return a &#x3D;&#x3D;&#x3D; b;
+})
+
+/** 
+ * **[Global]** Checks &#x60;a&#x60; and &#x60;b&#x60; are not equal (by negating &#x60;misc_utils.eq&#x60;)
+ * @function
+ * @param {any} a
+ * @param {any} b
+ * @returns {boolean}
+ */
+misc_utils.neq &#x3D; keep_global((a, b) &#x3D;&gt; !eq(a, b))
+
+/**
+ * **[Global]** Creates the range &#x60;[a, b)&#x60; in an array with an optional step size
+ * @function
+ * @param {number} a End of the range (if &#x60;b&#x60; is not provided)
+ * @param {number} [b&#x3D;0] End of the range (if provided, in which case &#x60;a&#x60; is the start)
+ * @param {number} [step&#x3D;1]
+ * @returns {number[]}
+ * @example range(4) // [0, 1, 2, 3]
+ * @example range(2, 5) // [2, 3, 4]
+ * @example range(1, 10, 2) // [1, 3, 5, 7, 9]
+ */
+misc_utils.range &#x3D; keep_global(function(a, b &#x3D; 0, step &#x3D; 1) {
+	let start &#x3D; 0, end &#x3D; a
+	if (arguments.length &gt; 1) {
+		start &#x3D; a
+		end &#x3D; b
+	}
+	const ret &#x3D; [];
+	for (let n &#x3D; start; n &amp;lt; end; n +&#x3D; step)
+		ret.push(n)
+	return ret
+})
+
+/**
+ * **[Global]** Same as &#x60;console.log&#x60; its arg(s)
+ * @function
+ * @template T
+ * @param {...T} values Values to print
+ * @returns {T|T[]}
+ */
+misc_utils.print &#x3D; keep_global((...values) &#x3D;&gt; {
+	console.log(...values)
+	return values.length &gt; 1 ? values : values[0]
+})
+
+/**
+ * **[Global]** Same as &#x60;misc_utils.print&#x60; but niladic (so that it becomes a getter)
+ * @function
+ * @template T
+ * @param {T} value Value to print
+ * @returns {T}
+ */
+misc_utils.pr &#x3D; value &#x3D;&gt; print(value)
+
+/**
+ * **[Global]** Tries to get the length property of &#x60;value&#x60; otherwise tries to get &#x60;size&#x60;
+ * @function
+ * @param {any} value Value to get the length/size of
+ * @returns {?number}
+ */
+misc_utils.len &#x3D; value &#x3D;&gt; value?.length ?? value?.size
+
+/**
+ * **[Global]** Wraps a value in a singleton list
+ * @template T
+ * @param {T} value Value to wrap
+ * @returns {T[]}
+ */
+misc_utils.wrap &#x3D; keep_global(value &#x3D;&gt; [value])
+
+/** @namespace */
+const constructors &#x3D; {}
+
+/**
+ * **[Global]** Calls &#x60;new _Set(iter)&#x60;. See the documentation for &#x60;{@link _Set}&#x60; for more info
+ * @function
+ * @param {Iterable.&amp;lt;*&gt;} iter The iterable to create the set from
+ * @returns {_Set}
+ */
+constructors.set &#x3D; keep_global((iter &#x3D; []) &#x3D;&gt; new _Set(iter))
+
+/**
+ * **[Global]** Calls &#x60;new Vec(x, y)&#x60;. See the documentation for &#x60;{@link Vec}&#x60; for more info
+ * @function
+ * @param {number} x The x component of the vector
+ * @param {number} y The y component of the vector
+ * @returns {Vec}
+ */
+constructors.vec &#x3D; keep_global((x, y) &#x3D;&gt; new Vec(x, y))
+
+export default {
+	...type_checks,
+	...type_casts,
+	...math_utils,
+	...string_utils,
+	...iter_utils,
+	...object_utils,
+	...logic_utils,
+	...misc_utils,
+	...constructors
+}
+</code></pre>
+          </article>
+        </div>
+      </div>
+      <nav id="jsdoc-toc-nav" role="navigation"></nav>
+    </div>
+  </div>
+  <footer id="jsdoc-footer" class="jsdoc-footer">
+    <div id="jsdoc-footer-container">
+      <p>
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.4 on December 11, 2024.
+      </p>
+    </div>
+  </footer>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/tree.jquery.js"></script>
+  <script src="scripts/prettify.js"></script>
+  <script src="scripts/jsdoc-toc.js"></script>
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/scrollanchor.js"></script>
+</body>
+
+</html>
