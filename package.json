@@ -1,15 +1,16 @@
 {
-	"name": "tacit-js",
-	"version": "0.0.0",
-	"description": "Useful util functions and tacit programming capabilities",
-	"type": "module",
+	"name": "@toby_ck/tacit-js",
+	"version": "0.0.1",
 	"author": "Toby Connor-Kebbell",
+	"description": "Useful util functions and tacit programming capabilities",
+	"devDependencies": {
+		"jsdoc": "^4.0.4",
+		"jsdoc-baseline": "^0.1.5"
+	},
 	"keywords": ["tacit", "point-free", "functional", "util"],
 	"scripts": {
 		"docs": "jsdoc -c ./jsdoc.json"
 	},
-	"devDependencies": {
-		"jsdoc": "^4.0.4",
-		"jsdoc-baseline": "^0.1.5"
-	}
+	"type": "module",
+	"main": "src/lib.js"
 }

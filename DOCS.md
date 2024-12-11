@@ -67,10 +67,10 @@ These may also be used in `get` chains:
 
 Install with you favourite JS package manager:
 
- - npm: `npm install tacit-js`
- - Yarn: `yarn add tacit-js`
- - pnpm: `pnpm add tacit-js`
- - Bun: `bun add tacit-js`
+ - npm: `npm install @toby_ck/tacit-js`
+ - Yarn: `yarn add @toby_ck/tacit-js`
+ - pnpm: `pnpm add @toby_ck/tacit-js`
+ - Bun: `bun add @toby_ck/tacit-js`
 
 <br>
 
