@@ -1,3 +1,5 @@
+import functions from "./functions.js"
+
 // applies a proxy to a function that makes any property access or call do
 // nothing, and simply build up a list of operations to do once it's called
 export const chain_proxy = func => new Proxy(func, {
@@ -11,7 +13,9 @@ export const chain_proxy = func => new Proxy(func, {
 
 	apply(target, _, args) {
 		const last_link = target.links.at(-1)
-		if (typeof last_link === "object" || last_link === "it")
+
+		if (!last_link) return args[0]
+		else if (typeof last_link === "object" || last_link === "it")
 			return evaluate_chain(target.links)(args[0])
 
 		let [func_name, flags] = target.links.pop().split("$")
@@ -25,7 +29,7 @@ const call_link = (chain_arg, result, func_name, flags = "", args = []) => {
 	let this_arg = result // value to call method on
 
 	// if an arg is `it` with no links, treat as the original chain arg
-	args = args.map(arg => arg.symbol === Symbol.for("chain_proxy") && !arg.links.length ? chain_arg : arg)
+	args = args.map(arg => arg?.symbol === Symbol.for("chain_proxy") && !arg.links.length ? chain_arg : arg)
 
 	for (const flag of flags) {
 		if (flag === "f") args = args.map(f => f(chain_arg)) // map args as functions on the chain arg
@@ -47,10 +51,12 @@ const call_link = (chain_arg, result, func_name, flags = "", args = []) => {
 		}
 	}
 
-	if (this_arg?.[func_name] === undefined || typeof this_arg[func_name] !== "function")
-		throw new Error(`Error while evluating chain: ${typeof this_arg} "${this_arg}" has no method '${func_name}\``)
+	if (typeof this_arg?.[func_name] === "function")
+		return this_arg[func_name](...args)
+	else if (typeof functions?.[func_name] === "function")
+		return functions[func_name](this_arg, ...args)
 
-	return this_arg[func_name](...args)
+	throw new Error(`Error while evluating chain: function '${func_name}\` not available`)
 }
 
 const evaluate_chain = links => chain_arg => links.reduce((result, link) => {

@@ -6,11 +6,12 @@ describe(`"it" chains`, () => {
 	test(() => expect(it.repeat(3)("a")).toBe("aaa"))
 	test(() => expect(repeat(3)("a")).toBe("aaa"))
 	test(() => expect(mul(3).add(1)(4)).toBe(13))
-	test(() => expect(it.isnum()(123)).toBeTruthy())
+	test(() => expect(it.isnum()(123)).toBe(true))
 	test(() => expect(mul(it)(3)).toBe(9))
 	test(() => expect(str.len.it("arstneio")).toBe(8))
 	test(() => expect(trim.split(" ")("  hello world ")).toEqual(["hello", "world"]))
 	test(() => expect(match(/\d+/)[0].length.it("abc1234def456")).toBe(4))
+	test(() => expect(it.eq(undefined)(undefined)).toBe(true))
 	
 	test("t flag", () => {
 		const s = set()

@@ -8,7 +8,7 @@ GitHub: [github.com/tobyck/tacit-js](https://github.com/tobyck/tacit-js)
 Firstly, besides the tacit capabilities, this library also adds some useful utility functions. You can explore them if you scroll past the installation section, or use the side bar on the left. Note that despite namespaces like `type_casts` or `iter_utils` appearing in the docs, most of these functions **only exist** as methods the `Object` prototype (meaning you can essentially use them on anything) besides a few which have a global version *as well* (these are tagged with `[Global]` in the docs). Anyway, on to the tacit stuff:
 
  - The global `it` starts a [tacit chain](https://en.wikipedia.org/wiki/Tacit_programming).
- - In a chain you may access properties or call any method or global function, builtin or defined by this library.
+ - In a chain you may access properties or call any method or function that's builtin or defined by this library.
  - All tacit chains are monadic, and `it` may also refer to the argument.
  - If you're calling a function without any arguments you may optionally omit the parentheses.
  - If the first link in a chain isn't already in the global scope you may omit the leading `it.`. This will be the case for every builtin method/property, and most functions defined by this library.
@@ -40,6 +40,7 @@ _Note: if a function with flags is the first link in a chain, the leading `it.` 
 | ----------- | ---------- |
 | `chcode.add$t(s)` | `char => s.add(char.charCodeAt(0))` |
 | `it.mul$fd(it.add(1))` | `num => { print(num, num + 1); return num * (num + 1) }` |
+| `it.add$a()` | `([a, b]) => a + b` |
 
 <br>
 
