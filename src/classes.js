@@ -115,6 +115,19 @@ export class Vec {
 	}
 
 	/**
+	 * Gets a list of the four orthogonal neighbors of this vector
+	 * @returns {Vec[]}
+	 */
+	get neighbors {
+		return [
+			this.add(new Vec(0, -1)),
+			this.add(new Vec(0, 1)),
+			this.add(new Vec(-1, 0)),
+			this.add(new Vec(1, 0))
+		]
+	}
+
+	/**
 	 * Gets the size of the vector
 	 * @returns {number}
 	 */
@@ -126,7 +139,7 @@ export class Vec {
 	 * Clones the vector
 	 * @returns {Vec}
 	 */
-	clone() {
+	get clone {
 		return new Vec(this.x, this.y)
 	}
 

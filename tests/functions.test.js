@@ -36,6 +36,7 @@ describe("arr", () => {
 	test("number", () => expect(f.arr(3)).toEqual([undefined, undefined, undefined]))
 	test("array", () => expect(f.arr(["a", "b", "c"])).toEqual(["a", "b", "c"]))
 	test("object", () => expect(f.arr({ length: 2 })).toEqual([undefined, undefined]))
+	test("vec", () => expect(f.arr(vec(2, 3))).toEqual([2, 3]))
 	test("empty object", () => expect(f.arr({})).toEqual([]))
 })
 

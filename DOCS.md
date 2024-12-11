@@ -77,7 +77,7 @@ Install with you favourite JS package manager:
 Using ES module syntax:
 
 ```js
-import "tacit-js"
+import "@toby_ck/tacit-js"
 
 // everything is automatically put in the global scope
 ```
@@ -85,5 +85,5 @@ import "tacit-js"
 Or with CommonJS:
 
 ```js
-require("tacit-js")
+require("@toby_ck/tacit-js")
 ```

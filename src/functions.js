@@ -127,6 +127,7 @@ type_casts.str = value => {
  */
 type_casts.arr = (value) => {
 	if (type_checks.isnum(value)) return Array(value)
+	if (type_checks.isiter(value)) return [...value]
 	return Array.from(value)
 }
 
@@ -699,6 +700,17 @@ iter_utils.countol = (iter, value, string_like_match = false) => count(iter, val
  * @returns {T[]}
  */
 iter_utils.filterout = (array, filter_fn) => array.filter((...args) => !filter_fn(...args))
+
+/**
+ * Checks if there are no elements in `array` that satisfy `fn`. `fn` is passed
+ * to the built in [Array.some](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)
+ * so refer to those docs if needed.
+ * @template T
+ * @param {T[]} array The array to check
+ * @param {function(T, number, T[]): boolean} fn The function to check
+ * @returns {boolean}
+ */
+iter_utils.none = (array, fn) => !array.some(fn)
 
 /**
  * Gets the differences between consecutive elements of an iterable
