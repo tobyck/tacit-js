@@ -6,11 +6,9 @@
 	"type": "module",
 	"main": "src/lib.js",
 	"scripts": {
-		"docs": "jsdoc -c ./jsdoc.json",
-		"prepare": "husky"
+		"docs": "jsdoc -c ./jsdoc.json"
 	},
 	"devDependencies": {
-		"husky": "^9.1.7",
 		"jsdoc": "^4.0.4",
 		"jsdoc-baseline": "^0.1.5"
 	},
