@@ -33,7 +33,7 @@
             <p>Firstly, besides the tacit capabilities, this library also adds some useful utility functions. You can explore them if you scroll past the installation section, or use the side bar on the left. Note that despite namespaces like <code>type_casts</code> or <code>iter_utils</code> appearing in the docs, most of these functions <strong>only exist</strong> as methods the <code>Object</code> prototype (meaning you can essentially use them on anything) besides a few which have a global version <em>as well</em> (these are tagged with <code>[Global]</code> in the docs). Anyway, on to the tacit stuff:</p>
             <ul>
               <li>The global <code>it</code> starts a <a href="https://en.wikipedia.org/wiki/Tacit_programming">tacit chain</a>.</li>
-              <li>In a chain you may access properties or call any method or function, that's builtin or defined by this library.</li>
+              <li>In a chain you may access properties or call any method or function that's builtin or defined by this library.</li>
               <li>All tacit chains are monadic, and <code>it</code> may also refer to the argument.</li>
               <li>If you're calling a function without any arguments you may optionally omit the parentheses.</li>
               <li>If the first link in a chain isn't already in the global scope you may omit the leading <code>it.</code>. This will be the case for every builtin method/property, and most functions defined by this library.</li>
