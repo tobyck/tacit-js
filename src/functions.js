@@ -1,7 +1,5 @@
+import { keep_global, attach_to, vectorise } from "./helpers.js"
 import { _Set, Vec } from "./classes.js"
-
-const keep_global = func => (func.keep_global = true, func)
-const attach_to = (type, func) => (func.attach_to = type, func)
 
 /** @namespace */
 const type_checks = {}
@@ -379,29 +377,26 @@ iter_utils.prod = iter => [...iter].reduce((acc, cur) => acc * cur)
 iter_utils.rev = iter => [...iter].reverse()
 
 /**
- * **[Global]** Zips multiple iterable into a single array of arrays, each containing a
- * single element from each iterable. If only one iterable is passed, it will
- * be transposed. Note: this function assumes that all iterables passed to it
- * are the same length.
+ * **[Global]** Zips multiple iterable into a single array of arrays, each
+ * containing a single element from each iterable. The result will only be as
+ * long as the shortest input.
  * @template T
  * @function
  * @param {...Iterable.<T[]>} iters The iterables to zip
  * @returns {T[][]}
  * @example zip([1, 2, 3], [4, 5, 6]) // [[1, 4], [2, 5], [3, 6]]
- * @example zip([[1, 2], [3, 4]]) // [[1, 3], [2, 4]]
+ * @example zip([1, 2]) // [[1], [2]]
  */
 iter_utils.zip = keep_global((...iters) => {
 	if (!iters.length) return [];
 
-	if (iters.length === 1) {
-		if (!iters[0].length) return [];
-		iters = iters[0]
-	}
-
+	const smallest = Math.min(...iters.map(x => x.length))
 	const ret = [];
-	for (let i = 0; i < iters[0].length; i++) {
+
+	for (let i = 0; i < smallest; i++) {
 		ret.push(iters.map(x => x[i]));
 	}
+
 	return ret;
 })
 

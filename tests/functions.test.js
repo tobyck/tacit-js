@@ -156,9 +156,9 @@ describe("deltas", () => {
 describe("zip", () => {
 	test("nothing", () => expect(f.zip()).toEqual([]))
 	test("single empty arr", () => expect(f.zip([])).toEqual([]))
-	test("transpose one row", () => expect(f.zip([[1, 2, 3]])).toEqual([[1], [2], [3]]))
+	test("one row", () => expect(f.zip([1, 2, 3])).toEqual([[1], [2], [3]]))
 	test("2x2", () => expect(f.zip([1, 2], [3, 4])).toEqual([[1, 3], [2, 4]]))
-	test("3x3", () => expect(f.zip([[1, 2, 3], [4, 5, 6], [7, 8, 9]])).toEqual([[1, 4, 7], [2, 5, 8], [3, 6, 9]]))
+	test("3x3", () => expect(f.zip([1, 2, 3], [4, 5, 6], [7, 8, 9])).toEqual([[1, 4, 7], [2, 5, 8], [3, 6, 9]]))
 })
 
 describe("perms", () => {

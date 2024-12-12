@@ -30,14 +30,22 @@
             <p>Docs: <a href="https://tobyck.github.io/tacit-js">tobyck.github.io/tacit-js</a> <br>
               GitHub: <a href="https://github.com/tobyck/tacit-js">github.com/tobyck/tacit-js</a></p>
             <h2>Usage</h2>
-            <p>Firstly, besides the tacit capabilities, this library also adds some useful utility functions. You can explore them if you scroll past the installation section, or use the side bar on the left. Note that despite namespaces like <code>type_casts</code> or <code>iter_utils</code> appearing in the docs, most of these functions <strong>only exist</strong> as methods the <code>Object</code> prototype (meaning you can essentially use them on anything) besides a few which have a global version <em>as well</em> (these are tagged with <code>[Global]</code> in the docs). Anyway, on to the tacit stuff:</p>
+            <h3>Utility Functions</h3>
+            <p>Firstly, besides the tacit capabilities, this library also adds some useful utility functions. You can explore them if you scroll past the installation section, or use the side bar on the left. Note that despite namespaces like <code>type_casts</code> or <code>iter_utils</code> appearing in the docs, they are entirely for organisation purposes, and won't exist by the time you import Tacit.js. Most of these functions <strong>only exist</strong> as methods the <code>Object</code> prototype (meaning you can essentially use them on anything) besides a few which have a global version <em>as well</em> (these are tagged with <code>[Global]</code> in the docs).</p>
+            <h3>Chains Using <code>it</code></h3>
             <ul>
               <li>The global <code>it</code> starts a <a href="https://en.wikipedia.org/wiki/Tacit_programming">tacit chain</a>.</li>
               <li>In a chain you may access properties or call any method or function that's builtin or defined by this library.</li>
               <li>All tacit chains are monadic, and <code>it</code> may also refer to the argument.</li>
               <li>If you're calling a function without any arguments you may optionally omit the parentheses.</li>
-              <li>If the first link in a chain isn't already in the global scope you may omit the leading <code>it.</code>. This will be the case for every builtin method/property, and most functions defined by this library.</li>
-              <li>If the last &quot;link&quot; in a chain isn't an explicit function call you will need to force the chain to end by appending <code>.it</code>.</li>
+              <li>If the first &quot;link&quot; in a chain isn't already in the global scope you may omit the leading <code>it</code>. This will be the case for every builtin method/property, and most functions defined by this library.</li>
+              <li>A chain will only be evaluated if the last link is either:
+                <ol>
+                  <li>an explicit function call</li>
+                  <li>a nilad from this library</li>
+                  <li><code>it</code> (so append this if you want to end a chain and neither of the above conditions are met)</li>
+                </ol>
+              </li>
             </ul>
             <table>
               <thead>
@@ -60,24 +68,32 @@
                   <td><code>num =&gt; num * 3 + 1</code></td>
                 </tr>
                 <tr>
-                  <td><code>it.isnum()</code></td>
-                  <td><code>val =&gt; typeof val === &quot;number&quot;</code> (<code>isnum</code> is global already so we need the leading <code>it.</code>)</td>
+                  <td><code>it.isnum</code></td>
+                  <td><code>val =&gt; typeof val === &quot;number&quot;</code> (<code>isnum</code> is global already so we need the leading <code>it</code>)</td>
                 </tr>
                 <tr>
                   <td><code>mul(it).div(2).toFixed(2)</code></td>
                   <td><code>num =&gt; (num * num / 2).toFixed(2)</code></td>
                 </tr>
                 <tr>
-                  <td><code>str.len.it</code></td>
-                  <td><code>val =&gt; val.toString().length</code></td>
+                  <td><code>it.str.len</code></td>
+                  <td><code>val =&gt; val.toString().length</code> (<code>str</code> doesn't allow implicit chains because it's a common variable name)</td>
                 </tr>
                 <tr>
                   <td><code>trim.split(&quot;, &quot;)</code></td>
                   <td><code>str =&gt; str.trim().split(&quot;, &quot;)</code></td>
                 </tr>
                 <tr>
-                  <td><code>match(/\d+/)[0].len.it</code></td>
-                  <td><code>str =&gt; str.match(/\d+/)[0].length</code></td>
+                  <td><code>trim.it</code></td>
+                  <td><code>str =&gt; str.trim()</code> (<code>trim</code> is niladic, but it's builtin so we need the trailing <code>.it</code>)</td>
+                </tr>
+                <tr>
+                  <td><code>trim()</code></td>
+                  <td>Same thing</td>
+                </tr>
+                <tr>
+                  <td><code>match(/\d+/)[0].len</code></td>
+                  <td><code>str =&gt; str.match(/\d+/)[0].length</code> (<code>[0]</code> may also be <code>first</code>)</td>
                 </tr>
               </tbody>
             </table>
@@ -86,10 +102,11 @@
             <ul>
               <li><code>t</code>: explicitly pass the <code>this</code> arg (i.e. the object that the method is being called on). This results what would have been <code>this</code> being the first arg to the function.</li>
               <li><code>f</code>: evaluate args as functions on the chain's argument before passing them to the function.</li>
+              <li><code>v</code>: <a href="#vectorisation">vectorise</a>.</li>
               <li><code>a</code>: make the function take a single array of args</li>
               <li><code>d</code>: debug. Prints args to the console.</li>
             </ul>
-            <p><em>Note: if a function with flags is the first link in a chain, the leading <code>it.</code> is compulsory.</em></p>
+            <p><em>Note: if a function with flags is the first link in a chain, the leading <code>it</code> is compulsory.</em></p>
             <table>
               <thead>
                 <tr>
@@ -112,7 +129,7 @@
                 </tr>
               </tbody>
             </table>
-            <br>
+            <h3>Chains Using <code>get</code></h3>
             <p>If you only need to access properties, you can start the chain with <code>get</code> instead, and you won't have to end with <code>.it</code>:</p>
             <table>
               <thead>
@@ -132,8 +149,8 @@
                 </tr>
               </tbody>
             </table>
-            <br>
-            <p>Lastly, all methods <em>in this library</em> (not builtin ones) which take no arguments (not even optional ones) are replaced by getters so you can omit the parentheses like in tacit chains:</p>
+            <h3>Getters</h3>
+            <p>All methods <em>in this library</em> (not builtin ones) which take no arguments (not even optional ones) are replaced by getters so you can omit the parentheses like in tacit chains:</p>
             <ul>
               <li><code>[1, 2, 1, 3, 3, 1].uniq.arr</code> (both of these functions are niladic)</li>
               <li><code>&quot; hello &quot;.trim().first</code> (we need the <code>()</code> on <code>trim</code> because it's builtin)</li>
@@ -141,6 +158,43 @@
             <p>These may also be used in <code>get</code> chains:</p>
             <pre class="prettyprint source lang-js"><code>&quot;foo bar baz&quot;.words.map(get.chars).pr // prints [[&quot;f&quot;, &quot;o&quot;, &quot;o&quot;], [&quot;b&quot;, &quot;a&quot;, &quot;r&quot;], [&quot;b&quot;, &quot;a&quot;, &quot;z&quot;]]
 </code></pre>
+            <h3 id="vectorisation">Vectorisation</h3>
+            <p>A vectorising operation is one which can operate on vectors (i.e. arrays) of arguments not just scalars. This will become clear in the examples. A function may be vectorised in three ways:</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Syntax</th>
+                  <th>Available functions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>func$v</code></td>
+                  <td>Builtin methods and functions defined by this library</td>
+                </tr>
+                <tr>
+                  <td><code>vct.func</code></td>
+                  <td>Functions defined by this library</td>
+                </tr>
+                <tr>
+                  <td><code>vct(func)</code></td>
+                  <td>Any function</td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+            <pre class="prettyprint source lang-js"><code>it.add$v(4) ([1, 2, 3]) // [5, 6, 7]
+it.add$v([4, 5, -1]) ([1, 2, 3]) // [5, 7, 2]
+vct.add([7, 8], 2) // [9, 10]
+vct.add(5, 6) // 11
+
+const squared_plus_one = vct(num => num * num + 1)
+squared_plus_one([1, 2, 3]) // [2, 5, 10]
+
+const a_times_b_plus_c = vct((a, b, c) => a * b + c)
+a_times_b_plus_c([1, 2, 3], [4, 5], [6, 7, 8]) // [10, 17]
+</code></pre>
+            <p>Notice that a) vectorised functions still work on scalars, and b) if a vector <em>is</em> present, the result is only as long as the shortest vector argument.</p>
             <h2>Installation</h2>
             <p>Install with you favourite JS package manager:</p>
             <ul>
@@ -953,7 +1007,7 @@
   <footer id="jsdoc-footer" class="jsdoc-footer">
     <div id="jsdoc-footer-container">
       <p>
-        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.4 on December 12, 2024.
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.4 on December 13, 2024.
       </p>
     </div>
   </footer>

@@ -1,5 +1,6 @@
-import { chain_proxy, attach_links, getter_chain_proxy } from "./proxies.js"
+import { chain_proxy, attach_links, getter_chain_proxy, vectorise_proxy } from "./proxies.js"
 import functions from "./functions.js"
+import { is_niladic } from "./helpers.js"
 import { Vec } from "./classes.js"
 
 // copy all functions into the global scope
@@ -13,14 +14,11 @@ Object.defineProperty(globalThis, "it", {
 })
 
 globalThis.get = getter_chain_proxy(x => x)
+globalThis.vct = vectorise_proxy
 
 const attach_to_type = (type, func_name) => {
 	type.prototype[func_name] = function(...args) { return functions[func_name](this, ...args) }
-
-	type.prototype[func_name].is_nildadic = !!globalThis[func_name].toString()
-		.match(/^function\([\d\w_$]+\)|^\(?[\d\w_$]+\)?\s*=>/)
-	// did i just do a regex match on a function... what am i creating
-
+	type.prototype[func_name].is_nildadic = is_niladic(functions[func_name])
 	// the keep_global property will need to be accessed on the method later so we need to copy it over
 	if (globalThis[func_name].keep_global) type.prototype[func_name].keep_global = true
 }
