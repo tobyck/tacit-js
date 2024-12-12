@@ -88,5 +88,3 @@ Or with CommonJS:
 ```js
 require("@toby_ck/tacit-js")
 ```
-
-(ignore this I'm seeing if the pre-commit hook works)
