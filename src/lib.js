@@ -11,7 +11,7 @@ Object.defineProperty(globalThis, "it", {
 globalThis.get = getter_chain_proxy(x => x)
 globalThis.vct = vectorise_proxy
 
-// for function make a copy that's a method (e.g. eq(a, b) -> a.eq(b))
+// for each function make a copy that's a method (e.g. eq(a, b) -> a.eq(b))
 for (const func_name in functions) {
 	for (const type of [Object, ...(functions[func_name]?.meta?.attach_to ?? [])]) {
 		type.prototype[func_name] = function(...args) { return functions[func_name](this, ...args) }
@@ -30,11 +30,9 @@ for (const type of [Number, String, Array, Boolean, Set, Object, Vec]) {
 		if (prop === null) continue
 
 		if (prop.meta?.keep_global) {
-			if (prop_name == "str") console.log("why tf are we here")
 			globalThis[prop_name] = functions[prop_name]
 		} else {
 			try {
-				if (prop_name == "str") console.log("why tf are we here 2")
 				Object.defineProperty(globalThis, prop_name, {
 					get: () => chain_proxy(attach_links(x => x, [prop_name]))
 				})

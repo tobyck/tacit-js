@@ -36,7 +36,7 @@ describe("arr", () => {
 	test("number", () => expect(f.arr(3)).toEqual([undefined, undefined, undefined]))
 	test("array", () => expect(f.arr(["a", "b", "c"])).toEqual(["a", "b", "c"]))
 	test("object", () => expect(f.arr({ length: 2 })).toEqual([undefined, undefined]))
-	test("vec", () => expect(f.arr(vec(2, 3))).toEqual([2, 3]))
+	test("vec", () => expect(f.arr(f.V(2, 3))).toEqual([2, 3]))
 	test("empty object", () => expect(f.arr({})).toEqual([]))
 })
 
@@ -168,4 +168,51 @@ describe("perms", () => {
 	test("three", () => expect(f.perms([1, 2, 3]).sort()).toEqual([
 		[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]
 	].sort()))
+})
+
+describe("gridd", () => {
+	test("empty", () => expect(f.gridd("", " ")).toEqual([]))
+	test("one row", () => expect(f.gridd("a,b,c", ",")).toEqual([["a", "b", "c"]]))
+	test("one item", () => expect(f.gridd("a", " ")).toEqual([["a"]]))
+	test("multiple rows", () => expect(f.gridd(" a b  c\nd e f  ", " ")).toEqual([["a", "b", "c"], ["d", "e", "f"]]))
+	test("no delim", () => expect(f.gridd("abc", "")).toEqual([["a", "b", "c"]]))
+})
+
+describe("gmap", () => {
+	test("empty", () => expect(f.gmap([], x => x + 1)).toEqual([]))
+	test("one row", () => expect(f.gmap([[1, 2, 3]], x => x + 1)).toEqual([[2, 3, 4]]))
+	test("multiple rows", () => expect(f.gmap([[1, 2], [3, 4], [5, 6]], (x, v) => x + v.y)).toEqual([[1, 2], [4, 5], [7, 8]]))
+})
+
+describe("vecswhere", () => {
+	test("empty", () => expect(f.vecswhere([], () => true)).toEqual([]))
+	test("one row", () => expect(f.vecswhere([[1, 2, 3]], cell => cell >= 2)).toEqual([f.V(1, 0), f.V(2, 0)]))
+	test("multiple rows", () => expect(f.vecswhere(
+		[[1, 3, 2], [6, 4, 5], [7, 8, 9]],
+		(cell, vec) => cell % 2 === 1 && vec.x < 2
+	)).toEqual([f.V(0, 0), f.V(1, 0), f.V(0, 2)]))
+})
+
+describe("nrotate", () => {
+	test("empty", () => expect(f.nrotate([], 1)).toEqual([]))
+	test("one row", () => expect(f.nrotate([[1, 2, 3]])).toEqual([[1], [2], [3]]))
+	test("multiple rows", () => expect(f.nrotate([[1, 2, 3], [4, 5, 6]], 1)).toEqual([[4, 1], [5, 2], [6, 3]]))
+	test("280 deg", () => expect(f.nrotate([[1, 2], [3, 4]], 2)).toEqual([[4, 3], [2, 1]]))
+	test("270 deg", () => expect(f.nrotate([[1, 2], [3, 4]], 3)).toEqual([[2, 4], [1, 3]]))
+})
+
+describe("diagonals", () => {
+	test("empty", () => expect(f.diagonals([])).toEqual([]))
+	test("one row", () => expect(f.diagonals([[1, 2, 3]])).toEqual([[1], [2], [3]]))
+	test("2x2 square", () => expect(f.diagonals([[1, 2], [3, 4]])).toEqual([[1], [2, 3], [4]]))
+	test("3x2 rectangle", () => expect(f.diagonals([[1, 2, 3], [4, 5, 6]])).toEqual([[1], [2, 4], [3, 5], [6]]))
+	test("2x3 rectangle", () => expect(f.diagonals([[1, 2], [3, 4], [5, 6]])).toEqual([[1], [2, 3], [4, 5], [6]]))
+})
+
+describe("antidiagonals", () => {
+	test("empty", () => expect(f.antidiagonals([])).toEqual([]))
+	test("one row", () => expect(f.antidiagonals([[1, 2, 3]])).toEqual([[3], [2], [1]]))
+	test("2x2 square", () => expect(f.antidiagonals([[1, 2], [3, 4]])).toEqual([[2], [1, 4], [3]]))
+	test("3x2 rectangle", () => expect(f.antidiagonals([[1, 2, 3], [4, 5, 6]])).toEqual([[3], [2, 6], [1, 5], [4]]))
+	test("2x3 rectangle", () => expect(f.antidiagonals([[1, 2], [3, 4], [5, 6]])).toEqual([[2], [1, 4], [3, 6], [5]]))
 })

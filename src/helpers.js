@@ -1,14 +1,12 @@
-import functions from "./functions.js"
-
 export const tag = (metadata, func) => {
 	func.meta = metadata
 	return func
 }
 
 export const vectorise = func => (...args) => {
-	if (args.some(functions.isiter)) {
+	if (args.some(arg => typeof arg[Symbol.iterator] === "function")) {
 		const shortest = Math.min(...args.map(a => a?.length ?? Infinity))
-		return functions.range(shortest).map(i => func(...args.map(a => a?.[i] ?? a)))
+		return Array.from({ length: shortest }).map((_, i) => func(...args.map(a => a?.[i] ?? a)))
 	} else return func(...args)
 }
 

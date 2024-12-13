@@ -836,6 +836,144 @@ logic_utils.not = a => !a
 logic_utils.xor = (a, b) => !!(!a ^ !b)
 
 /** @namespace */
+const grid_utils = {}
+
+/**
+ * Creates a grid from a string where each row is separated by a newline and
+ * each cell is seperated by `delim`.
+ * @param {string} str The string to create a grid from
+ * @param {string} delim The delimiter to split cells by
+ * @returns {string[][]}
+ */
+grid_utils.gridd = (str, delim) => str.trim().split("\n").filter(x => x).map(row => row.split(delim).filter(x => x))
+
+/**
+ * Calls with {@link grid_utils.gridd} with an empty delimiter
+ * @param {string} str The string to create a grid from
+ * @returns {string[][]}
+ */
+grid_utils.grid = str => grid_utils.gridd(str, "")
+
+/**
+ * Uses {@link grid_utils.grid} then maps each cell to a number
+ * @param {string} str The string to create a grid from
+ * @returns {number[][]}
+ */
+grid_utils.digitgrid = str => grid_utils.grid(str).map(row => row.map(cell => +cell))
+
+/**
+ * Maps a function over each cell in a grid
+ * @template T
+ * @template K
+ * @param {T[][]} grid The grid to map over
+ * @param {function(T, Vec, T[][]): K} fn The function to map
+ * @returns {K[][]}
+ */
+grid_utils.gmap = (grid, fn) => grid.map((row, y) => row.map((cell, x) => fn(cell, new Vec(x, y))))
+
+/**
+ * Finds {@link Vec}s in a grid which satisfy the given function
+ * @template T
+ * @param {T[][]} grid The grid to search
+ * @param {function(T, Vec, T[][]): boolean} fn The function to filter with
+ * @returns {Vec[]}
+ */
+grid_utils.vecswhere = (grid, fn) => grid.flatMap(
+	(row, y) => row
+		.map((cell, x) => [cell, new Vec(x, y)])
+		.filter(args => fn(...args, grid))
+		.map(([, vec]) => vec)
+)
+
+/**
+ * Rotates a grid 90 degrees clockwise `times` times
+ * @param {T[][]} grid The grid to rotate
+ * @param {number} [times=1] The number of times to rotate
+ * @returns {T[][]}
+ */
+grid_utils.nrotate = (grid, times = 1) => {
+	if (!grid.length) return []
+	let ret = grid.map(row => row.slice())
+	for (let i = 0; i < times; i++) {
+		ret = ret[0].map((_, i) => ret.map(row => row[i]).reverse())
+	}
+	return ret
+}
+
+/**
+ * Rotates a grid 90 degrees clockwise once (alias for `grid_utils.nrotate(grid, 1)`)
+ * @param {T[][]} grid The grid to rotate
+ * @returns {T[][]}
+ */
+grid_utils.rotate = grid => grid_utils.nrotate(grid, 1)
+
+/**
+ * Gets diagonals of a grid (top right to bottom left). Assumes the grid is rectangular.
+ * @param {T[][]} grid The grid to get diagonals from
+ * @returns {T[][]}
+ * @example diagonals([
+ *     [1, 2, 3],
+ *     [4, 5, 6],
+ *     [7, 8, 9]
+ * ]) // [[1], [2, 4], [3, 5, 7], [6, 8], [9]]
+ */
+grid_utils.diagonals = grid => {
+	const ret = []
+
+	for (let r = 0; r < grid.length; r++) {
+		for (let c = 0; c < grid[0].length; c++) {
+			ret[r + c] ??= []
+			ret[r + c].push(grid[r][c])
+		}
+	}
+
+	return ret
+}
+
+/**
+ * Gets diagonals of a grid in the other direction to {@link grid_utils.diagonals}
+ * (so top left to bottom right). Assumes the grid is rectangular.
+ * @param {T[][]} grid The grid to get diagonals from
+ * @returns {T[][]}
+ * @example antidiagonals([
+ *     [1, 2, 3],
+ *     [4, 5, 6],
+ *     [7, 8, 9]
+ * ]) // [[3], [2, 6], [1, 5, 9], [4, 8], [7]]
+ */
+grid_utils.antidiagonals = grid => {
+	const ret = [], width = grid[0]?.length
+
+	for (let r = 0; r < grid.length; r++) {
+		for (let c = 0; c < width; c++) {
+			ret[r + (width - 1 - c)] ??= []
+			ret[r + (width - 1 - c)].push(grid[r][c])
+		}
+	}
+
+	return ret
+}
+
+/**
+ * Prints a grid and returns it. If the shortest cell is only 1 character long
+ * then the grid will be printed without spaces between cells.
+ * @template T
+ * @param {T[][]} grid
+ * @returns {T[][]}
+ */
+grid_utils.gprint = grid => {
+	const longest_cell = Math.max(...grid.flatMap(
+		row => row.map(cell => cell.toString().length)
+	))
+
+	console.log(grid.map(row => row.map(
+		cell => cell.toString().padEnd(longest_cell)
+	).join(longest_cell > 1 ? " " : "")).join("\n"))
+
+	return grid
+}
+
+/** @namespace */
 const object_utils = {}
 
 /**
@@ -978,6 +1116,7 @@ export default {
 	...iter_utils,
 	...object_utils,
 	...logic_utils,
+	...grid_utils,
 	...misc_utils,
 	...constructors
 }

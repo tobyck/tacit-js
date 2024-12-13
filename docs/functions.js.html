@@ -867,6 +867,144 @@ logic_utils.not &#x3D; a &#x3D;&gt; !a
 logic_utils.xor &#x3D; (a, b) &#x3D;&gt; !!(!a ^ !b)
 
 /** @namespace */
+const grid_utils &#x3D; {}
+
+/**
+ * Creates a grid from a string where each row is separated by a newline and
+ * each cell is seperated by &#x60;delim&#x60;.
+ * @param {string} str The string to create a grid from
+ * @param {string} delim The delimiter to split cells by
+ * @returns {string[][]}
+ */
+grid_utils.gridd &#x3D; (str, delim) &#x3D;&gt; str.trim().split(&quot;\n&quot;).filter(x &#x3D;&gt; x).map(row &#x3D;&gt; row.split(delim).filter(x &#x3D;&gt; x))
+
+/**
+ * Calls with {@link grid_utils.gridd} with an empty delimiter
+ * @param {string} str The string to create a grid from
+ * @returns {string[][]}
+ */
+grid_utils.grid &#x3D; str &#x3D;&gt; grid_utils.gridd(str, &quot;&quot;)
+
+/**
+ * Uses {@link grid_utils.grid} then maps each cell to a number
+ * @param {string} str The string to create a grid from
+ * @returns {number[][]}
+ */
+grid_utils.digitgrid &#x3D; str &#x3D;&gt; grid_utils.grid(str).map(row &#x3D;&gt; row.map(cell &#x3D;&gt; +cell))
+
+/**
+ * Maps a function over each cell in a grid
+ * @template T
+ * @template K
+ * @param {T[][]} grid The grid to map over
+ * @param {function(T, Vec, T[][]): K} fn The function to map
+ * @returns {K[][]}
+ */
+grid_utils.gmap &#x3D; (grid, fn) &#x3D;&gt; grid.map((row, y) &#x3D;&gt; row.map((cell, x) &#x3D;&gt; fn(cell, new Vec(x, y))))
+
+/**
+ * Finds {@link Vec}s in a grid which satisfy the given function
+ * @template T
+ * @param {T[][]} grid The grid to search
+ * @param {function(T, Vec, T[][]): boolean} fn The function to filter with
+ * @returns {Vec[]}
+ */
+grid_utils.vecswhere &#x3D; (grid, fn) &#x3D;&gt; grid.flatMap(
+	(row, y) &#x3D;&gt; row
+		.map((cell, x) &#x3D;&gt; [cell, new Vec(x, y)])
+		.filter(args &#x3D;&gt; fn(...args, grid))
+		.map(([, vec]) &#x3D;&gt; vec)
+)
+
+/**
+ * Rotates a grid 90 degrees clockwise &#x60;times&#x60; times
+ * @param {T[][]} grid The grid to rotate
+ * @param {number} [times&#x3D;1] The number of times to rotate
+ * @returns {T[][]}
+ */
+grid_utils.nrotate &#x3D; (grid, times &#x3D; 1) &#x3D;&gt; {
+	if (!grid.length) return []
+	let ret &#x3D; grid.map(row &#x3D;&gt; row.slice())
+	for (let i &#x3D; 0; i &amp;lt; times; i++) {
+		ret &#x3D; ret[0].map((_, i) &#x3D;&gt; ret.map(row &#x3D;&gt; row[i]).reverse())
+	}
+	return ret
+}
+
+/**
+ * Rotates a grid 90 degrees clockwise once (alias for &#x60;grid_utils.nrotate(grid, 1)&#x60;)
+ * @param {T[][]} grid The grid to rotate
+ * @returns {T[][]}
+ */
+grid_utils.rotate &#x3D; grid &#x3D;&gt; grid_utils.nrotate(grid, 1)
+
+/**
+ * Gets diagonals of a grid (top right to bottom left). Assumes the grid is rectangular.
+ * @param {T[][]} grid The grid to get diagonals from
+ * @returns {T[][]}
+ * @example diagonals([
+ *     [1, 2, 3],
+ *     [4, 5, 6],
+ *     [7, 8, 9]
+ * ]) // [[1], [2, 4], [3, 5, 7], [6, 8], [9]]
+ */
+grid_utils.diagonals &#x3D; grid &#x3D;&gt; {
+	const ret &#x3D; []
+
+	for (let r &#x3D; 0; r &amp;lt; grid.length; r++) {
+		for (let c &#x3D; 0; c &amp;lt; grid[0].length; c++) {
+			ret[r + c] ??&#x3D; []
+			ret[r + c].push(grid[r][c])
+		}
+	}
+
+	return ret
+}
+
+/**
+ * Gets diagonals of a grid in the other direction to {@link grid_utils.diagonals}
+ * (so top left to bottom right). Assumes the grid is rectangular.
+ * @param {T[][]} grid The grid to get diagonals from
+ * @returns {T[][]}
+ * @example antidiagonals([
+ *     [1, 2, 3],
+ *     [4, 5, 6],
+ *     [7, 8, 9]
+ * ]) // [[3], [2, 6], [1, 5, 9], [4, 8], [7]]
+ */
+grid_utils.antidiagonals &#x3D; grid &#x3D;&gt; {
+	const ret &#x3D; [], width &#x3D; grid[0]?.length
+
+	for (let r &#x3D; 0; r &amp;lt; grid.length; r++) {
+		for (let c &#x3D; 0; c &amp;lt; width; c++) {
+			ret[r + (width - 1 - c)] ??&#x3D; []
+			ret[r + (width - 1 - c)].push(grid[r][c])
+		}
+	}
+
+	return ret
+}
+
+/**
+ * Prints a grid and returns it. If the shortest cell is only 1 character long
+ * then the grid will be printed without spaces between cells.
+ * @template T
+ * @param {T[][]} grid
+ * @returns {T[][]}
+ */
+grid_utils.gprint &#x3D; grid &#x3D;&gt; {
+	const longest_cell &#x3D; Math.max(...grid.flatMap(
+		row &#x3D;&gt; row.map(cell &#x3D;&gt; cell.toString().length)
+	))
+
+	console.log(grid.map(row &#x3D;&gt; row.map(
+		cell &#x3D;&gt; cell.toString().padEnd(longest_cell)
+	).join(longest_cell &gt; 1 ? &quot; &quot; : &quot;&quot;)).join(&quot;\n&quot;))
+
+	return grid
+}
+
+/** @namespace */
 const object_utils &#x3D; {}
 
 /**
@@ -1009,6 +1147,7 @@ export default {
 	...iter_utils,
 	...object_utils,
 	...logic_utils,
+	...grid_utils,
 	...misc_utils,
 	...constructors
 }

@@ -1,5 +1,3 @@
-import "./lib.js"
-
 /**
  * Overrides the default set methods to use `JSON.stringify`. This allows it to
  * work with objects and arrays. See the docs for the built in [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set).
