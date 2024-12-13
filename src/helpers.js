@@ -1,7 +1,9 @@
 import functions from "./functions.js"
 
-export const keep_global = func => (func.keep_global = true, func)
-export const attach_to = (type, func) => (func.attach_to = type, func)
+export const tag = (metadata, func) => {
+	func.meta = metadata
+	return func
+}
 
 export const vectorise = func => (...args) => {
 	if (args.some(functions.isiter)) {
@@ -10,5 +12,5 @@ export const vectorise = func => (...args) => {
 	} else return func(...args)
 }
 
-export const is_niladic = func => !!func?.toString()
+export const is_niladic_method = func => !!func?.toString()
 	.match(/^function\([\d\w_$]+\)|^\(?[\d\w_$]+\)?\s*=>/)

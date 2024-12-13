@@ -1,4 +1,4 @@
-import { keep_global, attach_to, vectorise } from "./helpers.js"
+import { tag } from "./helpers.js"
 import { _Set, Vec } from "./classes.js"
 
 /** @namespace */
@@ -10,7 +10,7 @@ const type_checks = {}
  * @param {any} value Value to check
  * @returns {boolean}
  */
-type_checks.isnum = keep_global(x => typeof x === "number" || typeof x === "bigint")
+type_checks.isnum = tag({ keep_global: true }, x => typeof x === "number" || typeof x === "bigint")
 
 /** 
  * **[Global]** Same as the built in [Number.isInteger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger)
@@ -18,7 +18,7 @@ type_checks.isnum = keep_global(x => typeof x === "number" || typeof x === "bigi
  * @param {any} value Value to check
  * @returns {boolean}
  */
-type_checks.isint = keep_global(Number.isInteger)
+type_checks.isint = tag({ keep_global: true }, Number.isInteger)
 
 /** 
  * **[Global]** Checks if a value is a string
@@ -26,7 +26,7 @@ type_checks.isint = keep_global(Number.isInteger)
  * @param {any} value Value to check
  * @returns {boolean}
  */
-type_checks.isstr = keep_global(x => typeof x === "string")
+type_checks.isstr = tag({ keep_global: true }, x => typeof x === "string")
 
 /** 
  * **[Global]** Checks if a value is an array (alias for Array.isArray)
@@ -34,7 +34,7 @@ type_checks.isstr = keep_global(x => typeof x === "string")
  * @param {any} value Value to check
  * @returns {boolean}
  */
-type_checks.isarr = keep_global(Array.isArray)
+type_checks.isarr = tag({ keep_global: true }, Array.isArray)
 
 /** 
  * **[Global]** Checks if a value is a boolean
@@ -42,7 +42,7 @@ type_checks.isarr = keep_global(Array.isArray)
  * @param {any} value Value to check
  * @returns {boolean}
  */
-type_checks.isbool = keep_global(x => typeof x === "boolean")
+type_checks.isbool = tag({ keep_global: true }, x => typeof x === "boolean")
 
 /** 
  * **[Global]** Checks if a value is a function
@@ -50,7 +50,7 @@ type_checks.isbool = keep_global(x => typeof x === "boolean")
  * @param {any} value Value to check
  * @returns {boolean}
  */
-type_checks.isfunc = keep_global(x => typeof x === "function")
+type_checks.isfunc = tag({ keep_global: true }, x => typeof x === "function")
 
 /**
  * **[Global]** Checks if a value is an object
@@ -58,7 +58,7 @@ type_checks.isfunc = keep_global(x => typeof x === "function")
  * @param {any} value Value to check
  * @returns {boolean}
  */
-type_checks.isobj = keep_global(x => typeof x === "object")
+type_checks.isobj = tag({ keep_global: true }, x => typeof x === "object")
 
 /** 
  * **[Global]** Gets the type of a value using typeof
@@ -66,7 +66,7 @@ type_checks.isobj = keep_global(x => typeof x === "object")
  * @param {any} value Value to get the type of
  * @returns {boolean}
  */
-type_checks.type = keep_global(x => typeof x)
+type_checks.type = tag({ keep_global: true }, x => typeof x)
 
 /** 
  * **[Global]** Checks if a type is iterable
@@ -74,7 +74,7 @@ type_checks.type = keep_global(x => typeof x)
  * @param {any} value Value to check
  * @returns {boolean}
  */
-type_checks.isiter = keep_global(x => typeof x[Symbol.iterator] === "function")
+type_checks.isiter = tag({ keep_global: true }, x => typeof x[Symbol.iterator] === "function")
 
 /** @namespace */
 const type_casts = {}
@@ -85,14 +85,14 @@ const type_casts = {}
  * @param {any} value
  * @returns {number}
  */
-type_casts.num = value => {
+type_casts.num = tag({ allow_implicit_chain: false }, value => {
 	if (type_checks.isstr(value)) {
 		const match = value.match(/-?\d+(\.\d+)?/)[0]
 		return match ? Number(match) : null
 	}
 
 	return Number(value)
-}
+})
 
 /**
  * Casts a value to an integer using parseInt. If `value` is a string an int
@@ -100,20 +100,20 @@ type_casts.num = value => {
  * @param {any} value Value to cast
  * @returns {number}
  */
-type_casts.int = value => parseInt(type_casts.num(value))
+type_casts.int = tag({ allow_implicit_chain: false }, value => parseInt(type_casts.num(value)))
 
 /**
  * Casts a value to a string. If `value` is an array, it will be joined by "".
  * @param {any} value Value to cast
  */
-type_casts.str = value => {
+type_casts.str = tag({ allow_implicit_chain: false }, value => {
 	if (type_checks.isarr(value)) return value.join("")
 	if (type_checks.isobj(value)) {
 		const str = value.toString()
 		return str === "[object Object]" ? JSON.stringify(value) : str
 	}
 	return value.toString()
-}
+})
 
 /**
  * Casts a value to an array. If `value` is a number, an array of length `value`
@@ -121,11 +121,11 @@ type_casts.str = value => {
  * @param {any} value Value to cast
  * @returns {Array}
  */
-type_casts.arr = (value) => {
+type_casts.arr = tag({ allow_implicit_chain: false }, (value) => {
 	if (type_checks.isnum(value)) return Array(value)
 	if (type_checks.isiter(value)) return [...value]
 	return Array.from(value)
-}
+})
 
 /**
  * Casts a value to a boolean (alias for Boolean constructor)
@@ -387,7 +387,7 @@ iter_utils.rev = iter => [...iter].reverse()
  * @example zip([1, 2, 3], [4, 5, 6]) // [[1, 4], [2, 5], [3, 6]]
  * @example zip([1, 2]) // [[1], [2]]
  */
-iter_utils.zip = keep_global((...iters) => {
+iter_utils.zip = tag({ keep_global: true }, (...iters) => {
 	if (!iters.length) return [];
 
 	const smallest = Math.min(...iters.map(x => x.length))
@@ -627,7 +627,7 @@ iter_utils.everynth = (iter, n, start = 0) => {
  * @param {number|Vec|number[]} index The index/indicies to get
  * @returns {T}
  */
-iter_utils.at = attach_to(Array, (iter, index) => {
+iter_utils.at = tag({ attach_to: [Array] }, (iter, index) => {
 	const array = [...iter]
 
 	if (type_checks.isint(index)) {
@@ -870,7 +870,7 @@ const misc_utils = {}
  * @param {any} b
  * @returns {boolean}
  */
-misc_utils.eq = keep_global((a, b) => {
+misc_utils.eq = tag({ keep_global: true }, (a, b) => {
 	if (Array.isArray(a) && Array.isArray(b)) {
 		if (a.length !== b.length) return false;
 		for (let i = 0; i < a.length; i++)
@@ -888,7 +888,7 @@ misc_utils.eq = keep_global((a, b) => {
  * @param {any} b
  * @returns {boolean}
  */
-misc_utils.neq = keep_global((a, b) => !eq(a, b))
+misc_utils.neq = tag({ keep_global: true }, (a, b) => !eq(a, b))
 
 /**
  * **[Global]** Creates the range `[a, b)` in an array with an optional step size
@@ -901,7 +901,7 @@ misc_utils.neq = keep_global((a, b) => !eq(a, b))
  * @example range(2, 5) // [2, 3, 4]
  * @example range(1, 10, 2) // [1, 3, 5, 7, 9]
  */
-misc_utils.range = keep_global(function(a, b = 0, step = 1) {
+misc_utils.range = tag({ keep_global: true }, function(a, b = 0, step = 1) {
 	let start = 0, end = a
 	if (arguments.length > 1) {
 		start = a
@@ -920,7 +920,7 @@ misc_utils.range = keep_global(function(a, b = 0, step = 1) {
  * @param {...T} values Values to print
  * @returns {T|T[]}
  */
-misc_utils.print = keep_global((...values) => {
+misc_utils.print = tag({ keep_global: true }, (...values) => {
 	console.log(...values)
 	return values.length > 1 ? values : values[0]
 })
@@ -948,7 +948,7 @@ misc_utils.len = value => value?.length ?? value?.size
  * @param {T} value Value to wrap
  * @returns {T[]}
  */
-misc_utils.wrap = keep_global(value => [value])
+misc_utils.wrap = tag({ keep_global: true }, value => [value])
 
 /** @namespace */
 const constructors = {}
@@ -959,7 +959,7 @@ const constructors = {}
  * @param {Iterable.<*>} iter The iterable to create the set from
  * @returns {_Set}
  */
-constructors.set = keep_global((iter = []) => new _Set(iter))
+constructors.set = tag({ keep_global: true }, (iter = []) => new _Set(iter))
 
 /**
  * **[Global]** Calls `new Vec(x, y)`. See the documentation for `{@link Vec}` for more info
@@ -968,7 +968,7 @@ constructors.set = keep_global((iter = []) => new _Set(iter))
  * @param {number} y The y component of the vector
  * @returns {Vec}
  */
-constructors.vec = keep_global((x, y) => new Vec(x, y))
+constructors.vec = tag({ keep_global: true }, (x, y) => new Vec(x, y))
 
 export default {
 	...type_checks,

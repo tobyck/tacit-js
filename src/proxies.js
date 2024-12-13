@@ -1,5 +1,5 @@
 import functions from "./functions.js"
-import { vectorise, is_niladic } from "./helpers.js"
+import { vectorise, is_niladic_method } from "./helpers.js"
 
 // applies a proxy to a function that makes any property access or call do
 // nothing, and simply build up a list of operations to do once it's called
@@ -16,7 +16,7 @@ export const chain_proxy = func => new Proxy(func, {
 		const last_link = target.links.at(-1)
 
 		if (!last_link) return args[0]
-		else if (typeof last_link === "object" || is_niladic(functions?.[last_link]) || last_link === "it")
+		else if (typeof last_link === "object" || is_niladic_method(functions?.[last_link]) || last_link === "it")
 			return evaluate_chain(target.links)(args[0])
 
 		let [func_name, flags] = target.links.pop().split("$")
@@ -93,7 +93,6 @@ export const getter_chain_proxy = func => new Proxy(func, {
 
 export const vectorise_proxy = new Proxy(vectorise, {
 	get(_, func_name) {
-		print(func_name)
 		if (functions?.[func_name] === undefined)
 			throw new Error(`Error trying to vectorise function '${func_name}\`: function does not exist`)
 		return vectorise(functions[func_name])
