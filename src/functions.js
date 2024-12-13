@@ -85,14 +85,14 @@ const type_casts = {}
  * @param {any} value
  * @returns {number}
  */
-type_casts.num = tag({ allow_implicit_chain: false }, value => {
+type_casts.num = value => {
 	if (type_checks.isstr(value)) {
 		const match = value.match(/-?\d+(\.\d+)?/)[0]
 		return match ? Number(match) : null
 	}
 
 	return Number(value)
-})
+}
 
 /**
  * Casts a value to an integer using parseInt. If `value` is a string an int
@@ -100,20 +100,20 @@ type_casts.num = tag({ allow_implicit_chain: false }, value => {
  * @param {any} value Value to cast
  * @returns {number}
  */
-type_casts.int = tag({ allow_implicit_chain: false }, value => parseInt(type_casts.num(value)))
+type_casts.int = value => parseInt(type_casts.num(value))
 
 /**
  * Casts a value to a string. If `value` is an array, it will be joined by "".
  * @param {any} value Value to cast
  */
-type_casts.str = tag({ allow_implicit_chain: false }, value => {
+type_casts.str = value => {
 	if (type_checks.isarr(value)) return value.join("")
 	if (type_checks.isobj(value)) {
 		const str = value.toString()
 		return str === "[object Object]" ? JSON.stringify(value) : str
 	}
 	return value.toString()
-})
+}
 
 /**
  * Casts a value to an array. If `value` is a number, an array of length `value`
@@ -121,11 +121,11 @@ type_casts.str = tag({ allow_implicit_chain: false }, value => {
  * @param {any} value Value to cast
  * @returns {Array}
  */
-type_casts.arr = tag({ allow_implicit_chain: false }, (value) => {
+type_casts.arr = value => {
 	if (type_checks.isnum(value)) return Array(value)
 	if (type_checks.isiter(value)) return [...value]
 	return Array.from(value)
-})
+}
 
 /**
  * Casts a value to a boolean (alias for Boolean constructor)
@@ -959,7 +959,7 @@ const constructors = {}
  * @param {Iterable.<*>} iter The iterable to create the set from
  * @returns {_Set}
  */
-constructors.set = tag({ keep_global: true }, (iter = []) => new _Set(iter))
+constructors.S = tag({ keep_global: true }, (iter = []) => new _Set(iter))
 
 /**
  * **[Global]** Calls `new Vec(x, y)`. See the documentation for `{@link Vec}` for more info
@@ -968,7 +968,7 @@ constructors.set = tag({ keep_global: true }, (iter = []) => new _Set(iter))
  * @param {number} y The y component of the vector
  * @returns {Vec}
  */
-constructors.vec = tag({ keep_global: true }, (x, y) => new Vec(x, y))
+constructors.V = tag({ keep_global: true }, (x, y) => new Vec(x, y))
 
 export default {
 	...type_checks,
