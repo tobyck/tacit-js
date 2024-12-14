@@ -240,3 +240,15 @@ describe("symdiff", () => {
 	test("no overlap", () => expect(f.S([1, 2]).symdiff(f.S([3, 4]))).toEqual(f.S([1, 2, 3, 4])))
 	test("overlap", () => expect(f.S([1, 2, 3, 4]).symdiff(f.S([3, 4, 5, 6]))).toEqual(f.S([1, 2, 5, 6])))
 })
+
+describe("pieces", () => {
+	test("empty", () => expect(f.pieces([], 2)).toEqual([]))
+	test("perfect split", () => expect(f.pieces([1, 2, 3, 4, 5, 6], 3)).toEqual([[1, 2], [3, 4], [5, 6]]))
+	test("uneven split", () => expect(f.pieces([1, 2, 3, 4, 5], 2)).toEqual([[1, 2, 3], [4, 5]]))
+	test("0 pieces", () => expect(f.pieces([1, 2, 3], 0)).toEqual([]))
+})
+
+describe("iwhere", () => {
+	test(() => expect(f.iwhere([1, 2, 3, 4, 5], x => x % 2 === 0)).toEqual([1, 3]))
+	test(() => expect(f.iwhere([1, 2, 3, 4, 5, 6], (x, i) => x % 2 === 0 && i > 2)).toEqual([3, 5]))
+})

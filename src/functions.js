@@ -301,6 +301,24 @@ math_utils.round = n => Math.round(n)
 math_utils.wrapindex = (index, length) => (index % length + length) % length
 
 /**
+ * Clamps `n` between `min` and `max`
+ * @param {number} n
+ * @param {number} min
+ * @param {number} max
+ * @returns {number}
+ */
+math_utils.clamp = (n, min, max) => Math.min(Math.max(n, min), max)
+
+/**
+ * Checks if `n` is in the range [`min`, `max`] (inclusive)
+ * @param {number} n
+ * @param {number} min
+ * @param {number} max
+ * @returns {boolean}
+ */
+math_utils.inrange = (n, min, max) => n >= min && n <= max
+
+/**
  * Functions which operate on iterable types
  * @namespace
  */
@@ -731,6 +749,38 @@ iter_utils.deltas = iter => {
 	}
 	return ret;
 }
+
+/**
+ * Splits an iterable into `n` pieces. Rounds up if the split is uneven.
+ * @template T
+ * @param {Iterable.<T>} iter The iterable to split
+ * @param {number} n The number of pieces to split into
+ * @returns {T[][]}
+ * @example [1, 2, 3, 4, 5, 6].pieces(3) // [[1, 2], [3, 4], [5, 6]]
+ * @example [1, 2, 3].pieces(2) // [[1, 2], [3]]
+ */
+iter_utils.pieces = (iter, n) => {
+	if (n <= 0) return []
+	const array = [...iter], ret = [], step = Math.ceil(array.length / n);
+	for (let i = 0; i < array.length; i += step) {
+		ret.push(array.slice(i, i + step))
+	}
+	return ret
+}
+
+/**
+ * Returns list of indices where the function `fn` returns true. `fn` receives
+ * the value, index and the iterable as arguments, in that order.
+ * @template T
+ * @param {Iterable.<T>} iter
+ * @param {function(T, number, Iterable.<T>): boolean} fn
+ * @returns {number[]}
+ * @example [1, 2, 3, 4, 5].iwhere(x => x % 2 === 0) // [1, 3]
+ */
+iter_utils.iwhere = (iter, fn) => [...iter]
+	.map((value, index) => [value, index])
+	.filter(([value, index]) => fn(value, index, iter))
+	.map(([, index]) => index)
 
 /** @namespace */
 const string_utils = {}
