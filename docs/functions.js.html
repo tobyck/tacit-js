@@ -950,7 +950,7 @@ grid_utils.digitgrid &#x3D; str &#x3D;&gt; grid_utils.grid(str).map(row &#x3D;&g
  * @param {function(T, Vec, T[][]): K} fn The function to map
  * @returns {K[][]}
  */
-grid_utils.gmap &#x3D; (grid, fn) &#x3D;&gt; grid.map((row, y) &#x3D;&gt; row.map((cell, x) &#x3D;&gt; fn(cell, new Vec(x, y))))
+grid_utils.gmap &#x3D; (grid, fn) &#x3D;&gt; grid.map((row, y) &#x3D;&gt; row.map((cell, x) &#x3D;&gt; fn(cell, new Vec(x, y), grid)))
 
 /**
  * Finds {@link Vec}s in a grid which satisfy the given function

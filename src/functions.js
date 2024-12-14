@@ -919,7 +919,7 @@ grid_utils.digitgrid = str => grid_utils.grid(str).map(row => row.map(cell => +c
  * @param {function(T, Vec, T[][]): K} fn The function to map
  * @returns {K[][]}
  */
-grid_utils.gmap = (grid, fn) => grid.map((row, y) => row.map((cell, x) => fn(cell, new Vec(x, y))))
+grid_utils.gmap = (grid, fn) => grid.map((row, y) => row.map((cell, x) => fn(cell, new Vec(x, y), grid)))
 
 /**
  * Finds {@link Vec}s in a grid which satisfy the given function
