@@ -4,7 +4,7 @@
 <head>
   <meta name="generator" content="JSDoc 4.0.4">
   <meta charset="utf-8">
-  <title>Namespace: type_check</title>
+  <title>Namespace: logic</title>
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
@@ -25,8 +25,8 @@
         <div id="jsdoc-main" role="main">
           <header class="page-header">
             <div class="symbol-detail-labels"><span class="label label-kind">namespace</span></div>
-            <h1><small></small><span class="symbol-name">type_check</span></h1>
-            <p class="source-link">Source: <a href="functions.js.html#source-line-7">functions.<wbr>js:7</a></p>
+            <h1><small></small><span class="symbol-name">logic</span></h1>
+            <p class="source-link">Source: <a href="functions.js.html#source-line-842">functions.<wbr>js:842</a></p>
             <div class="symbol-description">
             </div>
             <dl class="dl-compact">
@@ -34,53 +34,90 @@
           </header>
           <section id="summary">
             <div class="summary-callout">
-              <h2 class="summary-callout-heading">Properties</h2>
+              <h2 class="summary-callout-heading">Methods</h2>
               <div class="summary-content">
                 <div class="summary-column">
                   <dl class="dl-summary-callout">
-                    <dt><a href="type_check.html#.isarr">isarr</a></dt>
+                    <dt><a href="logic.html#.and">and(a, b)</a></dt>
                     <dd>
                     </dd>
-                    <dt><a href="type_check.html#.isbool">isbool</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="type_check.html#.isfunc">isfunc</a></dt>
+                    <dt><a href="logic.html#.not">not(a)</a></dt>
                     <dd>
                     </dd>
                   </dl>
                 </div>
                 <div class="summary-column">
                   <dl class="dl-summary-callout">
-                    <dt><a href="type_check.html#.isiter">isiter</a></dt>
+                    <dt><a href="logic.html#.or">or(a, b)</a></dt>
                     <dd>
                     </dd>
-                    <dt><a href="type_check.html#.isnum">isnum</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="type_check.html#.isobj">isobj</a></dt>
+                    <dt><a href="logic.html#.xor">xor(a, b)</a></dt>
                     <dd>
                     </dd>
                   </dl>
                 </div>
                 <div class="summary-column">
-                  <dl class="dl-summary-callout">
-                    <dt><a href="type_check.html#.isstr">isstr</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="type_check.html#.type">type</a></dt>
-                    <dd>
-                    </dd>
-                  </dl>
                 </div>
               </div>
             </div>
           </section>
           <section>
-            <h2>Properties</h2>
+            <h2>Methods</h2>
             <section>
               <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
-              <h3 id=".isarr"><span class="symbol-name">isarr</span></h3>
-              <p>[Global] Checks if a value is an array (alias for Array.isArray)</p>
+              <h3 id=".and"><span class="symbol-name">and</span><span class="signature"><span class="signature-params">(a, b)</span>&nbsp;&rarr; <span class="signature-returns"> any</span></span></h3>
+              <p>Returns <code>a &amp;&amp; b</code>. I.e. if <code>a</code> is truthy it returns <code>b</code>, otherwise it short
+                circuits and returns <code>a</code></p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>a</p>
+                      </td>
+                      <td>
+                        <p>any</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>b</p>
+                      </td>
+                      <td>
+                        <p>any</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>any</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".not"><span class="symbol-name">not</span><span class="signature"><span class="signature-params">(a)</span>&nbsp;&rarr; <span class="signature-returns"> boolean</span></span></h3>
+              <p>Returns logical NOT of <code>a</code></p>
               <section>
                 <h4>Parameter</h4>
                 <table class="jsdoc-details-table">
@@ -95,7 +132,7 @@
                   <tbody>
                     <tr>
                       <td>
-                        <p>value</p>
+                        <p>a</p>
                       </td>
                       <td>
                         <p>any</p>
@@ -104,7 +141,6 @@
                         <p>&nbsp;</p>
                       </td>
                       <td>
-                        <p>Value to check</p>
                       </td>
                     </tr>
                   </tbody>
@@ -117,10 +153,11 @@
                 </dd>
               </dl>
               <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
-              <h3 id=".isbool"><span class="symbol-name">isbool</span></h3>
-              <p>[Global] Checks if a value is a boolean</p>
+              <h3 id=".or"><span class="symbol-name">or</span><span class="signature"><span class="signature-params">(a, b)</span>&nbsp;&rarr; <span class="signature-returns"> any</span></span></h3>
+              <p>Returns <code>a || b</code>. I.e. if <code>a</code> is truthy it short circuits and returns <code>a</code>,
+                otherwise it returns <code>b</code></p>
               <section>
-                <h4>Parameter</h4>
+                <h4>Parameters</h4>
                 <table class="jsdoc-details-table">
                   <thead>
                     <tr>
@@ -133,7 +170,7 @@
                   <tbody>
                     <tr>
                       <td>
-                        <p>value</p>
+                        <p>a</p>
                       </td>
                       <td>
                         <p>any</p>
@@ -142,7 +179,19 @@
                         <p>&nbsp;</p>
                       </td>
                       <td>
-                        <p>Value to check</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>b</p>
+                      </td>
+                      <td>
+                        <p>any</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
                       </td>
                     </tr>
                   </tbody>
@@ -151,14 +200,15 @@
               <dl class="dl-compact">
                 <dt>Returns</dt>
                 <dd>
-                  <p><code>boolean</code> </p>
+                  <p><code>any</code> </p>
                 </dd>
               </dl>
               <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
-              <h3 id=".isfunc"><span class="symbol-name">isfunc</span></h3>
-              <p>[Global] Checks if a value is a function</p>
+              <h3 id=".xor"><span class="symbol-name">xor</span><span class="signature"><span class="signature-params">(a, b)</span>&nbsp;&rarr; <span class="signature-returns"> boolean</span></span></h3>
+              <p>Returns logical XOR of <code>a</code> and <code>b</code>. I.e. returns true if exactly one of <code>a</code>
+                and <code>b</code> are truthy, otherwise returns false</p>
               <section>
-                <h4>Parameter</h4>
+                <h4>Parameters</h4>
                 <table class="jsdoc-details-table">
                   <thead>
                     <tr>
@@ -171,7 +221,7 @@
                   <tbody>
                     <tr>
                       <td>
-                        <p>value</p>
+                        <p>a</p>
                       </td>
                       <td>
                         <p>any</p>
@@ -180,36 +230,11 @@
                         <p>&nbsp;</p>
                       </td>
                       <td>
-                        <p>Value to check</p>
                       </td>
                     </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>boolean</code> </p>
-                </dd>
-              </dl>
-              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
-              <h3 id=".isiter"><span class="symbol-name">isiter</span></h3>
-              <p>[Global] Checks if a type is iterable</p>
-              <section>
-                <h4>Parameter</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
                     <tr>
                       <td>
-                        <p>value</p>
+                        <p>b</p>
                       </td>
                       <td>
                         <p>any</p>
@@ -218,159 +243,6 @@
                         <p>&nbsp;</p>
                       </td>
                       <td>
-                        <p>Value to check</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>boolean</code> </p>
-                </dd>
-              </dl>
-              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
-              <h3 id=".isnum"><span class="symbol-name">isnum</span></h3>
-              <p>[Global] Checks if a value is a number or a big int</p>
-              <section>
-                <h4>Parameter</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>value</p>
-                      </td>
-                      <td>
-                        <p>any</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Value to check</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>boolean</code> </p>
-                </dd>
-              </dl>
-              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
-              <h3 id=".isobj"><span class="symbol-name">isobj</span></h3>
-              <p>[Global] Checks if a value is an object</p>
-              <section>
-                <h4>Parameter</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>value</p>
-                      </td>
-                      <td>
-                        <p>any</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Value to check</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>boolean</code> </p>
-                </dd>
-              </dl>
-              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
-              <h3 id=".isstr"><span class="symbol-name">isstr</span></h3>
-              <p>[Global] Checks if a value is a string</p>
-              <section>
-                <h4>Parameter</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>value</p>
-                      </td>
-                      <td>
-                        <p>any</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Value to check</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>boolean</code> </p>
-                </dd>
-              </dl>
-              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
-              <h3 id=".type"><span class="symbol-name">type</span></h3>
-              <p>[Global] Gets the type of a value using typeof</p>
-              <section>
-                <h4>Parameter</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>value</p>
-                      </td>
-                      <td>
-                        <p>any</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Value to get the type of</p>
                       </td>
                     </tr>
                   </tbody>
@@ -392,7 +264,7 @@
   <footer id="jsdoc-footer" class="jsdoc-footer">
     <div id="jsdoc-footer-container">
       <p>
-        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.4 on December 10, 2024.
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.4 on December 14, 2024.
       </p>
     </div>
   </footer>

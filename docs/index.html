@@ -61,7 +61,7 @@
                 </tr>
                 <tr>
                   <td><code>repeat(3)</code></td>
-                  <td>Same thing (there's no global <code>repeat(str, times)</code> so we can drop the leading <code>it.</code>)</td>
+                  <td>Same as above (there's no global <code>repeat(str, times)</code> so we can drop the leading <code>it.</code>)</td>
                 </tr>
                 <tr>
                   <td><code>mul(3).add(1)</code></td>
@@ -76,8 +76,8 @@
                   <td><code>num =&gt; (num * num / 2).toFixed(2)</code></td>
                 </tr>
                 <tr>
-                  <td><code>it.str.len</code></td>
-                  <td><code>val =&gt; val.toString().length</code> (<code>str</code> doesn't allow implicit chains because it's a common variable name)</td>
+                  <td><code>str.len</code></td>
+                  <td><code>val =&gt; val.toString().length</code> (Note: <code>str</code> is a common variable name. If in use, you would need to prefix this chain with <code>it</code>)</td>
                 </tr>
                 <tr>
                   <td><code>trim.split(&quot;, &quot;)</code></td>
@@ -89,7 +89,7 @@
                 </tr>
                 <tr>
                   <td><code>trim()</code></td>
-                  <td>Same thing</td>
+                  <td>Same as above</td>
                 </tr>
                 <tr>
                   <td><code>match(/\d+/)[0].len</code></td>
@@ -120,12 +120,16 @@
                   <td><code>char =&gt; s.add(char.charCodeAt(0))</code></td>
                 </tr>
                 <tr>
-                  <td><code>it.mul$fd(it.add(1))</code></td>
+                  <td><code>it.mul$fd(add(1))</code></td>
                   <td><code>num =&gt; { print(num, num + 1); return num * (num + 1) }</code></td>
                 </tr>
                 <tr>
                   <td><code>it.add$a()</code></td>
                   <td><code>([a, b]) =&gt; a + b</code></td>
+                </tr>
+                <tr>
+                  <td><code>it.div$v(2)</code></td>
+                  <td><code>nums =&gt; nums.map(num =&gt; num / 2)</code></td>
                 </tr>
               </tbody>
             </table>
@@ -152,7 +156,7 @@
             <h3>Getters</h3>
             <p>All methods <em>in this library</em> (not builtin ones) which take no arguments (not even optional ones) are replaced by getters so you can omit the parentheses like in tacit chains:</p>
             <ul>
-              <li><code>[1, 2, 1, 3, 3, 1].uniq.arr</code> (both of these functions are niladic)</li>
+              <li><code>[1, 2, 1, 3, 3, 1].uniq.arr</code> (both of these methods are niladic)</li>
               <li><code>&quot; hello &quot;.trim().first</code> (we need the <code>()</code> on <code>trim</code> because it's builtin)</li>
             </ul>
             <p>These may also be used in <code>get</code> chains:</p>
@@ -231,10 +235,19 @@ a_times_b_plus_c([1, 2, 3], [4, 5], [6, 7, 8]) // [10, 17]
                       <dd>
                       </dd>
                       <dt class="symbol-index-name">
-                        <a href="Vec.html#clone" class="!symbol-index-name">Vec#<wbr>clone</a>
+                        <a href="Vec.html#adj" class="!symbol-index-name">Vec#<wbr>adj()</a>
                       </dt>
                       <dd>
                       </dd>
+                      <dt class="symbol-index-name">
+                        <a href="Vec.html#clone" class="!symbol-index-name">Vec#<wbr>clone()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
                       <dt class="symbol-index-name">
                         <a href="Vec.html#div" class="!symbol-index-name">Vec#<wbr>div(factor)</a>
                       </dt>
@@ -245,10 +258,6 @@ a_times_b_plus_c([1, 2, 3], [4, 5], [6, 7, 8]) // [10, 17]
                       </dt>
                       <dd>
                       </dd>
-                    </dl>
-                  </div>
-                  <div class="symbol-index-column">
-                    <dl class="symbol-index-list">
                       <dt class="symbol-index-name">
                         <a href="Vec.html#left" class="!symbol-index-name">Vec#<wbr>left([n])</a>
                       </dt>
@@ -259,11 +268,10 @@ a_times_b_plus_c([1, 2, 3], [4, 5], [6, 7, 8]) // [10, 17]
                       </dt>
                       <dd>
                       </dd>
-                      <dt class="symbol-index-name">
-                        <a href="Vec.html#neighbors" class="!symbol-index-name">Vec#<wbr>neighbors</a>
-                      </dt>
-                      <dd>
-                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
                       <dt class="symbol-index-name">
                         <a href="Vec.html#right" class="!symbol-index-name">Vec#<wbr>right([n])</a>
                       </dt>
@@ -274,17 +282,8 @@ a_times_b_plus_c([1, 2, 3], [4, 5], [6, 7, 8]) // [10, 17]
                       </dt>
                       <dd>
                       </dd>
-                    </dl>
-                  </div>
-                  <div class="symbol-index-column">
-                    <dl class="symbol-index-list">
                       <dt class="symbol-index-name">
                         <a href="Vec.html#sub" class="!symbol-index-name">Vec#<wbr>sub(other)</a>
-                      </dt>
-                      <dd>
-                      </dd>
-                      <dt class="symbol-index-name">
-                        <a href="Vec.html#toString" class="!symbol-index-name">Vec#<wbr>toString()</a>
                       </dt>
                       <dd>
                       </dd>
@@ -309,14 +308,39 @@ a_times_b_plus_c([1, 2, 3], [4, 5], [6, 7, 8]) // [10, 17]
                       </dt>
                       <dd>
                       </dd>
+                      <dt class="symbol-index-name">
+                        <a href="-_Set.html#clone" class="!symbol-index-name">_Set#<wbr>clone()</a>
+                      </dt>
+                      <dd>
+                      </dd>
                     </dl>
                   </div>
                   <div class="symbol-index-column">
                     <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="-_Set.html#diff" class="!symbol-index-name">_Set#<wbr>diff(other)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="-_Set.html#intersect" class="!symbol-index-name">_Set#<wbr>intersect(other)</a>
+                      </dt>
+                      <dd>
+                      </dd>
                     </dl>
                   </div>
                   <div class="symbol-index-column">
                     <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="-_Set.html#symdiff" class="!symbol-index-name">_Set#<wbr>symdiff(other)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="-_Set.html#union" class="!symbol-index-name">_Set#<wbr>union(other)</a>
+                      </dt>
+                      <dd>
+                      </dd>
                     </dl>
                   </div>
                 </div>
@@ -837,7 +861,7 @@ a_times_b_plus_c([1, 2, 3], [4, 5], [6, 7, 8]) // [10, 17]
                       <dd>
                       </dd>
                       <dt class="symbol-index-name">
-                        <a href="misc_utils.html#.wrap" class="!symbol-index-name">misc_utils.<wbr>wrap</a>
+                        <a href="misc_utils.html#.wrap" class="!symbol-index-name">misc_utils.<wbr>wrap(value)</a>
                       </dt>
                       <dd>
                       </dd>
@@ -1081,7 +1105,7 @@ a_times_b_plus_c([1, 2, 3], [4, 5], [6, 7, 8]) // [10, 17]
   <footer id="jsdoc-footer" class="jsdoc-footer">
     <div id="jsdoc-footer-container">
       <p>
-        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.4 on December 13, 2024.
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.4 on December 14, 2024.
       </p>
     </div>
   </footer>

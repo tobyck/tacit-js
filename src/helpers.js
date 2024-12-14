@@ -1,3 +1,5 @@
+import { Vec, _Set } from "./classes.js"
+
 export const tag = (metadata, func) => {
 	func.meta = metadata
 	return func
@@ -10,5 +12,8 @@ export const vectorise = func => (...args) => {
 	} else return func(...args)
 }
 
-export const is_niladic_method = func => !!func?.toString()
-	.match(/^function\([\d\w_$]+\)|^\(?[\d\w_$]+\)?\s*=>/)
+export const is_monadic = func => !!func?.toString().match(/^([\w\$_]+\s*)?\(\s*[\w\$_]+\s*\)|^\(?\s*[\w\$_]+\s*\)?\s*=>/)
+export const is_niladic = func => !!func?.toString().match(/^([\w\$_]+\s*)?\(\s*\)/)
+
+export const builtin_types = [Number, String, Array, Boolean, Object]
+export const custom_types = [_Set, Vec]

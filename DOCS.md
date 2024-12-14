@@ -24,14 +24,14 @@ Firstly, besides the tacit capabilities, this library also adds some useful util
 | Tacit chain | Equivalent |
 | ----------- | ---------- |
 | `it.repeat(3)` | `str => str.repeat(3)` |
-| `repeat(3)` | Same thing (there's no global `repeat(str, times)` so we can drop the leading `it.`) |
+| `repeat(3)` | Same as above (there's no global `repeat(str, times)` so we can drop the leading `it.`) |
 | `mul(3).add(1)` | `num => num * 3 + 1` |
 | `it.isnum` | `val => typeof val === "number"` (`isnum` is global already so we need the leading `it`) |
 | `mul(it).div(2).toFixed(2)` | `num => (num * num / 2).toFixed(2)` |
-| `it.str.len` | `val => val.toString().length` (`str` doesn't allow implicit chains because it's a common variable name) |
+| `str.len` | `val => val.toString().length` (Note: `str` is a common variable name. If in use, you would need to prefix this chain with `it`) |
 | `trim.split(", ")` | `str => str.trim().split(", ")` |
 | `trim.it` | `str => str.trim()` (`trim` is niladic, but it's builtin so we need the trailing `.it`) |
-| `trim()` | Same thing |
+| `trim()` | Same as above |
 | `match(/\d+/)[0].len` | `str => str.match(/\d+/)[0].length` (`[0]` may also be `first`) |
 
 <br>
@@ -49,8 +49,9 @@ _Note: if a function with flags is the first link in a chain, the leading `it` i
 | Tacit chain | Equivalent |
 | ----------- | ---------- |
 | `chcode.add$t(s)` | `char => s.add(char.charCodeAt(0))` |
-| `it.mul$fd(it.add(1))` | `num => { print(num, num + 1); return num * (num + 1) }` |
+| `it.mul$fd(add(1))` | `num => { print(num, num + 1); return num * (num + 1) }` |
 | `it.add$a()` | `([a, b]) => a + b` |
+| `it.div$v(2)` | `nums => nums.map(num => num / 2)` |
 
 ### Chains Using `get`
 
@@ -65,7 +66,7 @@ If you only need to access properties, you can start the chain with `get` instea
 
 All methods *in this library* (not builtin ones) which take no arguments (not even optional ones) are replaced by getters so you can omit the parentheses like in tacit chains:
 
- - `[1, 2, 1, 3, 3, 1].uniq.arr` (both of these functions are niladic)
+ - `[1, 2, 1, 3, 3, 1].uniq.arr` (both of these methods are niladic)
  - `"  hello ".trim().first` (we need the `()` on `trim` because it's builtin)
 
 These may also be used in `get` chains:

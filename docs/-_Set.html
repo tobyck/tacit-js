@@ -51,10 +51,42 @@
                 </div>
               </div>
             </div>
+            <div class="summary-callout">
+              <h2 class="summary-callout-heading">Methods</h2>
+              <div class="summary-content">
+                <div class="summary-column">
+                  <dl class="dl-summary-callout">
+                    <dt><a href="-_Set.html#clone">clone()</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="-_Set.html#diff">diff(other)</a></dt>
+                    <dd>
+                    </dd>
+                  </dl>
+                </div>
+                <div class="summary-column">
+                  <dl class="dl-summary-callout">
+                    <dt><a href="-_Set.html#intersect">intersect(other)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="-_Set.html#symdiff">symdiff(other)</a></dt>
+                    <dd>
+                    </dd>
+                  </dl>
+                </div>
+                <div class="summary-column">
+                  <dl class="dl-summary-callout">
+                    <dt><a href="-_Set.html#union">union(other)</a></dt>
+                    <dd>
+                    </dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
           </section>
           <section>
             <h2 id="_Set">new&nbsp;<span class="symbol-name">_Set</span><span class="signature"><span class="signature-params">(iterable)</span></span></h2>
-            <p>Creates a new set. Can also be done with constructors.set.</p>
+            <p>Creates a new set. Can also be done with <a href="constructors.html#.S">constructors.S</a>.</p>
             <section>
               <h3>Parameter</h3>
               <table class="jsdoc-details-table">
@@ -96,6 +128,193 @@
             <section id='members-links'>
               <h3><a href="-_Set.html">_Set</a></h3>
             </section>
+            <h2>Methods</h2>
+            <section>
+              <h3 id="clone"><span class="symbol-name">clone</span><span class="signature"><span class="signature-params">()</span>&nbsp;&rarr; <span class="signature-returns"> <a href="-_Set.html">_Set</a></span></span></h3>
+              <p>Makes a copy of the set</p>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="-_Set.html">_Set</a></code> </p>
+                </dd>
+              </dl>
+              <h3 id="diff"><span class="symbol-name">diff</span><span class="signature"><span class="signature-params">(other)</span>&nbsp;&rarr; <span class="signature-returns"> <a href="-_Set.html">_Set</a></span></span></h3>
+              <p>Creates set difference in place with <code>other</code> and returns this set</p>
+              <section>
+                <h4>
+                  Example
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>S([1, 2, 3]).diff(S([3, 4, 5])) // { 1, 2 }</code></pre>
+                </div>
+              </section>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>other</p>
+                      </td>
+                      <td>
+                        <p><a href="-_Set.html">_Set</a></p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="-_Set.html">_Set</a></code> </p>
+                </dd>
+              </dl>
+              <h3 id="intersect"><span class="symbol-name">intersect</span><span class="signature"><span class="signature-params">(other)</span>&nbsp;&rarr; <span class="signature-returns"> <a href="-_Set.html">_Set</a></span></span></h3>
+              <p>Creates set intersection in place with <code>other</code> and returns this set</p>
+              <section>
+                <h4>
+                  Example
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>S([1, 2, 3]).intersect(S([3, 4, 5])) // { 3 }</code></pre>
+                </div>
+              </section>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>other</p>
+                      </td>
+                      <td>
+                        <p><a href="-_Set.html">_Set</a></p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="-_Set.html">_Set</a></code> </p>
+                </dd>
+              </dl>
+              <h3 id="symdiff"><span class="symbol-name">symdiff</span><span class="signature"><span class="signature-params">(other)</span>&nbsp;&rarr; <span class="signature-returns"> <a href="-_Set.html">_Set</a></span></span></h3>
+              <p>Creates symmetric set difference in place with <code>other</code> and returns this set</p>
+              <section>
+                <h4>
+                  Example
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>S([1, 2, 3]).symdiff(S([3, 4, 5])) // { 1, 2, 4, 5 }</code></pre>
+                </div>
+              </section>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>other</p>
+                      </td>
+                      <td>
+                        <p><a href="-_Set.html">_Set</a></p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="-_Set.html">_Set</a></code> </p>
+                </dd>
+              </dl>
+              <h3 id="union"><span class="symbol-name">union</span><span class="signature"><span class="signature-params">(other)</span>&nbsp;&rarr; <span class="signature-returns"> <a href="-_Set.html">_Set</a></span></span></h3>
+              <p>Creates set union in place with <code>other</code> and returns this set</p>
+              <section>
+                <h4>
+                  Example
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>S([1, 2, 3]).union(S([3, 4, 5])) // { 1, 2, 3, 4, 5 }</code></pre>
+                </div>
+              </section>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>other</p>
+                      </td>
+                      <td>
+                        <p><a href="-_Set.html">_Set</a></p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="-_Set.html">_Set</a></code> </p>
+                </dd>
+              </dl>
+            </section>
           </section>
         </div>
       </div>
@@ -105,7 +324,7 @@
   <footer id="jsdoc-footer" class="jsdoc-footer">
     <div id="jsdoc-footer-container">
       <p>
-        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.4 on December 13, 2024.
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.4 on December 14, 2024.
       </p>
     </div>
   </footer>

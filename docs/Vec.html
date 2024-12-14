@@ -26,7 +26,7 @@
           <header class="page-header">
             <div class="symbol-detail-labels"><span class="label label-kind">class</span></div>
             <h1><span class="symbol-name">Vec</span></h1>
-            <p class="source-link">Source: <a href="classes.js.html#source-line-39">classes.<wbr>js:39</a></p>
+            <p class="source-link">Source: <a href="classes.js.html#source-line-95">classes.<wbr>js:95</a></p>
             <div class="symbol-classdesc">
               <p>Represents a 2D vector.</p>
             </div>
@@ -51,28 +51,18 @@
               </div>
             </div>
             <div class="summary-callout">
-              <h2 class="summary-callout-heading">Properties</h2>
+              <h2 class="summary-callout-heading">Property</h2>
               <div class="summary-content">
-                <div class="summary-column">
-                  <dl class="dl-summary-callout">
-                    <dt><a href="Vec.html#clone">clone</a></dt>
-                    <dd>
-                    </dd>
-                  </dl>
-                </div>
-                <div class="summary-column">
-                  <dl class="dl-summary-callout">
-                    <dt><a href="Vec.html#neighbors">neighbors</a></dt>
-                    <dd>
-                    </dd>
-                  </dl>
-                </div>
                 <div class="summary-column">
                   <dl class="dl-summary-callout">
                     <dt><a href="Vec.html#size">size</a></dt>
                     <dd>
                     </dd>
                   </dl>
+                </div>
+                <div class="summary-column">
+                </div>
+                <div class="summary-column">
                 </div>
               </div>
             </div>
@@ -84,16 +74,22 @@
                     <dt><a href="Vec.html#add">add(other)</a></dt>
                     <dd>
                     </dd>
-                    <dt><a href="Vec.html#div">div(factor)</a></dt>
+                    <dt><a href="Vec.html#adj">adj()</a></dt>
                     <dd>
                     </dd>
-                    <dt><a href="Vec.html#down">down([n])</a></dt>
+                    <dt><a href="Vec.html#clone">clone()</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="Vec.html#div">div(factor)</a></dt>
                     <dd>
                     </dd>
                   </dl>
                 </div>
                 <div class="summary-column">
                   <dl class="dl-summary-callout">
+                    <dt><a href="Vec.html#down">down([n])</a></dt>
+                    <dd>
+                    </dd>
                     <dt><a href="Vec.html#left">left([n])</a></dt>
                     <dd>
                     </dd>
@@ -110,9 +106,6 @@
                     <dt><a href="Vec.html#sub">sub(other)</a></dt>
                     <dd>
                     </dd>
-                    <dt><a href="Vec.html#toString">toString()</a></dt>
-                    <dd>
-                    </dd>
                     <dt><a href="Vec.html#up">up([n])</a></dt>
                     <dd>
                     </dd>
@@ -123,7 +116,7 @@
           </section>
           <section>
             <h2 id="Vec">new&nbsp;<span class="symbol-name">Vec</span><span class="signature"><span class="signature-params">(x, y)</span></span></h2>
-            <p>Creates a new vector. Can also be done with constructors.vec.</p>
+            <p>Creates a new vector. Can also be done with <a href="constructors.html#.V">constructors.V</a>.</p>
             <section>
               <h3>Parameters</h3>
               <table class="jsdoc-details-table">
@@ -177,24 +170,8 @@
             <section id='members-links'>
               <h3><a href="Vec.html">Vec</a></h3>
             </section>
-            <h2>Properties</h2>
+            <h2>Property</h2>
             <section>
-              <h3 id="clone"><span class="symbol-name">clone</span></h3>
-              <p>Clones the vector</p>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code><a href="Vec.html">Vec</a></code> </p>
-                </dd>
-              </dl>
-              <h3 id="neighbors"><span class="symbol-name">neighbors</span></h3>
-              <p>Gets a list of the four orthogonal neighbors of this vector</p>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>Array of <a href="Vec.html">Vec</a></code> </p>
-                </dd>
-              </dl>
               <h3 id="size"><span class="symbol-name">size</span></h3>
               <p>Gets the size of the vector</p>
               <dl class="dl-compact">
@@ -243,6 +220,22 @@
                   <p><code><a href="Vec.html">Vec</a></code> 
                   <p>A new vector</p>
                   </p>
+                </dd>
+              </dl>
+              <h3 id="adj"><span class="symbol-name">adj</span><span class="signature"><span class="signature-params">()</span>&nbsp;&rarr; <span class="signature-returns"> Array of <a href="Vec.html">Vec</a></span></span></h3>
+              <p>Gets a list of the four adjacent vectors to this one</p>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of <a href="Vec.html">Vec</a></code> </p>
+                </dd>
+              </dl>
+              <h3 id="clone"><span class="symbol-name">clone</span><span class="signature"><span class="signature-params">()</span>&nbsp;&rarr; <span class="signature-returns"> <a href="Vec.html">Vec</a></span></span></h3>
+              <p>Clones the vector</p>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="Vec.html">Vec</a></code> </p>
                 </dd>
               </dl>
               <h3 id="div"><span class="symbol-name">div</span><span class="signature"><span class="signature-params">(factor)</span>&nbsp;&rarr; <span class="signature-returns"> <a href="Vec.html">Vec</a></span></span></h3>
@@ -482,14 +475,6 @@
                   </p>
                 </dd>
               </dl>
-              <h3 id="toString"><span class="symbol-name">toString</span><span class="signature"><span class="signature-params">()</span>&nbsp;&rarr; <span class="signature-returns"> string</span></span></h3>
-              <p>Returns <code>&quot;(x, y)&quot;</code></p>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>string</code> </p>
-                </dd>
-              </dl>
               <h3 id="up"><span class="symbol-name">up</span><span class="signature"><span class="signature-params">([n])</span>&nbsp;&rarr; <span class="signature-returns"> <a href="Vec.html">Vec</a></span></span></h3>
               <p>Moves the vector up by <code>n</code> units (decreases <code>y</code>), in place.</p>
               <section>
@@ -540,7 +525,7 @@
   <footer id="jsdoc-footer" class="jsdoc-footer">
     <div id="jsdoc-footer-container">
       <p>
-        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.4 on December 13, 2024.
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.4 on December 14, 2024.
       </p>
     </div>
   </footer>

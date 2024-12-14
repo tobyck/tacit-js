@@ -5,7 +5,7 @@
  */
 export class _Set extends Set {
 	/**
-	 * Creates a new set. Can also be done with {@link constructors.set}.
+	 * Creates a new set. Can also be done with {@link constructors.S}.
 	 * @param {Iterable.<*>} iterable Optional iterable to initialize the set with
 	 * @returns {_Set}
 	 */
@@ -28,6 +28,62 @@ export class _Set extends Set {
 		return super.delete(JSON.stringify(item))
 	}
 
+	/**
+	 * Makes a copy of the set
+	 * @returns {_Set}
+	 */
+	clone() {
+		return new _Set(this)
+	}
+
+	/**
+	 * Creates set union in place with `other` and returns this set
+	 * @param {_Set} other
+	 * @returns {_Set}
+	 * @example S([1, 2, 3]).union(S([3, 4, 5])) // { 1, 2, 3, 4, 5 }
+	 */
+	union(other) {
+		for (const item of other) this.add(item)
+		return this
+	}
+
+	/**
+	 * Creates set intersection in place with `other` and returns this set
+	 * @param {_Set} other
+	 * @returns {_Set}
+	 * @example S([1, 2, 3]).intersect(S([3, 4, 5])) // { 3 }
+	 */
+	intersect(other) {
+		for (const item of this)
+			if (!other.has(item))
+				this.delete(item)
+		return this
+	}
+
+	/**
+	 * Creates set difference in place with `other` and returns this set
+	 * @param {_Set} other
+	 * @returns {_Set}
+	 * @example S([1, 2, 3]).diff(S([3, 4, 5])) // { 1, 2 }
+	 */
+	diff(other) {
+		for (const item of other) this.delete(item)
+		return this
+	}
+
+	/**
+	 * Creates symmetric set difference in place with `other` and returns this set
+	 * @param {_Set} other
+	 * @returns {_Set}
+	 * @example S([1, 2, 3]).symdiff(S([3, 4, 5])) // { 1, 2, 4, 5 }
+	 */
+	symdiff(other) {
+		for (const item of other)
+			if (this.has(item)) this.delete(item)
+			else this.add(item)
+		return this
+	}
+
 	*[Symbol.iterator]() {
 		for (const item of super[Symbol.iterator]()) {
 			yield JSON.parse(item)
@@ -38,7 +94,7 @@ export class _Set extends Set {
 /** Represents a 2D vector. */
 export class Vec {
 	/**
-	 * Creates a new vector. Can also be done with {@link constructors.vec}.
+	 * Creates a new vector. Can also be done with {@link constructors.V}.
 	 * @param {number} x The x component
 	 * @param {number} y The y component
 	 * @returns {Vec}
@@ -113,10 +169,10 @@ export class Vec {
 	}
 
 	/**
-	 * Gets a list of the four orthogonal neighbors of this vector
+	 * Gets a list of the four adjacent vectors to this one
 	 * @returns {Vec[]}
 	 */
-	get neighbors() {
+	adj() {
 		return [
 			this.add(new Vec(0, -1)),
 			this.add(new Vec(0, 1)),
@@ -137,16 +193,8 @@ export class Vec {
 	 * Clones the vector
 	 * @returns {Vec}
 	 */
-	get clone() {
+	clone() {
 		return new Vec(this.x, this.y)
-	}
-
-	/**
-	 * Returns `"(x, y)"`
-	 * @returns {string}
-	 */
-	toString() {
-		return `(${this.x}, ${this.y})`
 	}
 
 	*[Symbol.iterator]() {
@@ -155,7 +203,7 @@ export class Vec {
 	}
 
 	[Symbol.toPrimitive](hint) {
-		if (hint === "string") return this.toString()
+		// if (hint === "string") return this.toString()
 		return this.size
 	}
 }

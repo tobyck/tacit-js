@@ -1082,6 +1082,7 @@ misc_utils.len = value => value?.length ?? value?.size
 
 /**
  * **[Global]** Wraps a value in a singleton list
+ * @function
  * @template T
  * @param {T} value Value to wrap
  * @returns {T[]}

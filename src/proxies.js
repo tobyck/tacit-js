@@ -1,13 +1,16 @@
 import functions from "./functions.js"
-import { vectorise, is_niladic_method } from "./helpers.js"
+import { vectorise } from "./helpers.js"
+import { is_niladic_method_map } from "./lib.js"
 
 // applies a proxy to a function that makes any property access or call do
 // nothing, and simply build up a list of operations to do once it's called
 export const chain_proxy = func => new Proxy(func, {
 	get(target, prop) {
 		if (prop === "links") return target[prop] // for debugging
+		// we can use this to identify tacit chains
 		if (prop === "symbol") return Symbol.for("chain_proxy")
 
+		// make any other property access just add an operation and return the proxy
 		target.links.push(prop)
 		return chain_proxy(target)
 	},
@@ -16,9 +19,11 @@ export const chain_proxy = func => new Proxy(func, {
 		const last_link = target.links.at(-1)
 
 		if (!last_link) return args[0]
-		else if (typeof last_link === "object" || is_niladic_method(functions?.[last_link]) || last_link === "it")
+		// only evaluate if the last link is a function, a nilad or `it`
+		else if (typeof last_link === "object" || is_niladic_method_map[last_link] || last_link === "it")
 			return evaluate_chain(target.links)(args[0])
 
+		// otherwise modify the last link to be a function call
 		let [func_name, flags] = target.links.pop().split("$")
 		target.links.push({ func_name, args, flags: flags ?? "" })
 
@@ -32,9 +37,12 @@ const call_link = (chain_arg, result, func_name, flags = "", args = []) => {
 	// if an arg is `it` with no links, treat as the original chain arg
 	args = args.map(arg => arg?.symbol === Symbol.for("chain_proxy") && !arg.links.length ? chain_arg : arg)
 
+	let should_vectorise = false
+
 	for (const flag of flags) {
-		if (flag === "f") args = args.map(f => f(chain_arg)) // map args as functions on the chain arg
-		else if (flag === "a") {
+		if (flag === "f") {
+			args = args.map(f => f(chain_arg)) // map args as functions on the chain arg
+		} else if (flag === "a") {
 			if (Array.isArray(result)) {
 				// treat the result as the arg list
 				this_arg = result[0]
@@ -45,6 +53,8 @@ const call_link = (chain_arg, result, func_name, flags = "", args = []) => {
 			// make this_arg passed explicitly
 			this_arg = args[0]
 			args = [result, ...args.slice(1)]
+		} else if (flag === "v") {
+			should_vectorise = true
 		} else if (flag === "d") {
 			const formatted_args = JSON.stringify([result, ...args], null, 1).replace(/\n\s*/g, " ")
 			const formatted_flags = `(-${flags.split("").filter(f => f !== "d").join("")})`
@@ -53,11 +63,19 @@ const call_link = (chain_arg, result, func_name, flags = "", args = []) => {
 	}
 
 	let func
-	if (typeof this_arg?.[func_name] === "function") func = (...args) => args[0][func_name](...args.slice(1))
-	else if (typeof functions?.[func_name] === "function") func = functions[func_name]
-	if (flags.includes("v")) func = vectorise(func)
 
-	if (func) return func(this_arg, ...args)
+	// if this_arg has the function as a method, use that (but convert it to normal
+	// function in case it needs to be vectorised)
+	if (typeof this_arg?.[func_name] === "function")
+		func = (...args) => args[0][func_name](...args.slice(1))
+
+	// otherwise try to use a util function directly from functions.js
+	else if (typeof functions?.[func_name] === "function") func = functions[func_name]
+
+	if (func) {
+		if (should_vectorise) func = vectorise(func)
+		return func(this_arg, ...args)
+	}
 
 	throw new Error(`Error while evluating chain: function '${func_name}\` not available`)
 }

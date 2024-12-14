@@ -216,3 +216,27 @@ describe("antidiagonals", () => {
 	test("3x2 rectangle", () => expect(f.antidiagonals([[1, 2, 3], [4, 5, 6]])).toEqual([[3], [2, 6], [1, 5], [4]]))
 	test("2x3 rectangle", () => expect(f.antidiagonals([[1, 2], [3, 4], [5, 6]])).toEqual([[2], [1, 4], [3, 6], [5]]))
 })
+
+describe("union", () => {
+	test("empty", () => expect(f.S([]).union(f.S([]))).toEqual(f.S([])))
+	test("no overlap", () => expect(f.S([1, 2]).union(f.S([3, 4]))).toEqual(f.S([1, 2, 3, 4])))
+	test("overlap", () => expect(f.S([1, 2, 3, 4]).union(f.S([3, 4, 5, 6]))).toEqual(f.S([1, 2, 3, 4, 5, 6])))
+})
+
+describe("intersect", () => {
+	test("empty", () => expect(f.S([]).intersect(f.S([]))).toEqual(f.S([])))
+	test("no overlap", () => expect(f.S([1, 2]).intersect(f.S([3, 4]))).toEqual(f.S([])))
+	test("overlap", () => expect(f.S([1, 2, 3, 4]).intersect(f.S([3, 4, 5, 6]))).toEqual(f.S([3, 4])))
+})
+
+describe("diff", () => {
+	test("empty", () => expect(f.S([]).diff(f.S([]))).toEqual(f.S([])))
+	test("no overlap", () => expect(f.S([1, 2]).diff(f.S([3, 4]))).toEqual(f.S([1, 2])))
+	test("overlap", () => expect(f.S([1, 2, 3, 4]).diff(f.S([3, 4, 5, 6]))).toEqual(f.S([1, 2])))
+})
+
+describe("symdiff", () => {
+	test("empty", () => expect(f.S([]).symdiff(f.S([]))).toEqual(f.S([])))
+	test("no overlap", () => expect(f.S([1, 2]).symdiff(f.S([3, 4]))).toEqual(f.S([1, 2, 3, 4])))
+	test("overlap", () => expect(f.S([1, 2, 3, 4]).symdiff(f.S([3, 4, 5, 6]))).toEqual(f.S([1, 2, 5, 6])))
+})

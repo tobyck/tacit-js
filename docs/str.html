@@ -4,7 +4,7 @@
 <head>
   <meta name="generator" content="JSDoc 4.0.4">
   <meta charset="utf-8">
-  <title>Namespace: type_cast</title>
+  <title>Namespace: str</title>
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
@@ -25,8 +25,8 @@
         <div id="jsdoc-main" role="main">
           <header class="page-header">
             <div class="symbol-detail-labels"><span class="label label-kind">namespace</span></div>
-            <h1><small></small><span class="symbol-name">type_cast</span></h1>
-            <p class="source-link">Source: <a href="functions.js.html#source-line-66">functions.<wbr>js:66</a></p>
+            <h1><small></small><span class="symbol-name">str</span></h1>
+            <p class="source-link">Source: <a href="functions.js.html#source-line-776">functions.<wbr>js:776</a></p>
             <div class="symbol-description">
             </div>
             <dl class="dl-compact">
@@ -38,30 +38,39 @@
               <div class="summary-content">
                 <div class="summary-column">
                   <dl class="dl-summary-callout">
-                    <dt><a href="type_cast.html#.arr">arr(value)</a></dt>
+                    <dt><a href="str.html#.chars">chars(str)</a></dt>
                     <dd>
                     </dd>
-                    <dt><a href="type_cast.html#.bool">bool(value)</a></dt>
+                    <dt><a href="str.html#.chcode">chcode(char)</a></dt>
                     <dd>
                     </dd>
-                  </dl>
-                </div>
-                <div class="summary-column">
-                  <dl class="dl-summary-callout">
-                    <dt><a href="type_cast.html#.int">int(value)</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="type_cast.html#.num">num(value)</a></dt>
+                    <dt><a href="str.html#.csv">csv(str)</a></dt>
                     <dd>
                     </dd>
                   </dl>
                 </div>
                 <div class="summary-column">
                   <dl class="dl-summary-callout">
-                    <dt><a href="type_cast.html#.str">str(value)</a></dt>
+                    <dt><a href="str.html#.groups">groups(str)</a></dt>
                     <dd>
                     </dd>
-                    <dt><a href="type_cast.html#.wrap">wrap(value)</a></dt>
+                    <dt><a href="str.html#.ints">ints(str)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="str.html#.isdigit">isdigit(char)</a></dt>
+                    <dd>
+                    </dd>
+                  </dl>
+                </div>
+                <div class="summary-column">
+                  <dl class="dl-summary-callout">
+                    <dt><a href="str.html#.lines">lines(str)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="str.html#.nums">nums(str)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="str.html#.words">words(str)</a></dt>
                     <dd>
                     </dd>
                   </dl>
@@ -73,9 +82,8 @@
             <h2>Methods</h2>
             <section>
               <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
-              <h3 id=".arr"><span class="symbol-name">arr</span><span class="signature"><span class="signature-params">(value)</span>&nbsp;&rarr; <span class="signature-returns"> array</span></span></h3>
-              <p>Casts a value to an array. If <code>value</code> is a number, an array of length <code>value</code>
-                will be created</p>
+              <h3 id=".chars"><span class="symbol-name">chars</span><span class="signature"><span class="signature-params">(str)</span>&nbsp;&rarr; <span class="signature-returns"> Array of string</span></span></h3>
+              <p>Splits a string into an array of characters</p>
               <section>
                 <h4>Parameter</h4>
                 <table class="jsdoc-details-table">
@@ -90,16 +98,16 @@
                   <tbody>
                     <tr>
                       <td>
-                        <p>value</p>
+                        <p>str</p>
                       </td>
                       <td>
-                        <p>any</p>
+                        <p>string</p>
                       </td>
                       <td>
                         <p>&nbsp;</p>
                       </td>
                       <td>
-                        <p>Value to cast</p>
+                        <p>The string to split</p>
                       </td>
                     </tr>
                   </tbody>
@@ -108,12 +116,12 @@
               <dl class="dl-compact">
                 <dt>Returns</dt>
                 <dd>
-                  <p><code>array</code> </p>
+                  <p><code>Array of string</code> </p>
                 </dd>
               </dl>
               <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
-              <h3 id=".bool"><span class="symbol-name">bool</span><span class="signature"><span class="signature-params">(value)</span>&nbsp;&rarr; <span class="signature-returns"> boolean</span></span></h3>
-              <p>Casts a value to a boolean (alias for Boolean constructor)</p>
+              <h3 id=".chcode"><span class="symbol-name">chcode</span><span class="signature"><span class="signature-params">(char)</span>&nbsp;&rarr; <span class="signature-returns"> number</span></span></h3>
+              <p>Gets the ASCII code a character</p>
               <section>
                 <h4>Parameter</h4>
                 <table class="jsdoc-details-table">
@@ -128,16 +136,168 @@
                   <tbody>
                     <tr>
                       <td>
-                        <p>value</p>
+                        <p>char</p>
                       </td>
                       <td>
-                        <p>any</p>
+                        <p>string</p>
                       </td>
                       <td>
                         <p>&nbsp;</p>
                       </td>
                       <td>
-                        <p>Value to cast</p>
+                        <p>The character to get the code of</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>number</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".csv"><span class="symbol-name">csv</span><span class="signature"><span class="signature-params">(str)</span>&nbsp;&rarr; <span class="signature-returns"> Array of string</span></span></h3>
+              <p>Splits a string on commas and trims each element</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>str</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The string to split</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of string</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".groups"><span class="symbol-name">groups</span><span class="signature"><span class="signature-params">(str)</span>&nbsp;&rarr; <span class="signature-returns"> Array of string</span></span></h3>
+              <p>Splits a string on &quot;\n\n&quot;</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>str</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The string to split</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of string</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".ints"><span class="symbol-name">ints</span><span class="signature"><span class="signature-params">(str)</span>&nbsp;&rarr; <span class="signature-returns"> Array of number</span></span></h3>
+              <p>Extracts all integers from a string and returns them in an array</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>str</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The string to extract integers from</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of number</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".isdigit"><span class="symbol-name">isdigit</span><span class="signature"><span class="signature-params">(char)</span>&nbsp;&rarr; <span class="signature-returns"> boolean</span></span></h3>
+              <p>Checks if a character is a digit</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>char</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The character to check</p>
                       </td>
                     </tr>
                   </tbody>
@@ -150,9 +310,8 @@
                 </dd>
               </dl>
               <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
-              <h3 id=".int"><span class="symbol-name">int</span><span class="signature"><span class="signature-params">(value)</span>&nbsp;&rarr; <span class="signature-returns"> number</span></span></h3>
-              <p>Casts a value to an integer using parseInt. If <code>value</code> is a string an int
-                will be extracted with regex before casting).</p>
+              <h3 id=".lines"><span class="symbol-name">lines</span><span class="signature"><span class="signature-params">(str)</span>&nbsp;&rarr; <span class="signature-returns"> Array of string</span></span></h3>
+              <p>Splits a string on &quot;\n&quot;</p>
               <section>
                 <h4>Parameter</h4>
                 <table class="jsdoc-details-table">
@@ -167,16 +326,16 @@
                   <tbody>
                     <tr>
                       <td>
-                        <p>value</p>
+                        <p>str</p>
                       </td>
                       <td>
-                        <p>any</p>
+                        <p>string</p>
                       </td>
                       <td>
                         <p>&nbsp;</p>
                       </td>
                       <td>
-                        <p>Value to cast</p>
+                        <p>The string to split</p>
                       </td>
                     </tr>
                   </tbody>
@@ -185,13 +344,12 @@
               <dl class="dl-compact">
                 <dt>Returns</dt>
                 <dd>
-                  <p><code>nullable number</code> </p>
+                  <p><code>Array of string</code> </p>
                 </dd>
               </dl>
               <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
-              <h3 id=".num"><span class="symbol-name">num</span><span class="signature"><span class="signature-params">(value)</span>&nbsp;&rarr; <span class="signature-returns"> number</span></span></h3>
-              <p>Casts a value to a number using the <code>Number</code> constructor. If <code>value</code> is a string
-                then a number will be extracted with regex before casting.</p>
+              <h3 id=".nums"><span class="symbol-name">nums</span><span class="signature"><span class="signature-params">(str)</span>&nbsp;&rarr; <span class="signature-returns"> Array of number</span></span></h3>
+              <p>Extracts all numbers from a string and returns them in an array</p>
               <section>
                 <h4>Parameter</h4>
                 <table class="jsdoc-details-table">
@@ -206,15 +364,16 @@
                   <tbody>
                     <tr>
                       <td>
-                        <p>value</p>
+                        <p>str</p>
                       </td>
                       <td>
-                        <p>any</p>
+                        <p>string</p>
                       </td>
                       <td>
                         <p>&nbsp;</p>
                       </td>
                       <td>
+                        <p>The string to extract numbers from</p>
                       </td>
                     </tr>
                   </tbody>
@@ -223,12 +382,12 @@
               <dl class="dl-compact">
                 <dt>Returns</dt>
                 <dd>
-                  <p><code>nullable number</code> </p>
+                  <p><code>Array of number</code> </p>
                 </dd>
               </dl>
               <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
-              <h3 id=".str"><span class="symbol-name">str</span><span class="signature"><span class="signature-params">(value)</span></span></h3>
-              <p>Casts a value to a string. If <code>value</code> is an array, it will be joined by &quot;&quot;.</p>
+              <h3 id=".words"><span class="symbol-name">words</span><span class="signature"><span class="signature-params">(str)</span>&nbsp;&rarr; <span class="signature-returns"> Array of string</span></span></h3>
+              <p>Splits a string on spaces and trims each word</p>
               <section>
                 <h4>Parameter</h4>
                 <table class="jsdoc-details-table">
@@ -243,50 +402,16 @@
                   <tbody>
                     <tr>
                       <td>
-                        <p>value</p>
+                        <p>str</p>
                       </td>
                       <td>
-                        <p>any</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Value to cast</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-              </dl>
-              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
-              <h3 id=".wrap"><span class="symbol-name">wrap</span><span class="signature"><span class="signature-params">(value)</span>&nbsp;&rarr; <span class="signature-returns"> array</span></span></h3>
-              <p>Wraps a value in a singleton list</p>
-              <section>
-                <h4>Parameter</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>value</p>
-                      </td>
-                      <td>
-                        <p>any</p>
+                        <p>string</p>
                       </td>
                       <td>
                         <p>&nbsp;</p>
                       </td>
                       <td>
-                        <p>Value to wrap</p>
+                        <p>The string to split</p>
                       </td>
                     </tr>
                   </tbody>
@@ -295,7 +420,7 @@
               <dl class="dl-compact">
                 <dt>Returns</dt>
                 <dd>
-                  <p><code>array</code> </p>
+                  <p><code>Array of string</code> </p>
                 </dd>
               </dl>
             </section>
@@ -308,7 +433,7 @@
   <footer id="jsdoc-footer" class="jsdoc-footer">
     <div id="jsdoc-footer-container">
       <p>
-        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.4 on December 10, 2024.
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.4 on December 14, 2024.
       </p>
     </div>
   </footer>

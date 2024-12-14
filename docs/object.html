@@ -4,7 +4,7 @@
 <head>
   <meta name="generator" content="JSDoc 4.0.4">
   <meta charset="utf-8">
-  <title>Namespace: type_casts</title>
+  <title>Namespace: object</title>
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
@@ -25,8 +25,8 @@
         <div id="jsdoc-main" role="main">
           <header class="page-header">
             <div class="symbol-detail-labels"><span class="label label-kind">namespace</span></div>
-            <h1><small></small><span class="symbol-name">type_casts</span></h1>
-            <p class="source-link">Source: <a href="functions.js.html#source-line-80">functions.<wbr>js:80</a></p>
+            <h1><small></small><span class="symbol-name">object</span></h1>
+            <p class="source-link">Source: <a href="functions.js.html#source-line-1017">functions.<wbr>js:1017</a></p>
             <div class="symbol-description">
             </div>
             <dl class="dl-compact">
@@ -38,27 +38,21 @@
               <div class="summary-content">
                 <div class="summary-column">
                   <dl class="dl-summary-callout">
-                    <dt><a href="type_casts.html#.arr">arr(value)</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="type_casts.html#.bool">bool(value)</a></dt>
+                    <dt><a href="object.html#.entries">entries(obj)</a></dt>
                     <dd>
                     </dd>
                   </dl>
                 </div>
                 <div class="summary-column">
                   <dl class="dl-summary-callout">
-                    <dt><a href="type_casts.html#.int">int(value)</a></dt>
-                    <dd>
-                    </dd>
-                    <dt><a href="type_casts.html#.num">num(value)</a></dt>
+                    <dt><a href="object.html#.keys">keys(obj)</a></dt>
                     <dd>
                     </dd>
                   </dl>
                 </div>
                 <div class="summary-column">
                   <dl class="dl-summary-callout">
-                    <dt><a href="type_casts.html#.str">str(value)</a></dt>
+                    <dt><a href="object.html#.values">values(obj)</a></dt>
                     <dd>
                     </dd>
                   </dl>
@@ -70,9 +64,8 @@
             <h2>Methods</h2>
             <section>
               <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
-              <h3 id=".arr"><span class="symbol-name">arr</span><span class="signature"><span class="signature-params">(value)</span>&nbsp;&rarr; <span class="signature-returns"> Array</span></span></h3>
-              <p>Casts a value to an array. If <code>value</code> is a number, an array of length <code>value</code>
-                will be created</p>
+              <h3 id=".entries"><span class="symbol-name">entries</span><span class="signature"><span class="signature-params">(obj)</span>&nbsp;&rarr; <span class="signature-returns"> Array of any</span></span></h3>
+              <p>Same as the built in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries">Object.entries</a></p>
               <section>
                 <h4>Parameter</h4>
                 <table class="jsdoc-details-table">
@@ -87,16 +80,16 @@
                   <tbody>
                     <tr>
                       <td>
-                        <p>value</p>
+                        <p>obj</p>
                       </td>
                       <td>
-                        <p>any</p>
+                        <p><a href="object.html">object</a></p>
                       </td>
                       <td>
                         <p>&nbsp;</p>
                       </td>
                       <td>
-                        <p>Value to cast</p>
+                        <p>The object to get entries from</p>
                       </td>
                     </tr>
                   </tbody>
@@ -105,12 +98,14 @@
               <dl class="dl-compact">
                 <dt>Returns</dt>
                 <dd>
-                  <p><code>Array</code> </p>
+                  <p><code>Array of any</code> 
+                  <p>An array of key-value tuples</p>
+                  </p>
                 </dd>
               </dl>
               <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
-              <h3 id=".bool"><span class="symbol-name">bool</span><span class="signature"><span class="signature-params">(value)</span>&nbsp;&rarr; <span class="signature-returns"> boolean</span></span></h3>
-              <p>Casts a value to a boolean (alias for Boolean constructor)</p>
+              <h3 id=".keys"><span class="symbol-name">keys</span><span class="signature"><span class="signature-params">(obj)</span>&nbsp;&rarr; <span class="signature-returns"> Array of string</span></span></h3>
+              <p>Same as the built in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys">Object.keys</a></p>
               <section>
                 <h4>Parameter</h4>
                 <table class="jsdoc-details-table">
@@ -125,16 +120,16 @@
                   <tbody>
                     <tr>
                       <td>
-                        <p>value</p>
+                        <p>obj</p>
                       </td>
                       <td>
-                        <p>any</p>
+                        <p><a href="object.html">object</a></p>
                       </td>
                       <td>
                         <p>&nbsp;</p>
                       </td>
                       <td>
-                        <p>Value to cast</p>
+                        <p>The object to get keys from</p>
                       </td>
                     </tr>
                   </tbody>
@@ -143,13 +138,12 @@
               <dl class="dl-compact">
                 <dt>Returns</dt>
                 <dd>
-                  <p><code>boolean</code> </p>
+                  <p><code>Array of string</code> </p>
                 </dd>
               </dl>
               <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
-              <h3 id=".int"><span class="symbol-name">int</span><span class="signature"><span class="signature-params">(value)</span>&nbsp;&rarr; <span class="signature-returns"> number</span></span></h3>
-              <p>Casts a value to an integer using parseInt. If <code>value</code> is a string an int
-                will be extracted with regex before casting).</p>
+              <h3 id=".values"><span class="symbol-name">values</span><span class="signature"><span class="signature-params">(obj)</span>&nbsp;&rarr; <span class="signature-returns"> Array of any</span></span></h3>
+              <p>Same as the built in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values">Object.values</a></p>
               <section>
                 <h4>Parameter</h4>
                 <table class="jsdoc-details-table">
@@ -164,16 +158,16 @@
                   <tbody>
                     <tr>
                       <td>
-                        <p>value</p>
+                        <p>obj</p>
                       </td>
                       <td>
-                        <p>any</p>
+                        <p><a href="object.html">object</a></p>
                       </td>
                       <td>
                         <p>&nbsp;</p>
                       </td>
                       <td>
-                        <p>Value to cast</p>
+                        <p>The object to get values from</p>
                       </td>
                     </tr>
                   </tbody>
@@ -182,80 +176,8 @@
               <dl class="dl-compact">
                 <dt>Returns</dt>
                 <dd>
-                  <p><code>number</code> </p>
+                  <p><code>Array of any</code> </p>
                 </dd>
-              </dl>
-              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
-              <h3 id=".num"><span class="symbol-name">num</span><span class="signature"><span class="signature-params">(value)</span>&nbsp;&rarr; <span class="signature-returns"> number</span></span></h3>
-              <p>Casts a value to a number using the <code>Number</code> constructor. If <code>value</code> is a string
-                then a number will be extracted with regex before casting.</p>
-              <section>
-                <h4>Parameter</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>value</p>
-                      </td>
-                      <td>
-                        <p>any</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>number</code> </p>
-                </dd>
-              </dl>
-              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
-              <h3 id=".str"><span class="symbol-name">str</span><span class="signature"><span class="signature-params">(value)</span></span></h3>
-              <p>Casts a value to a string. If <code>value</code> is an array, it will be joined by &quot;&quot;.</p>
-              <section>
-                <h4>Parameter</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>value</p>
-                      </td>
-                      <td>
-                        <p>any</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Value to cast</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
               </dl>
             </section>
           </section>

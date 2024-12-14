@@ -34,22 +34,6 @@
           </header>
           <section id="summary">
             <div class="summary-callout">
-              <h2 class="summary-callout-heading">Property</h2>
-              <div class="summary-content">
-                <div class="summary-column">
-                  <dl class="dl-summary-callout">
-                    <dt><a href="misc_utils.html#.wrap">wrap</a></dt>
-                    <dd>
-                    </dd>
-                  </dl>
-                </div>
-                <div class="summary-column">
-                </div>
-                <div class="summary-column">
-                </div>
-              </div>
-            </div>
-            <div class="summary-callout">
               <h2 class="summary-callout-heading">Methods</h2>
               <div class="summary-content">
                 <div class="summary-column">
@@ -60,20 +44,16 @@
                     <dt><a href="misc_utils.html#.len">len(value)</a></dt>
                     <dd>
                     </dd>
-                  </dl>
-                </div>
-                <div class="summary-column">
-                  <dl class="dl-summary-callout">
                     <dt><a href="misc_utils.html#.neq">neq(a, b)</a></dt>
                     <dd>
                     </dd>
-                    <dt><a href="misc_utils.html#.pr">pr(value)</a></dt>
-                    <dd>
-                    </dd>
                   </dl>
                 </div>
                 <div class="summary-column">
                   <dl class="dl-summary-callout">
+                    <dt><a href="misc_utils.html#.pr">pr(value)</a></dt>
+                    <dd>
+                    </dd>
                     <dt><a href="misc_utils.html#.print">print(.<wbr>.<wbr>.<wbr>values)</a></dt>
                     <dd>
                     </dd>
@@ -82,51 +62,17 @@
                     </dd>
                   </dl>
                 </div>
+                <div class="summary-column">
+                  <dl class="dl-summary-callout">
+                    <dt><a href="misc_utils.html#.wrap">wrap(value)</a></dt>
+                    <dd>
+                    </dd>
+                  </dl>
+                </div>
               </div>
             </div>
           </section>
           <section>
-            <h2>Property</h2>
-            <section>
-              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
-              <h3 id=".wrap"><span class="symbol-name">wrap</span></h3>
-              <p><strong>[Global]</strong> Wraps a value in a singleton list</p>
-              <section>
-                <h4>Parameter</h4>
-                <table class="jsdoc-details-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Optional</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p>value</p>
-                      </td>
-                      <td>
-                        <p>T</p>
-                      </td>
-                      <td>
-                        <p>&nbsp;</p>
-                      </td>
-                      <td>
-                        <p>Value to wrap</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
-              <dl class="dl-compact">
-                <dt>Returns</dt>
-                <dd>
-                  <p><code>Array of T</code> </p>
-                </dd>
-              </dl>
-            </section>
             <h2>Methods</h2>
             <section>
               <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
@@ -220,7 +166,7 @@
               </dl>
               <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
               <h3 id=".neq"><span class="symbol-name">neq</span><span class="signature"><span class="signature-params">(a, b)</span>&nbsp;&rarr; <span class="signature-returns"> boolean</span></span></h3>
-              <p><strong>[Global]</strong> Checks <code>a</code> and <code>b</code> are not equal (by negating <code>misc_utils.eq</code>)</p>
+              <p><strong>[Global]</strong> Checks <code>a</code> and <code>b</code> are not equal (by negating <code>misc.eq</code>)</p>
               <section>
                 <h4>Parameters</h4>
                 <table class="jsdoc-details-table">
@@ -270,7 +216,7 @@
               </dl>
               <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
               <h3 id=".pr"><span class="symbol-name">pr</span><span class="signature"><span class="signature-params">(value)</span>&nbsp;&rarr; <span class="signature-returns"> T</span></span></h3>
-              <p><strong>[Global]</strong> Same as <code>misc_utils.print</code> but niladic (so that it becomes a getter)</p>
+              <p><strong>[Global]</strong> Same as <code>misc.print</code> but niladic (so that it becomes a getter)</p>
               <section>
                 <h4>Parameter</h4>
                 <table class="jsdoc-details-table">
@@ -426,6 +372,44 @@
                   <p><code>Array of number</code> </p>
                 </dd>
               </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".wrap"><span class="symbol-name">wrap</span><span class="signature"><span class="signature-params">(value)</span>&nbsp;&rarr; <span class="signature-returns"> Array of T</span></span></h3>
+              <p><strong>[Global]</strong> Wraps a value in a singleton list</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>value</p>
+                      </td>
+                      <td>
+                        <p>T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>Value to wrap</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of T</code> </p>
+                </dd>
+              </dl>
             </section>
           </section>
         </div>
@@ -436,7 +420,7 @@
   <footer id="jsdoc-footer" class="jsdoc-footer">
     <div id="jsdoc-footer-container">
       <p>
-        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.4 on December 13, 2024.
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.4 on December 14, 2024.
       </p>
     </div>
   </footer>
