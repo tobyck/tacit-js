@@ -96,13 +96,16 @@
                     <dt><a href="Vec.html#mul">mul(factor)</a></dt>
                     <dd>
                     </dd>
-                    <dt><a href="Vec.html#right">right([n])</a></dt>
+                    <dt><a href="Vec.html#on">on(grid)</a></dt>
                     <dd>
                     </dd>
                   </dl>
                 </div>
                 <div class="summary-column">
                   <dl class="dl-summary-callout">
+                    <dt><a href="Vec.html#right">right([n])</a></dt>
+                    <dd>
+                    </dd>
                     <dt><a href="Vec.html#sub">sub(other)</a></dt>
                     <dd>
                     </dd>
@@ -394,6 +397,43 @@
                   <p><code><a href="Vec.html">Vec</a></code> 
                   <p>A new vector</p>
                   </p>
+                </dd>
+              </dl>
+              <h3 id="on"><span class="symbol-name">on</span><span class="signature"><span class="signature-params">(grid)</span>&nbsp;&rarr; <span class="signature-returns"> T</span></span></h3>
+              <p>Gets the cell at this vector on <code>grid</code></p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>grid</p>
+                      </td>
+                      <td>
+                        <p>Array of Array of T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The grid to get the cell from</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>T</code> </p>
                 </dd>
               </dl>
               <h3 id="right"><span class="symbol-name">right</span><span class="signature"><span class="signature-params">([n])</span>&nbsp;&rarr; <span class="signature-returns"> <a href="Vec.html">Vec</a></span></span></h3>

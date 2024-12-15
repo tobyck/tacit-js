@@ -198,6 +198,16 @@ export class Vec {
 	}
 
 	/**
+	 * Gets the cell at this vector on `grid`
+	 * @template T
+	 * @param {T[][]} grid The grid to get the cell from
+	 * @returns {T}
+	 */
+	on(grid) {
+		return grid[this.y]?.[this.x]
+	}
+
+	/**
 	 * Gets the size of the vector
 	 * @returns {number}
 	 */
