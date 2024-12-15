@@ -1011,6 +1011,16 @@ grid_utils.antidiagonals = grid => {
 }
 
 /**
+ * Creates a grid of size `width` by `height` filled with `fill`. Fill defaults to `null`.
+ * @template T
+ * @param {number} width The width of the grid
+ * @param {number} height The height of the grid
+ * @param {T} [fill=null] The value to fill the grid with
+ * @returns {T[][]}
+ */
+grid_utils.emptygrid = (width, height, fill = null) => Array(height).fill().map(() => Array(width).fill(fill))
+
+/**
  * Prints a grid and returns it. If the shortest cell is only 1 character long
  * then the grid will be printed without spaces between cells.
  * @template T

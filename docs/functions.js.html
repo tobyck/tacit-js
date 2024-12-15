@@ -1042,6 +1042,16 @@ grid_utils.antidiagonals &#x3D; grid &#x3D;&gt; {
 }
 
 /**
+ * Creates a grid of size &#x60;width&#x60; by &#x60;height&#x60; filled with &#x60;fill&#x60;. Fill defaults to &#x60;null&#x60;.
+ * @template T
+ * @param {number} width The width of the grid
+ * @param {number} height The height of the grid
+ * @param {T} [fill&#x3D;null] The value to fill the grid with
+ * @returns {T[][]}
+ */
+grid_utils.emptygrid &#x3D; (width, height, fill &#x3D; null) &#x3D;&gt; Array(height).fill().map(() &#x3D;&gt; Array(width).fill(fill))
+
+/**
  * Prints a grid and returns it. If the shortest cell is only 1 character long
  * then the grid will be printed without spaces between cells.
  * @template T

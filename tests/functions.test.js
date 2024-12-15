@@ -252,3 +252,10 @@ describe("iwhere", () => {
 	test(() => expect(f.iwhere([1, 2, 3, 4, 5], x => x % 2 === 0)).toEqual([1, 3]))
 	test(() => expect(f.iwhere([1, 2, 3, 4, 5, 6], (x, i) => x % 2 === 0 && i > 2)).toEqual([3, 5]))
 })
+
+describe("emptygrid", () => {
+	test("empty", () => expect(f.emptygrid(0, 0)).toEqual([]))
+	test("1x1", () => expect(f.emptygrid(1, 1)).toEqual([[null]]))
+	test("3x2", () => expect(f.emptygrid(3, 2)).toEqual([[null, null, null], [null, null, null]]))
+	test("filled with 0", () => expect(f.emptygrid(2, 3, 0)).toEqual([[0, 0], [0, 0], [0, 0]]))
+})
