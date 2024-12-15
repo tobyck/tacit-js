@@ -98,7 +98,7 @@ describe("alleq", () => {
 
 describe("sliding", () => {
 	test("empty", () => expect(f.sliding([], 3)).toEqual([]))
-	test("too short", () => expect(f.sliding([1, 2], 3)).toEqual([1, 2]))
+	test("too short", () => expect(f.sliding([1, 2], 3)).toEqual([]))
 	test("one window", () => expect(f.sliding([1, 2, 3], 3)).toEqual([[1, 2, 3]]))
 	test("multiple windows", () => expect(f.sliding([1, 2, 3, 4], 2)).toEqual([[1, 2], [2, 3], [3, 4]]))
 	test("wrapping", () => expect(f.sliding([1, 2, 3], 2, true)).toEqual([[1, 2], [2, 3], [3, 1]]))
@@ -147,7 +147,7 @@ describe("countol", () => {
 
 describe("deltas", () => {
 	test("empty", () => expect(f.deltas([])).toEqual([]))
-	test("one element", () => expect(f.deltas([1])).toEqual([0]))
+	test("one element", () => expect(f.deltas([1])).toEqual([]))
 	test("two elements", () => expect(f.deltas([1, 2])).toEqual([1]))
 	test("three elements", () => expect(f.deltas([1, 2, 4])).toEqual([1, 2]))
 	test("negative", () => expect(f.deltas([1, 2, -1])).toEqual([1, -3]))

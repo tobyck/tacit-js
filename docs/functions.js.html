@@ -65,7 +65,8 @@ type_checks.isstr &#x3D; tag({ keep_global: true }, x &#x3D;&gt; typeof x &#x3D;
  * @param {any} value Value to check
  * @returns {boolean}
  */
-type_checks.isarr &#x3D; tag({ keep_global: true }, Array.isArray)
+// Can&#x27;t use Array.isArray directly because the regex won&#x27;t pick up on it being niladic
+type_checks.isarr &#x3D; tag({ keep_global: true }, x &#x3D;&gt; Array.isArray(x))
 
 /** 
  * **[Global]** Checks if a value is a boolean
@@ -138,8 +139,10 @@ type_casts.int &#x3D; value &#x3D;&gt; parseInt(type_casts.num(value))
  * @param {any} value Value to cast
  */
 type_casts.str &#x3D; value &#x3D;&gt; {
-	const str &#x3D; value.toString()
+	const str &#x3D; value?.toString()
 
+	if (str &#x3D;&#x3D;&#x3D; null) return &quot;null&quot;
+	if (str &#x3D;&#x3D;&#x3D; undefined) return &quot;undefined&quot;
 	if (value instanceof Vec)
 		return &#x60;Vec(${value.x}, ${value.y})&#x60;
 	if (type_checks.isarr(value))
@@ -586,7 +589,7 @@ iter_utils.alleq &#x3D; iter &#x3D;&gt; {
  */
 iter_utils.sliding &#x3D; (iter, size &#x3D; 2, wrap &#x3D; false) &#x3D;&gt; {
 	const array &#x3D; [...iter]
-	if (array.length &amp;lt; size) return [array]
+	if (array.length &amp;lt; size) return []
 	const x &#x3D; wrap ? array.concat(array.slice(0, size - 1)) : array
 	return x.slice(0, -size + 1).map((_, i) &#x3D;&gt; x.slice(i, i + size))
 }

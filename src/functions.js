@@ -34,7 +34,8 @@ type_checks.isstr = tag({ keep_global: true }, x => typeof x === "string")
  * @param {any} value Value to check
  * @returns {boolean}
  */
-type_checks.isarr = tag({ keep_global: true }, Array.isArray)
+// Can't use Array.isArray directly because the regex won't pick up on it being niladic
+type_checks.isarr = tag({ keep_global: true }, x => Array.isArray(x))
 
 /** 
  * **[Global]** Checks if a value is a boolean
@@ -107,8 +108,10 @@ type_casts.int = value => parseInt(type_casts.num(value))
  * @param {any} value Value to cast
  */
 type_casts.str = value => {
-	const str = value.toString()
+	const str = value?.toString()
 
+	if (str === null) return "null"
+	if (str === undefined) return "undefined"
 	if (value instanceof Vec)
 		return `Vec(${value.x}, ${value.y})`
 	if (type_checks.isarr(value))
@@ -555,7 +558,7 @@ iter_utils.alleq = iter => {
  */
 iter_utils.sliding = (iter, size = 2, wrap = false) => {
 	const array = [...iter]
-	if (array.length < size) return [array]
+	if (array.length < size) return []
 	const x = wrap ? array.concat(array.slice(0, size - 1)) : array
 	return x.slice(0, -size + 1).map((_, i) => x.slice(i, i + size))
 }
