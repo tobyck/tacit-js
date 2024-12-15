@@ -278,3 +278,9 @@ describe("corners", () => {
 		expect(f.corners(shape)).toBe(14)
 	})
 })
+
+describe("seqs", () => {
+	test("empty", () => expect(f.seqs([])).toEqual([]))
+	test("single", () => expect(f.seqs([1])).toEqual([[1]]))
+	test("lots", () => expect(f.seqs([1, 22, 2, 2, 3, 3, 3, 4, 3, 1])).toEqual([[1], [22], [2, 2], [3, 3, 3], [4], [3], [1]]))
+})

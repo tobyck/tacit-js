@@ -788,6 +788,18 @@ iter_utils.iwhere = (iter, fn) => [...iter]
 	.filter(([value, index]) => fn(value, index, iter))
 	.map(([, index]) => index)
 
+iter_utils.seqs = iter => {
+	const ret = []
+	for (const value of iter) {
+		if (ret[ret.length - 1]?.[ret[ret.length - 1].length - 1] === value) {
+			ret[ret.length - 1].push(value)
+		} else {
+			ret.push([value])
+		}
+	}
+	return ret
+}
+
 /** @namespace */
 const string_utils = {}
 

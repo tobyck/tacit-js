@@ -819,6 +819,18 @@ iter_utils.iwhere &#x3D; (iter, fn) &#x3D;&gt; [...iter]
 	.filter(([value, index]) &#x3D;&gt; fn(value, index, iter))
 	.map(([, index]) &#x3D;&gt; index)
 
+iter_utils.seqs &#x3D; iter &#x3D;&gt; {
+	const ret &#x3D; []
+	for (const value of iter) {
+		if (ret[ret.length - 1]?.[ret[ret.length - 1].length - 1] &#x3D;&#x3D;&#x3D; value) {
+			ret[ret.length - 1].push(value)
+		} else {
+			ret.push([value])
+		}
+	}
+	return ret
+}
+
 /** @namespace */
 const string_utils &#x3D; {}
 
