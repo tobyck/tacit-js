@@ -107,12 +107,16 @@ type_casts.int = value => parseInt(type_casts.num(value))
  * @param {any} value Value to cast
  */
 type_casts.str = value => {
-	if (type_checks.isarr(value)) return value.join("")
-	if (type_checks.isobj(value)) {
-		const str = value.toString()
+	const str = value.toString()
+
+	if (value instanceof Vec)
+		return `Vec(${value.x}, ${value.y})`
+	if (type_checks.isarr(value))
+		return value.join("")
+	if (type_checks.isobj(value))
 		return str === "[object Object]" ? JSON.stringify(value) : str
-	}
-	return value.toString()
+
+	return str
 }
 
 /**
@@ -549,9 +553,9 @@ iter_utils.alleq = iter => {
  * @example [1, 2, 3, 4, 5].sliding(3) // [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
  * @example [1, 2, 3].sliding(2, true) // [[1, 2], [2, 3], [3, 1]]
  */
-iter_utils.sliding = (iter, size, wrap = false) => {
+iter_utils.sliding = (iter, size = 2, wrap = false) => {
 	const array = [...iter]
-	if (array.length < size) return array
+	if (array.length < size) return [array]
 	const x = wrap ? array.concat(array.slice(0, size - 1)) : array
 	return x.slice(0, -size + 1).map((_, i) => x.slice(i, i + size))
 }
@@ -740,8 +744,7 @@ iter_utils.none = (array, fn) => !array.some(fn)
 iter_utils.deltas = iter => {
 	const array = [...iter];
 
-	if (!array.length) return [];
-	if (array.length === 1) return [0];
+	if (array.length <= 1) return [];
 
 	const ret = [];
 	for (let i = 0; i < array.length - 1; i++) {

@@ -25,7 +25,8 @@ export class _Set extends Set {
 	}
 
 	delete(item) {
-		return super.delete(JSON.stringify(item))
+		super.delete(JSON.stringify(item))
+		return item
 	}
 
 	/**
@@ -89,6 +90,10 @@ export class _Set extends Set {
 			yield JSON.parse(item)
 		}
 	}
+
+	values() {
+		return super.values().map(JSON.parse)
+	}
 }
 
 /** Represents a 2D vector. */
@@ -100,6 +105,17 @@ export class Vec {
 	 * @returns {Vec}
 	 */
 	constructor(x, y) {
+		if (Array.isArray(x)) {
+			[x, y] = x
+		} if (typeof x === "object") {
+			y = x.y
+			x = x.x
+		}
+
+		if (typeof x !== "number" || typeof y !== "number") {
+			throw new TypeError(`Vec constructor must be given two numbers (not ${x} and ${y})`)
+		}
+
 		this.x = x
 		this.y = y
 	}
