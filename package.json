@@ -1,6 +1,6 @@
 {
 	"name": "@toby_ck/tacit-js",
-	"version": "0.2.1",
+	"version": "0.3.0",
 	"author": "Toby Connor-Kebbell",
 	"description": "Useful util functions and tacit programming capabilities",
 	"type": "module",
