@@ -1029,6 +1029,14 @@ grid_utils.gprint = grid => {
 	return grid
 }
 
+/**
+ * Alias for {@link grid_utils.gprint}
+ * @template T
+ * @param {T[][]} grid
+ * @returns {T[][]}
+ */
+grid_utils.gpr = grid_utils.gprint
+
 /** @namespace */
 const object_utils = {}
 
