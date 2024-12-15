@@ -1163,6 +1163,33 @@ misc_utils.len = value => value?.length ?? value?.size
  */
 misc_utils.wrap = tag({ keep_global: true }, value => [value])
 
+/**
+ * Finds the number of corners in an area
+ * @param {_Set<Vec>} area The area to find corners in
+ * @returns {number}
+ */
+misc_utils.corners = area => {
+	const xs = [...area].map(v => v.x)
+	const ys = [...area].map(v => v.y)
+
+	let corners = 0
+
+	for (let x = Math.min(...xs) - 1; x <= Math.max(...xs); x++) {
+		for (let y = Math.min(...ys) - 1; y <= Math.max(...ys); y++) {
+			const subgrid = [new Vec(x, y), new Vec(x + 1, y), new Vec(x, y + 1), new Vec(x + 1, y + 1)]
+			const in_area = subgrid.map(v => area.has(v))
+			const count_in_area = in_area.filter(x => x).length
+			if (count_in_area == 1 || count_in_area == 3) corners++
+			else if (
+				misc_utils.eq(in_area, [true, false, false, true]) ||
+				misc_utils.eq(in_area, [false, true, true, false])
+			) corners += 2
+		}
+	}
+
+	return corners
+}
+
 /** @namespace */
 const constructors = {}
 

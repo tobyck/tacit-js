@@ -259,3 +259,22 @@ describe("emptygrid", () => {
 	test("3x2", () => expect(f.emptygrid(3, 2)).toEqual([[null, null, null], [null, null, null]]))
 	test("filled with 0", () => expect(f.emptygrid(2, 3, 0)).toEqual([[0, 0], [0, 0], [0, 0]]))
 })
+
+describe("corners", () => {
+	const create_shape = str => f.S(f.vecswhere(f.grid(str.trim("\n")), cell => cell === "#"))
+
+	test("empty", () => expect(f.corners(create_shape(""))).toBe(0))
+	test("one cell", () => expect(f.corners(create_shape("#"))).toBe(4))
+	test("2x2 square", () => expect(f.corners(create_shape("##\n##"))).toBe(4))
+	test("2x4 rectangle", () => expect(f.corners(create_shape("####\n####"))).toBe(4))
+	test("L shape", () => expect(f.corners(create_shape(`#\n##`))).toBe(6))
+	test("funky shape", () => {
+		const shape = create_shape(`
+#######
+##...##
+#.#####
+#####..
+`)
+		expect(f.corners(shape)).toBe(14)
+	})
+})
