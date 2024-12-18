@@ -860,6 +860,24 @@ iter_utils.includes &#x3D; tag({ attach_to: [Array] }, (iter, value, start_index
  */
 iter_utils.incl &#x3D; iter_utils.includes
 
+/**
+ * Deep flattens an iterable
+ * @template T
+ * @param {Iterable.&amp;lt;T&gt;} iter The iterable to flatten
+ * @returns {T[]}
+ * @example [[1, [2]], [[[[3, [4, 5]]]]], 6].flat // [1, 2, 3, 4, 5, 6]
+ */
+iter_utils.flat &#x3D; iter &#x3D;&gt; [...iter].flat(Infinity)
+
+/**
+ * Flattens an iterable to a certain depth. Alias for the builtin [Array.flat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat).
+ * @template T
+ * @param {Iterable.&amp;lt;T&gt;} iter The iterable to flatten
+ * @param {number} [depth&#x3D;1] The depth to flatten to
+ * @returns {T[]}
+ */
+iter_utils.nflat &#x3D; (iter, depth &#x3D; 1) &#x3D;&gt; [...iter].flat(depth)
+
 /** @namespace */
 const string_utils &#x3D; {}
 
@@ -926,7 +944,18 @@ string_utils.nums &#x3D; str &#x3D;&gt; str.match(/\d+(\.\d+)?/g).map(type_casts
  */
 string_utils.chcode &#x3D; char &#x3D;&gt; char.charCodeAt(0)
 
+/**
+ * Converts a string to upper case
+ * @param {string} str The string to convert
+ * @returns {string}
+ */
 string_utils.upper &#x3D; str &#x3D;&gt; str.toUpperCase()
+
+/**
+ * Converts a string to lower case
+ * @param {string} str The string to convert
+ * @returns {string}
+ */
 string_utils.lower &#x3D; str &#x3D;&gt; str.toLowerCase()
 
 /** @namespace */

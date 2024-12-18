@@ -96,11 +96,14 @@
                     <dt><a href="iter_utils.html#.first">first(iter)</a></dt>
                     <dd>
                     </dd>
+                    <dt><a href="iter_utils.html#.firstn">firstn(iter, n)</a></dt>
+                    <dd>
+                    </dd>
                   </dl>
                 </div>
                 <div class="summary-column">
                   <dl class="dl-summary-callout">
-                    <dt><a href="iter_utils.html#.firstn">firstn(iter, n)</a></dt>
+                    <dt><a href="iter_utils.html#.flat">flat(iter)</a></dt>
                     <dd>
                     </dd>
                     <dt><a href="iter_utils.html#.for">for(iter, callback)</a></dt>
@@ -119,6 +122,9 @@
                     <dd>
                     </dd>
                     <dt><a href="iter_utils.html#.min">min(iter)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="iter_utils.html#.nflat">nflat(iter[, depth])</a></dt>
                     <dd>
                     </dd>
                     <dt><a href="iter_utils.html#.none">none(array, fn)</a></dt>
@@ -1066,6 +1072,52 @@
                 </dd>
               </dl>
               <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".flat"><span class="symbol-name">flat</span><span class="signature"><span class="signature-params">(iter)</span>&nbsp;&rarr; <span class="signature-returns"> Array of T</span></span></h3>
+              <p>Deep flattens an iterable</p>
+              <section>
+                <h4>
+                  Example
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>[[1, [2]], [[[[3, [4, 5]]]]], 6].flat // [1, 2, 3, 4, 5, 6]</code></pre>
+                </div>
+              </section>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to flatten</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of T</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
               <h3 id=".for"><span class="symbol-name">for</span><span class="signature"><span class="signature-params">(iter, callback)</span>&nbsp;&rarr; <span class="signature-returns"> Iterable containing T</span></span></h3>
               <p>Same as the built in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">Array.forEach</a></p>
               <section>
@@ -1344,6 +1396,59 @@
                 <dt>Returns</dt>
                 <dd>
                   <p><code>number</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".nflat"><span class="symbol-name">nflat</span><span class="signature"><span class="signature-params">(iter[, depth])</span>&nbsp;&rarr; <span class="signature-returns"> Array of T</span></span></h3>
+              <p>Flattens an iterable to a certain depth. Alias for the builtin <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat">Array.flat</a>.</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to flatten</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>depth</p>
+                      </td>
+                      <td>
+                        <p>number</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>The depth to flatten to</p>
+                        <p>Defaults to <code>1</code>.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Array of T</code> </p>
                 </dd>
               </dl>
               <div class="symbol-detail-labels"><span class="label label-static">static</span></div>

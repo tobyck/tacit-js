@@ -310,3 +310,19 @@ describe("lower", () => {
 	test("string", () => expect(f.lower("ABC")).toBe("abc"))
 	test("mixed", () => expect(f.lower("aBc")).toBe("abc"))
 })
+
+describe("flat", () => {
+	test("empty", () => expect(f.flat([])).toEqual([]))
+	test("nested empty", () => expect(f.flat([[[[]]]])).toEqual([]))
+	test("singleton", () => expect(f.flat([1])).toEqual([1]))
+	test("deep", () => expect(f.flat([[1, [2]], [[[[3, [4, 5]]]]], 6])).toEqual([1, 2, 3, 4, 5, 6]))
+	test("set", () => expect(f.flat(f.S([1, [2, [3]], 4]))).toEqual([1, 2, 3, 4]))
+})
+
+describe("nflat", () => {
+	test("empty", () => expect(f.nflat([], 2)).toEqual([]))
+	test("nested empty", () => expect(f.nflat([[[[]]]], 2)).toEqual([[]]))
+	test("singleton", () => expect(f.nflat([1], 2)).toEqual([1]))
+	test("deep", () => expect(f.nflat([[1, [2]], [[[[3, [4, 5]]]]], 6], 2)).toEqual([1, 2, [[3, [4, 5]]], 6]))
+	test("set", () => expect(f.nflat(f.S([1, [2, [3]], 4]))).toEqual([1, 2, [3], 4]))
+})
