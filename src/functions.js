@@ -895,6 +895,9 @@ string_utils.nums = str => str.match(/\d+(\.\d+)?/g).map(type_casts.num)
  */
 string_utils.chcode = char => char.charCodeAt(0)
 
+string_utils.upper = str => str.toUpperCase()
+string_utils.lower = str => str.toLowerCase()
+
 /** @namespace */
 const logic_utils = {}
 

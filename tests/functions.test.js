@@ -284,3 +284,29 @@ describe("seqs", () => {
 	test("single", () => expect(f.seqs([1])).toEqual([[1]]))
 	test("lots", () => expect(f.seqs([1, 22, 2, 2, 3, 3, 3, 4, 3, 1])).toEqual([[1], [22], [2, 2], [3, 3, 3], [4], [3], [1]]))
 })
+
+describe("includes", () => {
+	test("empty", () => expect(f.includes([], 123)).toBe(false))
+	test("single item", () => expect(f.includes([1], 1)).toBe(true))
+	test("array", () => expect(f.includes([1, [2, 3]], [2, 3])).toBe(true))
+	test("array (no match)", () => expect(f.includes([1, 2, 3], [2, 3])).toBe(false))
+	test("string match single char", () => expect(f.includes("abc", "b")).toBe(true))
+	test("string match substring", () => expect(f.includes("abcdef", "cdef")).toBe(true))
+	test("set", () => expect(f.includes(f.S([1, 2, 3]), 2)).toBe(true))
+	test("num in vec", () => expect(f.includes(f.V(1, 2), 2)).toBe(true))
+	test("vec in array", () => expect(f.includes([f.V(1, 2), f.V(3, 4)], f.V(3, 4))).toBe(true))
+})
+
+describe("upper", () => {
+	test("empty", () => expect(f.upper("")).toBe(""))
+	test("single char", () => expect(f.upper("a")).toBe("A"))
+	test("string", () => expect(f.upper("abc")).toBe("ABC"))
+	test("mixed", () => expect(f.upper("aBc")).toBe("ABC"))
+})
+
+describe("lower", () => {
+	test("empty", () => expect(f.lower("")).toBe(""))
+	test("single char", () => expect(f.lower("A")).toBe("a"))
+	test("string", () => expect(f.lower("ABC")).toBe("abc"))
+	test("mixed", () => expect(f.lower("aBc")).toBe("abc"))
+})
