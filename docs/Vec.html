@@ -83,14 +83,20 @@
                     <dt><a href="Vec.html#div">div(factor)</a></dt>
                     <dd>
                     </dd>
+                    <dt><a href="Vec.html#down">down()</a></dt>
+                    <dd>
+                    </dd>
                   </dl>
                 </div>
                 <div class="summary-column">
                   <dl class="dl-summary-callout">
-                    <dt><a href="Vec.html#down">down([n])</a></dt>
+                    <dt><a href="Vec.html#downn">downn(n)</a></dt>
                     <dd>
                     </dd>
-                    <dt><a href="Vec.html#left">left([n])</a></dt>
+                    <dt><a href="Vec.html#left">left()</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="Vec.html#leftn">leftn(n)</a></dt>
                     <dd>
                     </dd>
                     <dt><a href="Vec.html#mul">mul(factor)</a></dt>
@@ -103,13 +109,19 @@
                 </div>
                 <div class="summary-column">
                   <dl class="dl-summary-callout">
-                    <dt><a href="Vec.html#right">right([n])</a></dt>
+                    <dt><a href="Vec.html#right">right()</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="Vec.html#rightn">rightn(n)</a></dt>
                     <dd>
                     </dd>
                     <dt><a href="Vec.html#sub">sub(other)</a></dt>
                     <dd>
                     </dd>
-                    <dt><a href="Vec.html#up">up([n])</a></dt>
+                    <dt><a href="Vec.html#up">up()</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="Vec.html#upn">upn(n)</a></dt>
                     <dd>
                     </dd>
                   </dl>
@@ -280,7 +292,17 @@
                   </p>
                 </dd>
               </dl>
-              <h3 id="down"><span class="symbol-name">down</span><span class="signature"><span class="signature-params">([n])</span>&nbsp;&rarr; <span class="signature-returns"> <a href="Vec.html">Vec</a></span></span></h3>
+              <h3 id="down"><span class="symbol-name">down</span><span class="signature"><span class="signature-params">()</span>&nbsp;&rarr; <span class="signature-returns"> <a href="Vec.html">Vec</a></span></span></h3>
+              <p>Moves the vector down by 1 unit using Vec.downn</p>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="Vec.html">Vec</a></code> 
+                  <p>The new vector</p>
+                  </p>
+                </dd>
+              </dl>
+              <h3 id="downn"><span class="symbol-name">downn</span><span class="signature"><span class="signature-params">(n)</span>&nbsp;&rarr; <span class="signature-returns"> <a href="Vec.html">Vec</a></span></span></h3>
               <p>Moves the vector down by <code>n</code> units (increases <code>y</code>), in place.</p>
               <section>
                 <h4>Parameter</h4>
@@ -302,11 +324,10 @@
                         <p>number</p>
                       </td>
                       <td>
-                        <p>Yes</p>
+                        <p>&nbsp;</p>
                       </td>
                       <td>
                         <p>The number of units to move</p>
-                        <p>Defaults to <code>1</code>.</p>
                       </td>
                     </tr>
                   </tbody>
@@ -320,7 +341,17 @@
                   </p>
                 </dd>
               </dl>
-              <h3 id="left"><span class="symbol-name">left</span><span class="signature"><span class="signature-params">([n])</span>&nbsp;&rarr; <span class="signature-returns"> <a href="Vec.html">Vec</a></span></span></h3>
+              <h3 id="left"><span class="symbol-name">left</span><span class="signature"><span class="signature-params">()</span>&nbsp;&rarr; <span class="signature-returns"> <a href="Vec.html">Vec</a></span></span></h3>
+              <p>Moves the vector left by 1 unit using Vec.leftn</p>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="Vec.html">Vec</a></code> 
+                  <p>The new vector</p>
+                  </p>
+                </dd>
+              </dl>
+              <h3 id="leftn"><span class="symbol-name">leftn</span><span class="signature"><span class="signature-params">(n)</span>&nbsp;&rarr; <span class="signature-returns"> <a href="Vec.html">Vec</a></span></span></h3>
               <p>Moves the vector left by <code>n</code> units (decreases <code>x</code>), in place.</p>
               <section>
                 <h4>Parameter</h4>
@@ -342,11 +373,10 @@
                         <p>number</p>
                       </td>
                       <td>
-                        <p>Yes</p>
+                        <p>&nbsp;</p>
                       </td>
                       <td>
                         <p>The number of units to move</p>
-                        <p>Defaults to <code>1</code>.</p>
                       </td>
                     </tr>
                   </tbody>
@@ -436,7 +466,17 @@
                   <p><code>T</code> </p>
                 </dd>
               </dl>
-              <h3 id="right"><span class="symbol-name">right</span><span class="signature"><span class="signature-params">([n])</span>&nbsp;&rarr; <span class="signature-returns"> <a href="Vec.html">Vec</a></span></span></h3>
+              <h3 id="right"><span class="symbol-name">right</span><span class="signature"><span class="signature-params">()</span>&nbsp;&rarr; <span class="signature-returns"> <a href="Vec.html">Vec</a></span></span></h3>
+              <p>Moves the vector right by 1 unit using Vec.rightn</p>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="Vec.html">Vec</a></code> 
+                  <p>The new vector</p>
+                  </p>
+                </dd>
+              </dl>
+              <h3 id="rightn"><span class="symbol-name">rightn</span><span class="signature"><span class="signature-params">(n)</span>&nbsp;&rarr; <span class="signature-returns"> <a href="Vec.html">Vec</a></span></span></h3>
               <p>Moves the vector right by <code>n</code> units (increases <code>x</code>), in place.</p>
               <section>
                 <h4>Parameter</h4>
@@ -458,11 +498,10 @@
                         <p>number</p>
                       </td>
                       <td>
-                        <p>Yes</p>
+                        <p>&nbsp;</p>
                       </td>
                       <td>
                         <p>The number of units to move</p>
-                        <p>Defaults to <code>1</code>.</p>
                       </td>
                     </tr>
                   </tbody>
@@ -515,7 +554,17 @@
                   </p>
                 </dd>
               </dl>
-              <h3 id="up"><span class="symbol-name">up</span><span class="signature"><span class="signature-params">([n])</span>&nbsp;&rarr; <span class="signature-returns"> <a href="Vec.html">Vec</a></span></span></h3>
+              <h3 id="up"><span class="symbol-name">up</span><span class="signature"><span class="signature-params">()</span>&nbsp;&rarr; <span class="signature-returns"> <a href="Vec.html">Vec</a></span></span></h3>
+              <p>Moves the vector up by 1 unit using Vec.upn</p>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="Vec.html">Vec</a></code> 
+                  <p>The new vector</p>
+                  </p>
+                </dd>
+              </dl>
+              <h3 id="upn"><span class="symbol-name">upn</span><span class="signature"><span class="signature-params">(n)</span>&nbsp;&rarr; <span class="signature-returns"> <a href="Vec.html">Vec</a></span></span></h3>
               <p>Moves the vector up by <code>n</code> units (decreases <code>y</code>), in place.</p>
               <section>
                 <h4>Parameter</h4>
@@ -537,11 +586,10 @@
                         <p>number</p>
                       </td>
                       <td>
-                        <p>Yes</p>
+                        <p>&nbsp;</p>
                       </td>
                       <td>
                         <p>The number of units to move</p>
-                        <p>Defaults to <code>1</code>.</p>
                       </td>
                     </tr>
                   </tbody>

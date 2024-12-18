@@ -153,31 +153,55 @@ export class Vec {
 
 	/**
 	 * Moves the vector up by &#x60;n&#x60; units (decreases &#x60;y&#x60;), in place.
-	 * @param {number} [n&#x3D;1] The number of units to move
+	 * @param {number} n The number of units to move
 	 * @returns {Vec} The new vector
 	 */
-	up(n &#x3D; 1) { this.y -&#x3D; n; return this }
-
+	upn(n) { this.y -&#x3D; n; return this }
+	
 	/**
 	 * Moves the vector down by &#x60;n&#x60; units (increases &#x60;y&#x60;), in place.
-	 * @param {number} [n&#x3D;1] The number of units to move
+	 * @param {number} n The number of units to move
 	 * @returns {Vec} The new vector
 	 */
-	down(n &#x3D; 1) { this.y +&#x3D; n; return this }
+	downn(n) { this.y +&#x3D; n; return this }
 
 	/**
 	 * Moves the vector left by &#x60;n&#x60; units (decreases &#x60;x&#x60;), in place.
-	 * @param {number} [n&#x3D;1] The number of units to move
+	 * @param {number} n The number of units to move
 	 * @returns {Vec} The new vector
 	 */
-	left(n &#x3D; 1) { this.x -&#x3D; n; return this }
+	leftn(n) { this.x -&#x3D; n; return this }
 
 	/**
 	 * Moves the vector right by &#x60;n&#x60; units (increases &#x60;x&#x60;), in place.
-	 * @param {number} [n&#x3D;1] The number of units to move
+	 * @param {number} n The number of units to move
 	 * @returns {Vec} The new vector
 	 */
-	right(n &#x3D; 1) { this.x +&#x3D; n; return this }
+	rightn(n) { this.x +&#x3D; n; return this }
+
+	/**
+	 * Moves the vector up by 1 unit using {@link Vec.upn}
+	 * @returns {Vec} The new vector
+	 */
+	up() { return this.upn(1) }
+
+	/**
+	 * Moves the vector down by 1 unit using {@link Vec.downn}
+	 * @returns {Vec} The new vector
+	 */
+	down() { return this.downn(1) }
+
+	/**
+	 * Moves the vector left by 1 unit using {@link Vec.leftn}
+	 * @returns {Vec} The new vector
+	 */
+	left() { return this.leftn(1) }
+
+	/**
+	 * Moves the vector right by 1 unit using {@link Vec.rightn}
+	 * @returns {Vec} The new vector
+	 */
+	right() { return this.rightn(1) }
 
 	/**
 	 * Add another vector to this one

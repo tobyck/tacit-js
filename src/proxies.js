@@ -66,8 +66,6 @@ const call_link = (chain_arg, result, func_name, flags = "", args = []) => {
 
 	let func
 
-	console.log(func_name, this_arg, args)
-
 	// if this_arg has the function as a method, use that (but convert it to normal
 	// function in case it needs to be vectorised)
 	if (has_method(this_arg, func_name))
