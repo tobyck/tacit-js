@@ -806,6 +806,29 @@ iter_utils.seqs = iter => {
 	return ret
 }
 
+/**
+ * Checks if an iterable includes a value. Uses {@link iter_utils.count}.
+ * @template T
+ * @param {Iterable.<T>} iter The iterable to check
+ * @param {T} value The value to check for
+ * @param {number} [start_index=0] The index to start checking from
+ * @returns {boolean}
+ */
+iter_utils.includes = tag({ attach_to: [Array] }, (iter, value, start_index) => {
+	if (typeof iter === "string") return iter.includes(value, start_index)
+	return [...iter].filter(x => misc_utils.eq(x, value)).length > 0
+})
+
+
+/** Alias for {@link iter_utils.includes}
+ * @template T
+ * @param {Iterable.<T>} iter The iterable to check
+ * @param {T} value The value to check for
+ * @param {number} [start_index=0] The index to start checking from
+ * @returns {boolean}
+ */
+iter_utils.incl = iter_utils.includes
+
 /** @namespace */
 const string_utils = {}
 

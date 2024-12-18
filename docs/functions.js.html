@@ -837,6 +837,29 @@ iter_utils.seqs &#x3D; iter &#x3D;&gt; {
 	return ret
 }
 
+/**
+ * Checks if an iterable includes a value. Uses {@link iter_utils.count}.
+ * @template T
+ * @param {Iterable.&amp;lt;T&gt;} iter The iterable to check
+ * @param {T} value The value to check for
+ * @param {number} [start_index&#x3D;0] The index to start checking from
+ * @returns {boolean}
+ */
+iter_utils.includes &#x3D; tag({ attach_to: [Array] }, (iter, value, start_index) &#x3D;&gt; {
+	if (typeof iter &#x3D;&#x3D;&#x3D; &quot;string&quot;) return iter.includes(value, start_index)
+	return [...iter].filter(x &#x3D;&gt; misc_utils.eq(x, value)).length &gt; 0
+})
+
+
+/** Alias for {@link iter_utils.includes}
+ * @template T
+ * @param {Iterable.&amp;lt;T&gt;} iter The iterable to check
+ * @param {T} value The value to check for
+ * @param {number} [start_index&#x3D;0] The index to start checking from
+ * @returns {boolean}
+ */
+iter_utils.incl &#x3D; iter_utils.includes
+
 /** @namespace */
 const string_utils &#x3D; {}
 
