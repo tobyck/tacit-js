@@ -1029,14 +1029,18 @@ grid_utils.antidiagonals = grid => {
 }
 
 /**
- * Creates a grid of size `width` by `height` filled with `fill`. Fill defaults to `null`.
+ * **[Global]** Creates a grid of size `width` by `height` filled with `fill`.
+ * Fill defaults to `null`.
  * @template T
  * @param {number} width The width of the grid
  * @param {number} height The height of the grid
  * @param {T} [fill=null] The value to fill the grid with
  * @returns {T[][]}
  */
-grid_utils.emptygrid = (width, height, fill = null) => Array(height).fill().map(() => Array(width).fill(fill))
+grid_utils.emptygrid = tag(
+	{ keep_global: true },
+	(width, height, fill = null) => Array(height).fill().map(() => Array(width).fill(fill))
+)
 
 /**
  * **[Global]** Prints a grid and returns it. If the shortest cell is only 1 character long
@@ -1173,13 +1177,13 @@ misc_utils.pr = value => misc_utils.print(value)
 misc_utils.len = value => value?.length ?? value?.size
 
 /**
- * **[Global]** Wraps a value in a singleton list
+ * Wraps a value in a singleton list
  * @function
  * @template T
  * @param {T} value Value to wrap
  * @returns {T[]}
  */
-misc_utils.wrap = tag({ keep_global: true }, value => [value])
+misc_utils.wrap = value => [value]
 
 /**
  * Finds the number of corners in an area
