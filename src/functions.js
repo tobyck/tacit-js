@@ -788,6 +788,12 @@ iter_utils.iwhere = (iter, fn) => [...iter]
 	.filter(([value, index]) => fn(value, index, iter))
 	.map(([, index]) => index)
 
+/**
+ * Returns a list of sublists containing consecutive elements of `iter`
+ * @template T
+ * @param {Iterable.<T>} iter The iterable to group
+ * @returns {T[][]}
+ */
 iter_utils.seqs = iter => {
 	const ret = []
 	for (const value of iter) {
@@ -1033,13 +1039,14 @@ grid_utils.antidiagonals = grid => {
 grid_utils.emptygrid = (width, height, fill = null) => Array(height).fill().map(() => Array(width).fill(fill))
 
 /**
- * Prints a grid and returns it. If the shortest cell is only 1 character long
+ * **[Global]** Prints a grid and returns it. If the shortest cell is only 1 character long
  * then the grid will be printed without spaces between cells.
+ * @function
  * @template T
  * @param {T[][]} grid
  * @returns {T[][]}
  */
-grid_utils.gprint = grid => {
+grid_utils.gprint = tag({ keep_global: true }, grid => {
 	const longest_cell = Math.max(...grid.flatMap(
 		row => row.map(cell => cell.toString().length)
 	))
@@ -1049,7 +1056,7 @@ grid_utils.gprint = grid => {
 	).join(longest_cell > 1 ? " " : "")).join("\n"))
 
 	return grid
-}
+})
 
 /**
  * Alias for {@link grid_utils.gprint}
@@ -1057,7 +1064,7 @@ grid_utils.gprint = grid => {
  * @param {T[][]} grid
  * @returns {T[][]}
  */
-grid_utils.gpr = grid_utils.gprint
+grid_utils.gpr = grid => grid_utils.gprint(grid)
 
 /** @namespace */
 const object_utils = {}
@@ -1151,12 +1158,11 @@ misc_utils.print = tag({ keep_global: true }, (...values) => {
 
 /**
  * **[Global]** Same as `misc_utils.print` but niladic (so that it becomes a getter)
- * @function
  * @template T
  * @param {T} value Value to print
  * @returns {T}
  */
-misc_utils.pr = value => print(value)
+misc_utils.pr = value => misc_utils.print(value)
 
 /**
  * **[Global]** Tries to get the length property of `value` otherwise tries to get `size`

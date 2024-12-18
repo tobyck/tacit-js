@@ -1,12 +1,12 @@
 import functions from "./functions.js"
-import { vectorise } from "./helpers.js"
+import { vectorise, has_method } from "./helpers.js"
 import { is_niladic_method_map } from "./lib.js"
 
 // applies a proxy to a function that makes any property access or call do
 // nothing, and simply build up a list of operations to do once it's called
 export const chain_proxy = func => new Proxy(func, {
 	get(target, prop) {
-		if (prop === "links") return target[prop] // for debugging
+		if (prop === "links") return target.links // for debugging
 		// we can use this to identify tacit chains
 		if (prop === "symbol") return Symbol.for("chain_proxy")
 
@@ -18,9 +18,11 @@ export const chain_proxy = func => new Proxy(func, {
 	apply(target, _, args) {
 		const last_link = target.links.at(-1)
 
+		// console.log(typeof last_link === "object", is_niladic_method_map[last_link], last_link === "it")
+
 		if (!last_link) return args[0]
 		// only evaluate if the last link is a function, a nilad or `it`
-		else if (typeof last_link === "object" || is_niladic_method_map[last_link] || last_link === "it")
+		else if (typeof last_link === "object" || is_niladic_method_map[last_link] === true || last_link === "it")
 			return evaluate_chain(target.links)(args[0])
 
 		// otherwise modify the last link to be a function call
@@ -64,13 +66,14 @@ const call_link = (chain_arg, result, func_name, flags = "", args = []) => {
 
 	let func
 
+	console.log(func_name, this_arg, args)
+
 	// if this_arg has the function as a method, use that (but convert it to normal
 	// function in case it needs to be vectorised)
-	if (typeof this_arg?.[func_name] === "function")
+	if (has_method(this_arg, func_name))
 		func = (...args) => args[0][func_name](...args.slice(1))
-
 	// otherwise try to use a util function directly from functions.js
-	else if (typeof functions?.[func_name] === "function") func = functions[func_name]
+	else if (has_method(functions, func_name)) func = functions[func_name]
 
 	if (func) {
 		if (should_vectorise) func = vectorise(func)
@@ -86,9 +89,10 @@ const evaluate_chain = links => chain_arg => links.reduce((result, link) => {
 		try {
 			return call_link(chain_arg, result, ...link.split("$"))
 		} catch (_) {
-			if (result[link] === undefined)
+			const prop = result[link]
+			if (prop === undefined)
 				throw new Error(`Error while evaluating chain: ${typeof result} "${result}" has no property \`${link}\``)
-			return result[link]
+			return prop
 		}
 	} else {
 		return call_link(chain_arg, result, link.func_name, link.flags, link.args)
