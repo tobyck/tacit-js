@@ -326,3 +326,18 @@ describe("nflat", () => {
 	test("deep", () => expect(f.nflat([[1, [2]], [[[[3, [4, 5]]]]], 6], 2)).toEqual([1, 2, [[3, [4, 5]]], 6]))
 	test("set", () => expect(f.nflat(f.S([1, [2, [3]], 4]))).toEqual([1, 2, [3], 4]))
 })
+
+describe("gset", () => {
+	test("normal", () => {
+		const grid = f.grid(`ab\ncd`)
+		expect(f.gset(grid, f.V(0, 1), "z")).toEqual(f.grid(`ab\nzd`))
+		expect(grid).toEqual(f.grid(`ab\nzd`))
+	})
+
+	test("out of bounds", () => {
+		const grid = f.grid(`ab\ncd`)
+		f.gset(grid, f.V(0, 2), "z")
+		f.gset(grid, f.V(1, 2), "z")
+		expect(grid).toEqual(f.grid(`ab\ncd\nzz`))
+	})
+})

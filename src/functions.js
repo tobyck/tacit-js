@@ -1125,6 +1125,21 @@ grid_utils.gprint = tag({ keep_global: true }, grid => {
  */
 grid_utils.gpr = grid => grid_utils.gprint(grid)
 
+/**
+ * Sets value at the given vector in a grid. If the cell doesn't exist, it will be created.
+ * @template T
+ * @param {T[][]} grid The grid to set the value in
+ * @param {Vec} vec The vector to set the value at
+ * @param {T} value The value to set
+ * @returns {T[][]} The modified grid
+ */
+grid_utils.gset = (grid, vec, value) => {
+	const row = grid[vec.y]
+	if (!row) grid[vec.y] = []
+	grid[vec.y][vec.x] = value
+	return grid
+}
+
 /** @namespace */
 const object_utils = {}
 
