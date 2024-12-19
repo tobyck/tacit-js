@@ -1366,6 +1366,13 @@ misc_utils.corners &#x3D; area &#x3D;&gt; {
 	return corners
 }
 
+/**
+ * **[Global]** Exits the program (alias for [process.exit](https://nodejs.org/api/process.html#process_process_exit_code))
+ * @param {number|string} [exit_code&#x3D;0]
+ * @returns {void}
+ */
+misc_utils.exit &#x3D; tag({ keep_global: true }, (exit_code &#x3D; process.exitCode ?? 0) &#x3D;&gt; process.exit(exit_code))
+
 /** @namespace */
 const constructors &#x3D; {}
 
