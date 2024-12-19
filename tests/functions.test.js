@@ -371,3 +371,12 @@ describe("max", () => {
 	test("single", () => expect(f.max([1])).toBe(1))
 	test("multiple", () => expect(f.max([2, 9, 1, -9, 10])).toBe(10))
 })
+
+describe("inrect", () => {
+	test("top left", () => expect(f.V(0, 0).inrect(f.V(0, 0), f.V(1, 1))).toEqual(true))
+	test("top right", () => expect(f.V(1, 1).inrect(f.V(0, 0), f.V(1, 1))).toEqual(true))
+	test("not in", () => expect(f.V(1, 2).inrect(f.V(0, 0), f.V(1, 1))).toEqual(false))
+	test("single vec arg", () => expect(f.V(1, 1).inrect(f.V(1, 1))).toEqual(true))
+	test("single num arg", () => expect(f.V(1, 1).inrect(2)).toEqual(true))
+	test("single num arg (not in)", () => expect(f.V(1, 1).inrect(1)).toEqual(false))
+})

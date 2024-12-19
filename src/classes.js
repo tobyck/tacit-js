@@ -221,6 +221,17 @@ export class Vec {
 		]
 	}
 
+	inrect(a, b) {
+		if (b === undefined) {
+			b = a
+			a = new Vec(0, 0)
+		}
+
+		if (typeof b === "number") b = new Vec(b - 1, b - 1)
+
+		return this.x >= a.x && this.x <= b.x && this.y >= a.y && this.y <= b.y
+	}
+
 	/**
 	 * Gets the cell at this vector on `grid`
 	 * @template T

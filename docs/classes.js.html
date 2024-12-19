@@ -252,6 +252,17 @@ export class Vec {
 		]
 	}
 
+	inrect(a, b) {
+		if (b &#x3D;&#x3D;&#x3D; undefined) {
+			b &#x3D; a
+			a &#x3D; new Vec(0, 0)
+		}
+
+		if (typeof b &#x3D;&#x3D;&#x3D; &quot;number&quot;) b &#x3D; new Vec(b - 1, b - 1)
+
+		return this.x &gt;&#x3D; a.x &amp;amp;&amp;amp; this.x &amp;lt;&#x3D; b.x &amp;amp;&amp;amp; this.y &gt;&#x3D; a.y &amp;amp;&amp;amp; this.y &amp;lt;&#x3D; b.y
+	}
+
 	/**
 	 * Gets the cell at this vector on &#x60;grid&#x60;
 	 * @template T
