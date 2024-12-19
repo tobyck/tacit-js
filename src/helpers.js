@@ -16,8 +16,12 @@ export const has_method = (object, method_name) => object != undefined
 	&& (typeof Object.getOwnPropertyDescriptor(Object.getPrototypeOf(object), method_name)?.value === "function"
 	|| typeof Object.getOwnPropertyDescriptor(Object.prototype, method_name)?.value === "function")
 
-export const is_monadic = func => !!func?.toString().match(/^([\w\$_]+\s*)?\(\s*[\w\$_]+\s*\)|^\(?\s*[\w\$_]+\s*\)?\s*=>/)
-export const is_niladic = func => !!func?.toString().match(/^([\w\$_]+\s*)?\(\s*\)/)
+// this also matches functions which take a single optional arg
+export const is_monadic = func => !!func?.toString()
+	.match(/^([\w\$_]+\s*)?\(\s*[\w\$_]+\s*(\=.+?)\)|^\(?\s*[\w\$_]+\s*(\=.+?)?\)?\s*=>/)
+
+export const is_niladic = func => !!func?.toString()
+	.match(/^([\w\$_]+\s*)?\(\s*\)/)
 
 export const builtin_types = [Number, String, Array, Boolean, Object]
 export const custom_types = [_Set, Vec]
