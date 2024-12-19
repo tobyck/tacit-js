@@ -84,16 +84,22 @@
                     <dt><a href="math_utils.html#.lte">lte(a, b)</a></dt>
                     <dd>
                     </dd>
-                    <dt><a href="math_utils.html#.mod">mod(a, b)</a></dt>
+                    <dt><a href="math_utils.html#.max">max(iter)</a></dt>
                     <dd>
                     </dd>
-                    <dt><a href="math_utils.html#.mul">mul(a, b)</a></dt>
+                    <dt><a href="math_utils.html#.min">min(iter)</a></dt>
                     <dd>
                     </dd>
                   </dl>
                 </div>
                 <div class="summary-column">
                   <dl class="dl-summary-callout">
+                    <dt><a href="math_utils.html#.mod">mod(a, b)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="math_utils.html#.mul">mul(a, b)</a></dt>
+                    <dd>
+                    </dd>
                     <dt><a href="math_utils.html#.odd">odd(n)</a></dt>
                     <dd>
                     </dd>
@@ -805,6 +811,98 @@
                 <dt>Returns</dt>
                 <dd>
                   <p><code>boolean</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".max"><span class="symbol-name">max</span><span class="signature"><span class="signature-params">(iter)</span>&nbsp;&rarr; <span class="signature-returns"> number</span></span></h3>
+              <p>Calculates the maximum of an iterable using the builtin <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max">Math.max</a></p>
+              <section>
+                <h4>
+                  Example
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>max([2, 1, 3]) // 3</code></pre>
+                </div>
+              </section>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing any type</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to find the maximum of</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>number</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".min"><span class="symbol-name">min</span><span class="signature"><span class="signature-params">(iter)</span>&nbsp;&rarr; <span class="signature-returns"> number</span></span></h3>
+              <p>Calculates the minimum of an iterable using the builtin <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min">Math.min</a></p>
+              <section>
+                <h4>
+                  Example
+                </h4>
+                <div>
+                  <pre class="prettyprint"><code>min([2, 1, 3]) // 1</code></pre>
+                </div>
+              </section>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iter</p>
+                      </td>
+                      <td>
+                        <p>Iterable containing any type</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The iterable to find the minimum of</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>number</code> </p>
                 </dd>
               </dl>
               <div class="symbol-detail-labels"><span class="label label-static">static</span></div>

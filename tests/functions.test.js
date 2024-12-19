@@ -359,3 +359,15 @@ describe("gfind", () => {
 		f.gfind([[1, 2], [3, 4]], (c, v, g) => g[v.y][v.x + 1] === c + 1)
 	).toEqual(1))
 })
+
+describe("min", () => {
+	test("empty", () => expect(f.min([])).toBe(Infinity))
+	test("single", () => expect(f.min([1])).toBe(1))
+	test("multiple", () => expect(f.min([2, 9, 1, -9, 10])).toBe(-9))
+})
+
+describe("max", () => {
+	test("empty", () => expect(f.max([])).toBe(-Infinity))
+	test("single", () => expect(f.max([1])).toBe(1))
+	test("multiple", () => expect(f.max([2, 9, 1, -9, 10])).toBe(10))
+})

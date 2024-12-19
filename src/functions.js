@@ -326,6 +326,23 @@ math_utils.clamp = (n, min, max) => Math.min(Math.max(n, min), max)
 math_utils.inrange = (n, min, max) => n >= min && n <= max
 
 /**
+ * Calculates the minimum of an iterable using the builtin [Math.min](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min)
+ * @param {Iterable.<*>} iter The iterable to find the minimum of
+ * @returns {number}
+ * @example min([2, 1, 3]) // 1
+ */
+math_utils.min = iter => Math.min(...iter)
+
+
+/**
+ * Calculates the maximum of an iterable using the builtin [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max)
+ * @param {Iterable.<*>} iter The iterable to find the maximum of
+ * @returns {number}
+ * @example max([2, 1, 3]) // 3
+ */
+math_utils.max = iter => Math.max(...iter)
+
+/**
  * Functions which operate on iterable types
  * @namespace
  */

@@ -357,6 +357,23 @@ math_utils.clamp &#x3D; (n, min, max) &#x3D;&gt; Math.min(Math.max(n, min), max)
 math_utils.inrange &#x3D; (n, min, max) &#x3D;&gt; n &gt;&#x3D; min &amp;amp;&amp;amp; n &amp;lt;&#x3D; max
 
 /**
+ * Calculates the minimum of an iterable using the builtin [Math.min](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min)
+ * @param {Iterable.&amp;lt;*&gt;} iter The iterable to find the minimum of
+ * @returns {number}
+ * @example min([2, 1, 3]) // 1
+ */
+math_utils.min &#x3D; iter &#x3D;&gt; Math.min(...iter)
+
+
+/**
+ * Calculates the maximum of an iterable using the builtin [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max)
+ * @param {Iterable.&amp;lt;*&gt;} iter The iterable to find the maximum of
+ * @returns {number}
+ * @example max([2, 1, 3]) // 3
+ */
+math_utils.max &#x3D; iter &#x3D;&gt; Math.max(...iter)
+
+/**
  * Functions which operate on iterable types
  * @namespace
  */
