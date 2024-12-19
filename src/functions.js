@@ -1158,6 +1158,24 @@ grid_utils.vecwhere = (grid, fn) => {
 	return null
 }
 
+/**
+ * Returns the first cell in a grid (searching top to bottom, left to right)
+ * where the function `fn` is truthy for that cell. `fn` also receives the
+ * position of each cell and a reference to the grid.
+ * @template T
+ * @param {T[][]} grid The grid to search
+ * @param {function(T, Vec, T[][]): boolean} fn The function to search with
+ * @returns {T}
+ */
+grid_utils.gfind = (grid, fn) => {
+	for (let y = 0; y < grid.length; y++) {
+		for (let x = 0; x < grid[y].length; x++) {
+			if (fn(grid[y][x], new Vec(x, y), grid)) return grid[y][x]
+		}
+	}
+	return null
+}
+
 /** @namespace */
 const object_utils = {}
 

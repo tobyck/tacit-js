@@ -343,10 +343,19 @@ describe("gset", () => {
 })
 
 describe("vecwhere", () => {
-	test("empty", () => expect(f.vecwhere([], () => true)).toEqual(null))
+	test("empty", () => expect(f.vecwhere([], () => true)).toBeNull())
 	test("single cell", () => expect(f.vecwhere([[1]], x => x === 1)).toEqual(f.V(0, 0)))
 	test("3x2 grid", () => expect(f.vecwhere([[1, 2, 3], [4, 5, 6]], (c, v) => c % 2 === 0 && v.y > 0)).toEqual(f.V(0, 1)))
 	test("using third arg in callback", () => expect(
 		f.vecwhere([[1, 2], [3, 4]], (c, v, g) => g[v.y][v.x + 1] === c + 1)
 	).toEqual(f.V(0, 0)))
+})
+
+describe("gfind", () => {
+	test("empty", () => expect(f.gfind([], () => true)).toBeNull())
+	test("single cell", () => expect(f.gfind([[1]], x => x === 1)).toEqual(1))
+	test("3x2 grid", () => expect(f.gfind([[1, 2, 3], [4, 5, 6]], (c, v) => c % 2 === 0 && v.y > 0)).toEqual(4))
+	test("using third arg in callback", () => expect(
+		f.gfind([[1, 2], [3, 4]], (c, v, g) => g[v.y][v.x + 1] === c + 1)
+	).toEqual(1))
 })

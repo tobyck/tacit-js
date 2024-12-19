@@ -63,16 +63,19 @@
                     <dt><a href="grid_utils.html#.digitgrid">digitgrid(str)</a></dt>
                     <dd>
                     </dd>
-                    <dt><a href="grid_utils.html#.gmap">gmap(grid, fn)</a></dt>
+                    <dt><a href="grid_utils.html#.gfind">gfind(grid, fn)</a></dt>
                     <dd>
                     </dd>
-                    <dt><a href="grid_utils.html#.gpr">gpr(grid)</a></dt>
+                    <dt><a href="grid_utils.html#.gmap">gmap(grid, fn)</a></dt>
                     <dd>
                     </dd>
                   </dl>
                 </div>
                 <div class="summary-column">
                   <dl class="dl-summary-callout">
+                    <dt><a href="grid_utils.html#.gpr">gpr(grid)</a></dt>
+                    <dd>
+                    </dd>
                     <dt><a href="grid_utils.html#.gprint">gprint(grid)</a></dt>
                     <dd>
                     </dd>
@@ -85,13 +88,13 @@
                     <dt><a href="grid_utils.html#.gset">gset(grid, vec, value)</a></dt>
                     <dd>
                     </dd>
-                    <dt><a href="grid_utils.html#.nrotate">nrotate(grid[, times])</a></dt>
-                    <dd>
-                    </dd>
                   </dl>
                 </div>
                 <div class="summary-column">
                   <dl class="dl-summary-callout">
+                    <dt><a href="grid_utils.html#.nrotate">nrotate(grid[, times])</a></dt>
+                    <dd>
+                    </dd>
                     <dt><a href="grid_utils.html#.rotate">rotate(grid)</a></dt>
                     <dd>
                     </dd>
@@ -317,6 +320,60 @@
                 <dt>Returns</dt>
                 <dd>
                   <p><code>Array of Array of number</code> </p>
+                </dd>
+              </dl>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".gfind"><span class="symbol-name">gfind</span><span class="signature"><span class="signature-params">(grid, fn)</span>&nbsp;&rarr; <span class="signature-returns"> T</span></span></h3>
+              <p>Returns the first cell in a grid (searching top to bottom, left to right)
+                where the function <code>fn</code> is truthy for that cell. <code>fn</code> also receives the
+                position of each cell and a reference to the grid.</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>grid</p>
+                      </td>
+                      <td>
+                        <p>Array of Array of T</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The grid to search</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>fn</p>
+                      </td>
+                      <td>
+                        <p>function(T, <a href="Vec.html">Vec</a>, Array of Array of T)</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>The function to search with</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>T</code> </p>
                 </dd>
               </dl>
               <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
